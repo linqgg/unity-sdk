@@ -1,0 +1,21 @@
+{
+  "name": "gg.linq.unity-sdk",
+  "version": "0.1.0",
+  "displayName": "LinQ Unity Plugin",
+  "description": "Unity SDK for integration LinQ services and tools with Unity apps",
+  "unity": "2021.3",
+  "unityRelease": "26f1",
+  "documentationUrl": "https://docs.linq.gg/",
+  "changelogUrl": "https://docs.linq.gg/changelog.html",
+  "licensesUrl": "https://docs.linq.gg/licensing.html",
+  "keywords": [
+    "linq",
+    "wallet",
+    "integration"
+  ],
+  "author": {
+    "name": "Galactica Games",
+    "email": "support@galactica.games",
+    "url": "https://galactica.games"
+  }
+}
