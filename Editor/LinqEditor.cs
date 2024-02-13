@@ -12,22 +12,22 @@ namespace LinqUnity.Editor {
 
     private const string KOUNT_FRAMEWORK_NAME = "KountDataCollector.xcframework";
     
-    [PostProcessBuild(1000)]
-    public static void OnPostProcessBuild(string path)
+    [PostProcessBuild]
+    public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
     {
-      string pbxProjectPath = PBXProject.GetPBXProjectPath(path);
+      string pbxProjectPath = PBXProject.GetPBXProjectPath(buildPath);
 
       PBXProject project = new PBXProject();
       project.ReadFromFile(pbxProjectPath);
 
       string targetGuid = project.GetUnityMainTargetGuid();
 
+      string sectionGuid = project.GetFrameworksBuildPhaseByTarget(targetGuid);
+
       var source = Path.Combine("Pods", "Kount", "xcframeworks", KOUNT_FRAMEWORK_NAME);
-      
       var framework = project.AddFile(source, source);
 
-      // project.AddFileToBuild(mainTargetGuid, framework);
-      project.AddFileToEmbedFrameworks(targetGuid, framework);
+      project.AddFileToBuildSection(targetGuid, sectionGuid, framework);
       
       project.WriteToFile(pbxProjectPath);
     }
