@@ -1,5 +1,6 @@
 {
-    "name": "LinQ",
+    "name": "Galactica.Linq",
+    "rootNamespace": "LinqUnity",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

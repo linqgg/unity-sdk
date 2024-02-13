@@ -1,0 +1,9 @@
+<dependencies>
+  <iosPods>
+    <iosPod name="Kount">
+      <sources>
+        <source>https://github.com/Kount/kount-pod-spec</source>
+      </sources>
+    </iosPod>
+  </iosPods>
+</dependencies>
