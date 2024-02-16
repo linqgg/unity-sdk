@@ -7,8 +7,8 @@ namespace LinqUnity
     public const string SettingsResourceName = "LinqSettings";
 
     [SerializeField]
-    [Tooltip("Private SDK access token from partner dashboard.")]
-    public string Token;
+    [Tooltip("Public Secret Key (PSK) for access from Mobile SDK.")]
+    public string SecretKey;
 
     private static Settings _instance;
 
