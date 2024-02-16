@@ -1,5 +1,5 @@
 {
-  "name": "gg.linq.unity",
+  "name": "gg.linq.unity-sdk",
   "version": "0.2.0",
   "displayName": "LinQ Unity",
   "description": "LinQ SDK for Unity",
@@ -13,8 +13,13 @@
     "wallet",
     "integration"
   ],
+  "scopedRegistries": [{
+    "name": "package.openupm.com",
+    "url": "https://package.openupm.com",
+    "scopes": ["com.google.external-dependency-manager"]
+  }],
   "dependencies": {
-    "com.google.external-dependency-manager": "1.2.178"
+    "com.google.external-dependency-manager": "1.2.177"
   },
   "author": {
     "name": "Galactica Games",
