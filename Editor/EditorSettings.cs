@@ -24,5 +24,17 @@ namespace LinqUnity.Editor {
 
       Selection.activeObject = settings;
     }
+
+    [MenuItem("GameObject/LinQ/Initializer", false, 10)]
+    [MenuItem("LinQ/Create Initializer")]
+    public static void CreateInitializer(MenuCommand menuCommand)
+    {
+      var go = new GameObject("LinQ Initializer");
+      go.AddComponent<LinqInitializer>();
+      GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+      Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+      Selection.activeObject = go;
+    }
+
   }
 }

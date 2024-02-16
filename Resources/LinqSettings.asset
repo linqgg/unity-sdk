@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97c3bbdc08064f0689a346e4d5bfe11, type: 3}
   m_Name: LinqSettings
   m_EditorClassIdentifier: 
-  Token: 1233
+  SecretKey: secret kkkkkey
