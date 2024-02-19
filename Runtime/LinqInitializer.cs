@@ -14,14 +14,17 @@ namespace LinqUnity
         return;  
       }
 
+      if (string.IsNullOrEmpty(settings.RemoteUrl)) {
+        Debug.LogError("LinQ: Remote Url is missing. Open menu \"LinQ/Edit Settings\" and provide correct Remote Url.");
+        return;
+      }
+
       if (string.IsNullOrEmpty(settings.SecretKey)) {
         Debug.LogError("LinQ: Secret Key is missing. Open menu \"LinQ/Edit Settings\" and provide correct Secret Key.");
         return;
       }
 
-      Debug.Log("LinQ: Initializing LinQ SDK" + settings.SecretKey);
-
-      // Smartlook.SetupAndStartRecording(new SetupOptions(settings.ProjectKey, settings.FPS, ResetSession, ResetUser));
+      LinqSDK.InitSDK(settings.RemoteUrl, settings.SecretKey);
     }
   }
 }

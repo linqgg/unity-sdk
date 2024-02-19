@@ -7,6 +7,10 @@ namespace LinqUnity
     public const string SettingsResourceName = "LinqSettings";
 
     [SerializeField]
+    [Tooltip("Remote services URL for access from Mobile SDK.")]
+    public string RemoteUrl;
+
+    [SerializeField]
     [Tooltip("Public Secret Key (PSK) for access from Mobile SDK.")]
     public string SecretKey;
 
