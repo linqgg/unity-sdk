@@ -1,30 +1,33 @@
-# unity-sdk
+# Official LinQ Unity SDK
 
-TBD
+🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to support@galactoca.games.
 
-https://stackoverflow.com/questions/75211075/unity-ios-development-how-to-add-frameworks-from-pods-via-post-build-script
+> When submitting an issue please specify your sign-up (account) email, production steps, logs, code snippets and any additional relevant information.
 
-https://forum.unity.com/threads/how-do-i-add-xcframwork-from-code.840163/
+## Overview
 
+tbd
 
-https://developer.kount.com/hc/en-us/sections/5319287642260-Integration-Guide?article=4411149718676
+## Requirements
 
-https://developer.kount.com/hc/en-us/articles/4411898403988-How-to-Integrate-the-Kount-Device-Data-Collector-XCFramework-Package-into-an-iOS-Application
+## Installation
 
-
-
-check also other pluging/service for tracking - I forgot the name
-
-
-https://github.com/AppsFlyerSDK/appsflyer-unity-plugin/blob/master/Assets/AppsFlyer/Editor/AppsFlyerObjectEditor.cs
+## Getting Started
 
 
-how build packages in unity
-https://docs.unity3d.com/Manual/CustomPackages.html#procedure
+## Samples
 
+Examples and ready to use components. Soon!
+  
+## Tutorials
 
-https://github.com/rodellison/Unity-Basic-GRPC/blob/master/Assets/Scripts/RouteGuideUnityClient.cs
+How to implement you own payment screen. Soon!
 
+## Contributing
 
-how sentry installs
-https://github.com/getsentry/sentry-unity/blob/2f323ef4cc2748c91294b4c400b43bf18f732835/src/Sentry.Unity.Editor.iOS/SentryXcodeProject.cs
+Pull requests are welcome! For major changes, please open an issue first
+to discuss what you would like to change.
+
+## License
+
+[MIT License](./LICENSE.md)
