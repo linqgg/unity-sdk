@@ -2,4 +2,4 @@
 !/Runtime/Services/Native*
 !/Runtime/Services/BillingAddress*
 
-*.md.meta
+.idea
