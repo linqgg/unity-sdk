@@ -1,6 +1,6 @@
 {
-    "name": "Galactica.Linq.Editor",
-    "rootNamespace": "LinqUnity",
+    "name": "Galactica.LinQ.Editor",
+    "rootNamespace": "LinqUnity.Editor",
     "references": [
         "Galactica.Linq"
     ],

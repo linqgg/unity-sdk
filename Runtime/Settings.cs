@@ -8,11 +8,11 @@ namespace LinqUnity
 
     [SerializeField]
     [Tooltip("Remote services URL for access from Mobile SDK.")]
-    public string RemoteUrl;
+    public string remoteUrl;
 
     [SerializeField]
     [Tooltip("Public Secret Key (PSK) for access from Mobile SDK.")]
-    public string SecretKey;
+    public string secretKey;
 
     private static Settings _instance;
 
@@ -20,7 +20,7 @@ namespace LinqUnity
 
     public static Settings LoadSettings()
     {
-      return Resources.Load(SettingsResourceName) as Settings;
+      return Resources.Load<Settings>("Settings/" + SettingsResourceName);
     }
   }
 }
