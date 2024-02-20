@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Grpc.Net.Client;
 using System.Net.Http;
@@ -6,13 +7,49 @@ using static Linq.Money.Payments.V1.NativePaymentsService;
 using Linq.Money.Payments.V1;
 using Grpc.Core;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
+using UnityEngine.Networking;
+using System.Text;
+using JetBrains.Annotations;
+using Linq.Shared;
 
 namespace LinqUnity
 {
+  [Serializable]
+  public record TokenexDataRequest
+  {
+    public string tokenexid;
+    public string timestamp;
+    public string authenticationKey;
+    public string tokenScheme;
+    public string data;
+    public string cvv;
+  }
+
+  [Serializable]
+  public record TokenexDataResponse
+  {
+    public bool Success;
+    [CanBeNull] public string Error;
+    public string ReferenceNumber;
+    public string Token;
+    public string TokenHMAC;
+  }
+
+  [Serializable]
+  public record PaymentDetails
+  {
+    public string CardNumber;
+    public string HolderName;
+    public string Expiration;
+    public string Protection;
+  }
+
   public class LinqSDK : MonoBehaviour
   {
-    private static GrpcChannel channel;
-    private static Metadata headers;
+    private static GrpcChannel _channel;
+    private static Metadata _headers;
 
     /// <summary>
     /// Initialize the LinQ SDK with your remoteUrl and secretKey.
@@ -26,54 +63,129 @@ namespace LinqUnity
     /// </example>
     public static void InitSDK(string remoteUrl, string secretKey)
     {
-      Debug.Log("LinQ Initializing: " + remoteUrl + ", with key: " + secretKey);
+      #if UNITY_EDITOR
+        Debug.Log("LinQ Initializing: " + remoteUrl + ", with key: " + secretKey);
+      #endif
 
-      channel = GrpcChannel.ForAddress(remoteUrl, new GrpcChannelOptions() {
+      _channel = GrpcChannel.ForAddress(remoteUrl, new GrpcChannelOptions() {
           HttpHandler = new GrpcWebHandler(new HttpClientHandler())
         }
       );
 
-      headers = new Metadata {
+      _headers = new Metadata {
         { "Authorization", $"Bearer {secretKey}" }
       };
 
     }
 
-    public static async void MakePaymentAsync(string intentionId)
+    public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
     {
-      Debug.Log("MakePaymentAsync");
+      // 1. Getting config for a payment intention
+      var config = await GetPaymentConfig(orderId);
 
-      // var d = await GetPaymentConfig("5f9e3e3e-3b3e-4e3e-8e3e-3e3e3e3e3e3e");
-      var d = await GetPaymentConfig(intentionId);
+      Debug.Log("Fetched config: " + JsonConvert.SerializeObject(config));
 
-      // need ask config from backend
-      // send data to tokenex and get token
-      // check data with Kount DDC
-      // send request for payment and get its status
+      // 2. Asking token for a card
+      var tokenizedCard = await GetTokenizedCard(config.TokenexConfig, details);
 
-      // order id - 5f9e3e3e-3b3e-4e3e-8e3e-3e3e3e3e3e3e - intent id
-      // card data
-      // billing address data - stored somewhere? - option to store in player prefs
+      Debug.Log("Tokenized card: " + JsonConvert.SerializeObject(tokenizedCard));
+
+      // 3. Request Kount Session ID
+      // var kountSession = await GetSpecialChecks();
+
+      // 4. Send full payload for processing payment
+      PaymentResponse payment = await SetPaymentHandle(orderId, tokenizedCard, address);
+
+      Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
+
+      return payment.Order;
     }
 
     private static async Task<CardPaymentConfig> GetPaymentConfig(string orderId)
     {
       #if UNITY_EDITOR
-        Debug.Log("Getting config for intent id: " + orderId);
+        Debug.Log("Getting config for order id: " + orderId);
       #endif
 
-      NativePaymentsServiceClient client = new (channel);
+      NativePaymentsServiceClient client = new(_channel);
+      OrderConfigRequest request = new() { OrderId = orderId };
 
-      OrderConfigRequest request = new() {
-        OrderId = orderId
-      };
-
-      var result = await client.GetCardPaymentConfigAsync(request, headers);
-
-      Debug.Log($"Result: {result}");
-
-      return result;
+      return await client.GetCardPaymentConfigAsync(request, _headers);
     }
 
+    private static async Task<CardTokenexPayment> GetTokenizedCard(TokenexConfig config, PaymentDetails details)
+    {
+      var tokenexRequest = new TokenexDataRequest()
+      {
+        tokenexid = config.TokenexId,
+        timestamp = config.Timestamp,
+        authenticationKey = config.AuthenticationKey,
+        tokenScheme = config.TokenScheme,
+        data = details.CardNumber,
+        cvv = details.Protection,
+      };
+
+      TokenexDataResponse response = await ProcessWebRequest<TokenexDataResponse>(config.Url, JsonConvert.SerializeObject(tokenexRequest));
+
+      // need to get card info somewhere
+      return new CardTokenexPayment()
+      {
+        CardHolderName = details.HolderName,
+        ExpMonth = "12", // todo:
+        ExpYear = "27", // todo:
+        Token = response.Token,
+        TokenHmac = response.TokenHMAC,
+
+        // tmp solution before API updates
+        KountData = new KountData()
+        {
+          FirstSix = "",
+          LastFour = "",
+          SessionId = "",
+        },
+      };
+    }
+
+    private static async Task<PaymentResponse> SetPaymentHandle(
+      string orderId,
+      CardTokenexPayment tokenex,
+      BillingAddress address
+      )
+    {
+      #if UNITY_EDITOR
+        Debug.Log("Setting payment handle for intent id: " + orderId);
+      #endif
+
+      NativePaymentsServiceClient client = new(_channel);
+      PaymentRequest request = new()
+      {
+        OrderId = orderId,
+        Address = address,
+        // Tokenex
+        // Session
+        CardTokenexPayment = tokenex, // rename to tokenex?
+      };
+
+      return await client.MakePaymentAsync(request, _headers);
+    }
+
+    private static async UniTask<T> ProcessWebRequest<T>(string url, string payload)
+    {
+      var request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+
+      request.uploadHandler = (UploadHandler) new UploadHandlerRaw(Encoding.UTF8.GetBytes(payload));
+      request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+      request.SetRequestHeader("Content-Type", "application/json");
+
+      await request.SendWebRequest();
+
+      if (request.result == UnityWebRequest.Result.ProtocolError) {
+        throw new Exception("HTTP ERROR " + request.error); // todo: improve error handling
+      }
+
+      request.Dispose();
+
+      return JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+    }
   }
 }
