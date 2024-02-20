@@ -6,7 +6,7 @@ namespace LinqUnity.Editor {
   public static class EditorSettings {
 
     private const string SETTINGS_RESOURCE_SUFFIX = ".asset";
-    private const string SETTINGS_RESOURCE_FOLDER = "Packages/gg.linq.unity-sdk/Resources/";
+    private const string SETTINGS_RESOURCE_FOLDER = "Assets/Resources/Settings/";
 
     [MenuItem("LinQ/Edit Settings")]
     public static void EditSettings()
