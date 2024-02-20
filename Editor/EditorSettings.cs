@@ -5,8 +5,8 @@ namespace LinqUnity.Editor {
 
   public static class EditorSettings {
 
-    private const string SETTINGS_RESOURCE_SUFFIX = ".asset";
-    private const string SETTINGS_RESOURCE_FOLDER = "Assets/Resources/Settings/";
+    private const string SettingsResourceSuffix = ".asset";
+    private const string SettingsResourceFolder = "Assets/Resources/Settings/";
 
     [MenuItem("LinQ/Edit Settings")]
     public static void EditSettings()
@@ -16,7 +16,7 @@ namespace LinqUnity.Editor {
       if (settings == null)
       {
         settings = ScriptableObject.CreateInstance<Settings>();
-        AssetDatabase.CreateAsset(settings, SETTINGS_RESOURCE_FOLDER + Settings.SettingsResourceName + SETTINGS_RESOURCE_SUFFIX);
+        AssetDatabase.CreateAsset(settings, SettingsResourceFolder + Settings.SettingsResourceName + SettingsResourceSuffix);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         EditorUtility.FocusProjectWindow();
