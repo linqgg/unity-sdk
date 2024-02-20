@@ -4,13 +4,12 @@ using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
-using UnityEditor.iOS.Xcode.Extensions;
 
 namespace LinqUnity.Editor {
 
-  public partial class LinqEditor {
+  public static class LinqEditor {
 
-    private const string KOUNT_FRAMEWORK_NAME = "KountDataCollector.xcframework";
+    private const string KountFrameworkName = "KountDataCollector.xcframework";
     
     [PostProcessBuild]
     public static void OnPostProcessBuild(BuildTarget buildTarget, string buildPath)
@@ -24,7 +23,7 @@ namespace LinqUnity.Editor {
 
       string sectionGuid = project.GetFrameworksBuildPhaseByTarget(targetGuid);
 
-      var source = Path.Combine("Pods", "Kount", "xcframeworks", KOUNT_FRAMEWORK_NAME);
+      var source = Path.Combine("Pods", "Kount", "xcframeworks", KountFrameworkName);
       var framework = project.AddFile(source, source);
 
       project.AddFileToBuildSection(targetGuid, sectionGuid, framework);

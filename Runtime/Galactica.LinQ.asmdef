@@ -2,7 +2,8 @@
     "name": "Galactica.Linq",
     "rootNamespace": "LinqUnity",
     "references": [
-        "Linq"
+        "Linq",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
