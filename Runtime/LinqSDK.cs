@@ -183,9 +183,11 @@ namespace LinqUnity
         throw new Exception("HTTP ERROR " + request.error); // todo: improve error handling
       }
 
+      var response = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+
       request.Dispose();
 
-      return JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+      return response;
     }
   }
 }
