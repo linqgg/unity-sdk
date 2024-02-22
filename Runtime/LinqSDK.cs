@@ -46,6 +46,7 @@ namespace LinqUnity
     public string Protection;
   }
 
+  // PlayPal
   public class LinqSDK : MonoBehaviour
   {
     private static GrpcChannel _channel;
@@ -81,17 +82,25 @@ namespace LinqUnity
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
     {
       // 1. Getting config for a payment intention
-      var config = await GetPaymentConfig(orderId);
+      CardPaymentConfig config = await GetPaymentConfig(orderId);
 
       Debug.Log("Fetched config: " + JsonConvert.SerializeObject(config));
+      
+      
+      DataCollector.Init(config.KountConfig.ClientId, config.KountConfig.IsProd);
+      DataCollector.Collect();
+      // and wait handler catch
 
       // 2. Asking token for a card
       var tokenizedCard = await GetTokenizedCard(config.TokenexConfig, details);
-
+      
       Debug.Log("Tokenized card: " + JsonConvert.SerializeObject(tokenizedCard));
 
       // 3. Request Kount Session ID
       // var kountSession = await GetSpecialChecks();
+
+      // await kount.init(clientId, isProd);
+      // const sessionId = await kount.collect();
 
       // 4. Send full payload for processing payment
       PaymentResponse payment = await SetPaymentHandle(orderId, tokenizedCard, address);
