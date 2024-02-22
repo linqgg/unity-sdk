@@ -83,28 +83,19 @@ namespace LinqUnity
     {
       // 1. Getting config for a payment intention
       CardPaymentConfig config = await GetPaymentConfig(orderId);
-
-      Debug.Log("Fetched config: " + JsonConvert.SerializeObject(config));
-      
-      
-      DataCollector.Init(config.KountConfig.ClientId, config.KountConfig.IsProd);
-      DataCollector.Collect();
-      // and wait handler catch
+      Debug.Log("Fetched payment config: " + JsonConvert.SerializeObject(config));
 
       // 2. Asking token for a card
-      var tokenizedCard = await GetTokenizedCard(config.TokenexConfig, details);
-      
+      CardTokenexPayment tokenizedCard = await GetTokenizedCard(config.TokenexConfig, details);
       Debug.Log("Tokenized card: " + JsonConvert.SerializeObject(tokenizedCard));
 
       // 3. Request Kount Session ID
-      // var kountSession = await GetSpecialChecks();
-
-      // await kount.init(clientId, isProd);
-      // const sessionId = await kount.collect();
+      KountData kountSessionData = await GetSpecialChecks(config.KountConfig, details);
+      Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
+      tokenizedCard.KountData = kountSessionData;
 
       // 4. Send full payload for processing payment
       PaymentResponse payment = await SetPaymentHandle(orderId, tokenizedCard, address);
-
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
       return payment.Order;
@@ -136,23 +127,31 @@ namespace LinqUnity
 
       TokenexDataResponse response = await ProcessWebRequest<TokenexDataResponse>(config.Url, JsonConvert.SerializeObject(tokenexRequest));
 
-      // need to get card info somewhere
+      string[] expiration = details.Expiration.Split("/");
+
       return new CardTokenexPayment()
       {
         CardHolderName = details.HolderName,
-        ExpMonth = "12", // todo:
-        ExpYear = "27", // todo:
+        ExpMonth = expiration[0],
+        ExpYear = expiration[1],
         Token = response.Token,
         TokenHmac = response.TokenHMAC,
-
-        // tmp solution before API updates
-        KountData = new KountData()
-        {
-          FirstSix = "",
-          LastFour = "",
-          SessionId = "",
-        },
       };
+    }
+
+    private static async Task<KountData> GetSpecialChecks(KountConfig config, PaymentDetails details)
+    {
+      var data = new KountData()
+      {
+        FirstSix = details.CardNumber.Substring(0, 6),
+        LastFour = details.CardNumber[^4..],
+      };
+
+      Task<string> sessionId = DataSession.RequestSessionId(config.ClientId, config.IsProd);
+
+      data.SessionId = await sessionId;
+
+      return data;
     }
 
     private static async Task<PaymentResponse> SetPaymentHandle(
@@ -170,9 +169,7 @@ namespace LinqUnity
       {
         OrderId = orderId,
         Address = address,
-        // Tokenex
-        // Session
-        CardTokenexPayment = tokenex, // rename to tokenex?
+        CardTokenexPayment = tokenex,
       };
 
       return await client.MakePaymentAsync(request, _headers);

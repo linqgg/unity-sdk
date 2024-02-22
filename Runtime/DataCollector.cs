@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 #if UNITY_IOS
   using System.Runtime.InteropServices;
 #endif
@@ -9,18 +10,46 @@ namespace LinqUnity
   {
     private delegate void sessionCallBackDelegate(string session);
 
-    [AOT.MonoPInvokeCallbackAttribute(typeof(sessionCallBackDelegate))]
-    public static void handleNativeCallBack(string message)
-    {
-      Debug.Log("Session is cacthed: " + message);
-    }
-
+#if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void _Init(sessionCallBackDelegate sessionCallBack, string kountClientId, bool isProd);
-    public static void Init(string kountClientId, bool isProd) => _Init(handleNativeCallBack, kountClientId, isProd);
+#endif
 
+#if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void _Collect();
-    public static void Collect() => _Collect();
+#endif
+
+    [AOT.MonoPInvokeCallbackAttribute(typeof(sessionCallBackDelegate))]
+    public static void handleNativeCallBack(string message) => DataSession.OnSessionIdCaptured(message);
+
+    public static void RequestSessionId(string kountClientId, bool isProd)
+    {
+      #if UNITY_IOS
+        _Init(handleNativeCallBack, kountClientId, isProd);
+        _Collect();
+      #else
+        DataSession.OnSessionIdCaptured("");
+      #endif
+    }
+  }
+
+  public static class DataSession
+  {
+    private static TaskCompletionSource<string> _completion;
+
+    public static Task<string> RequestSessionId(string kountClientId, bool isProd)
+    {
+      _completion = new TaskCompletionSource<string>();
+
+      DataCollector.RequestSessionId(kountClientId, isProd);
+
+      return _completion.Task;
+    }
+
+    public static void OnSessionIdCaptured(string sessionId)
+    {
+      _completion.SetResult(sessionId);
+    }
   }
 }
