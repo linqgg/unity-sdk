@@ -91,8 +91,8 @@ namespace LinqUnity
 
       // 3. Request Kount Session ID
       KountData kountSessionData = await GetSpecialChecks(config.KountConfig, details);
-      Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
       tokenizedCard.KountData = kountSessionData;
+      Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
 
       // 4. Send full payload for processing payment
       PaymentResponse payment = await SetPaymentHandle(orderId, tokenizedCard, address);
@@ -171,6 +171,8 @@ namespace LinqUnity
         Address = address,
         CardTokenexPayment = tokenex,
       };
+
+      Debug.Log("Payment handle: " + JsonConvert.SerializeObject(request));
 
       return await client.MakePaymentAsync(request, _headers);
     }
