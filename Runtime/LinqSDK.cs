@@ -46,6 +46,7 @@ namespace LinqUnity
     public string Protection;
   }
 
+  // PlayPal
   public class LinqSDK : MonoBehaviour
   {
     private static GrpcChannel _channel;
@@ -81,21 +82,20 @@ namespace LinqUnity
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
     {
       // 1. Getting config for a payment intention
-      var config = await GetPaymentConfig(orderId);
-
-      Debug.Log("Fetched config: " + JsonConvert.SerializeObject(config));
+      CardPaymentConfig config = await GetPaymentConfig(orderId);
+      Debug.Log("Fetched payment config: " + JsonConvert.SerializeObject(config));
 
       // 2. Asking token for a card
-      var tokenizedCard = await GetTokenizedCard(config.TokenexConfig, details);
-
+      CardTokenexPayment tokenizedCard = await GetTokenizedCard(config.TokenexConfig, details);
       Debug.Log("Tokenized card: " + JsonConvert.SerializeObject(tokenizedCard));
 
       // 3. Request Kount Session ID
-      // var kountSession = await GetSpecialChecks();
+      KountData kountSessionData = await GetSpecialChecks(config.KountConfig, details);
+      tokenizedCard.KountData = kountSessionData;
+      Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
 
       // 4. Send full payload for processing payment
       PaymentResponse payment = await SetPaymentHandle(orderId, tokenizedCard, address);
-
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
       return payment.Order;
@@ -127,23 +127,31 @@ namespace LinqUnity
 
       TokenexDataResponse response = await ProcessWebRequest<TokenexDataResponse>(config.Url, JsonConvert.SerializeObject(tokenexRequest));
 
-      // need to get card info somewhere
+      string[] expiration = details.Expiration.Split("/");
+
       return new CardTokenexPayment()
       {
         CardHolderName = details.HolderName,
-        ExpMonth = "12", // todo:
-        ExpYear = "27", // todo:
+        ExpMonth = expiration[0],
+        ExpYear = expiration[1],
         Token = response.Token,
         TokenHmac = response.TokenHMAC,
-
-        // tmp solution before API updates
-        KountData = new KountData()
-        {
-          FirstSix = "",
-          LastFour = "",
-          SessionId = "",
-        },
       };
+    }
+
+    private static async Task<KountData> GetSpecialChecks(KountConfig config, PaymentDetails details)
+    {
+      var data = new KountData()
+      {
+        FirstSix = details.CardNumber.Substring(0, 6),
+        LastFour = details.CardNumber[^4..],
+      };
+
+      Task<string> sessionId = DataSession.RequestSessionId(config.ClientId, config.IsProd);
+
+      data.SessionId = await sessionId;
+
+      return data;
     }
 
     private static async Task<PaymentResponse> SetPaymentHandle(
@@ -161,10 +169,10 @@ namespace LinqUnity
       {
         OrderId = orderId,
         Address = address,
-        // Tokenex
-        // Session
-        CardTokenexPayment = tokenex, // rename to tokenex?
+        CardTokenexPayment = tokenex,
       };
+
+      Debug.Log("Payment handle: " + JsonConvert.SerializeObject(request));
 
       return await client.MakePaymentAsync(request, _headers);
     }
