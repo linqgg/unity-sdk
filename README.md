@@ -1,6 +1,6 @@
 # Official LinQ Unity SDK
 
-🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to [support@galactica.games](mailto:support@galactica.games) or [create an issue](./issues/new).
+🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to [support@galactica.games](mailto:support@galactica.games) or [create an issue](/issues/new).
 
 > When submitting an issue please specify your game identifier (asset), production steps, logs, code snippets, and any additional relevant information.
 
