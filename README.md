@@ -1,6 +1,6 @@
 # Official LinQ Unity SDK
 
-🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to [support@galactica.games](mailto:support@galactica.games) or [create an issue](/issues/new).
+🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to [support@galactica.games](mailto:support@galactica.games) or [create an issue](https://github.com/linqgg/unity-sdk/issues/new).
 
 > When submitting an issue please specify your game identifier (asset), production steps, logs, code snippets, and any additional relevant information.
 
@@ -16,7 +16,7 @@ The current version is written and tested on Unity version **2021.3** and releas
 
 Unity SDK uses [External Dependency Manager for Unity (EDM4U)](https://github.com/googlesamples/unity-jar-resolver) from Google for managing native libraries required for work, including CocoaPod binaries for iOS. This manager should be installed via Package Manager before SDK is installed, as Unity can not automatically resolve dependencies from external sources except its own.
 
-For work with JSON, that is required for web-request to external APIs need to install a special [JSON.NET package](https://www.newtonsoft.com/json) from Newtonsoft.
+For work with JSON, which is required for web-request to external APIs need to install a special [JSON.NET package](https://www.newtonsoft.com/json) from Newtonsoft.
 
 ## Installation
 
