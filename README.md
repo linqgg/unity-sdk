@@ -54,6 +54,12 @@ Configuration stored in the special asset, that has to be placed by the path `As
 
 To initialize SDK we provide a special Initializer, which has to be placed on the game scene. To add it to the scene use menu `LinQ > Create Initializer`.
 
+In case you are using your system for configuring the game, you may initialize the SDK manually, providing proper details.
+
+```scharp
+LinqSDK.InitSDK("https://services.stage.galactica.games", "secret-key");
+```
+
 ### Usage
 
 To use SDK need to prepare card data and billing address, that the user provided via your own UX elements. We do not require any additional steps here, except the rule that card data should not be transferred to any game backend service as it will break PCI DCI policy.
