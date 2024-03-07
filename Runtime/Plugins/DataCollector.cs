@@ -10,15 +10,15 @@ namespace LinqUnity
   {
     private delegate void sessionCallBackDelegate(string session);
 
-#if UNITY_IOS
-    [DllImport("__Internal")]
-    private static extern void _Init(sessionCallBackDelegate sessionCallBack, string kountClientId, bool isProd);
-#endif
+	#if UNITY_IOS
+      [DllImport("__Internal")]
+      private static extern void _Init(sessionCallBackDelegate sessionCallBack, string kountClientId, bool isProd);
+	#endif
 
-#if UNITY_IOS
-    [DllImport("__Internal")]
-    private static extern void _Collect();
-#endif
+	#if UNITY_IOS
+      [DllImport("__Internal")]
+      private static extern void _Collect();
+	#endif
 
     [AOT.MonoPInvokeCallbackAttribute(typeof(sessionCallBackDelegate))]
     public static void handleNativeCallBack(string message) => DataSession.OnSessionIdCaptured(message);
