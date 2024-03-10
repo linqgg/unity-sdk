@@ -26,71 +26,70 @@ namespace Linq.Money.Payments.V1 {
           string.Concat(
             "CiNsaW5xL21vbmV5L3BheW1lbnRzL3YxL25hdGl2ZS5wcm90bxIWbGlucS5t",
             "b25leS5wYXltZW50cy52MRocc2hhcmVkL2JpbGxpbmdfYWRkcmVzcy5wcm90",
-            "byKnAgoOQXBwbGVQYXlDb25maWcSHwoLbWVyY2hhbnRfaWQYASABKAlSCm1l",
+            "byLxAgoOQXBwbGVQYXlDb25maWcSHwoLbWVyY2hhbnRfaWQYASABKAlSCm1l",
             "cmNoYW50SWQSIQoMY291bnRyeV9jb2RlGAIgASgJUgtjb3VudHJ5Q29kZRIt",
             "ChJzdXBwb3J0ZWRfbmV0d29ya3MYAyADKAlSEXN1cHBvcnRlZE5ldHdvcmtz",
             "EjMKFW1lcmNoYW50X2NhcGFiaWxpdGllcxgEIAMoCVIUbWVyY2hhbnRDYXBh",
             "YmlsaXRpZXMSRQofcmVxdWlyZWRfYmlsbGluZ19jb250YWN0X2ZpZWxkcxgF",
             "IAMoCVIccmVxdWlyZWRCaWxsaW5nQ29udGFjdEZpZWxkcxImCg9saW5lX2l0",
-            "ZW1fbGFiZWwYBiABKAlSDWxpbmVJdGVtTGFiZWwisAEKDVRva2VuZXhDb25m",
-            "aWcSEAoDdXJsGAEgASgJUgN1cmwSHQoKdG9rZW5leF9pZBgCIAEoCVIJdG9r",
-            "ZW5leElkEhwKCXRpbWVzdGFtcBgDIAEoCVIJdGltZXN0YW1wEi0KEmF1dGhl",
-            "bnRpY2F0aW9uX2tleRgEIAEoCVIRYXV0aGVudGljYXRpb25LZXkSIQoMdG9r",
-            "ZW5fc2NoZW1lGAUgASgJUgt0b2tlblNjaGVtZSJWCgtLb3VudENvbmZpZxIX",
-            "Cgdpc19wcm9kGAEgASgIUgZpc1Byb2QSIAoJY2xpZW50X2lkGAIgASgJSABS",
-            "CGNsaWVudElkiAEBQgwKCl9jbGllbnRfaWQiqQEKEUNhcmRQYXltZW50Q29u",
-            "ZmlnEkwKDnRva2VuZXhfY29uZmlnGAEgASgLMiUubGlucS5tb25leS5wYXlt",
-            "ZW50cy52MS5Ub2tlbmV4Q29uZmlnUg10b2tlbmV4Q29uZmlnEkYKDGtvdW50",
-            "X2NvbmZpZxgCIAEoCzIjLmxpbnEubW9uZXkucGF5bWVudHMudjEuS291bnRD",
-            "b25maWdSC2tvdW50Q29uZmlnIjQKD0FwcGxlUGF5UGF5bWVudBIhCgxwYXlt",
-            "ZW50X2RhdGEYASABKAlSC3BheW1lbnREYXRhImQKCUtvdW50RGF0YRIdCgpz",
-            "ZXNzaW9uX2lkGAEgASgJUglzZXNzaW9uSWQSGwoJZmlyc3Rfc2l4GAIgASgJ",
-            "UghmaXJzdFNpeBIbCglsYXN0X2ZvdXIYAyABKAlSCGxhc3RGb3VyIu0BChJD",
-            "YXJkVG9rZW5leFBheW1lbnQSFAoFdG9rZW4YASABKAlSBXRva2VuEh0KCnRv",
-            "a2VuX2htYWMYAiABKAlSCXRva2VuSG1hYxIZCghleHBfeWVhchgDIAEoCVIH",
-            "ZXhwWWVhchIbCglleHBfbW9udGgYBCABKAlSCGV4cE1vbnRoEigKEGNhcmRf",
-            "aG9sZGVyX25hbWUYBSABKAlSDmNhcmRIb2xkZXJOYW1lEkAKCmtvdW50X2Rh",
-            "dGEYBiABKAsyIS5saW5xLm1vbmV5LnBheW1lbnRzLnYxLktvdW50RGF0YVIJ",
-            "a291bnREYXRhIi8KEk9yZGVyQ29uZmlnUmVxdWVzdBIZCghvcmRlcl9pZBgB",
-            "IAEoCVIHb3JkZXJJZCLOAgoOUGF5bWVudFJlcXVlc3QSGQoIb3JkZXJfaWQY",
-            "ASABKAlSB29yZGVySWQSNQoHYWRkcmVzcxgCIAEoCzIbLmxpbnEuc2hhcmVk",
-            "LkJpbGxpbmdBZGRyZXNzUgdhZGRyZXNzElgKEWFwcGxlX3BheV9wYXltZW50",
-            "GAMgASgLMicubGlucS5tb25leS5wYXltZW50cy52MS5BcHBsZVBheVBheW1l",
-            "bnRIAFIPYXBwbGVQYXlQYXltZW50iAEBEmEKFGNhcmRfdG9rZW5leF9wYXlt",
-            "ZW50GAQgASgLMioubGlucS5tb25leS5wYXltZW50cy52MS5DYXJkVG9rZW5l",
-            "eFBheW1lbnRIAVISY2FyZFRva2VuZXhQYXltZW50iAEBQhQKEl9hcHBsZV9w",
-            "YXlfcGF5bWVudEIXChVfY2FyZF90b2tlbmV4X3BheW1lbnQibQoNT3JkZXJS",
-            "ZXNwb25zZRIOCgJpZBgBIAEoCVICaWQSFgoGc3RhdHVzGAIgASgJUgZzdGF0",
-            "dXMSFgoGYW1vdW50GAMgASgNUgZhbW91bnQSHAoJcmVmZXJlbmNlGAQgASgJ",
-            "UglyZWZlcmVuY2UiaAoPUGF5bWVudFJlc3BvbnNlEhgKB3N1Y2Nlc3MYASAB",
-            "KAhSB3N1Y2Nlc3MSOwoFb3JkZXIYAiABKAsyJS5saW5xLm1vbmV5LnBheW1l",
-            "bnRzLnYxLk9yZGVyUmVzcG9uc2VSBW9yZGVyMtUCChVOYXRpdmVQYXltZW50",
-            "c1NlcnZpY2USaQoRR2V0QXBwbGVQYXlDb25maWcSKi5saW5xLm1vbmV5LnBh",
-            "eW1lbnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBomLmxpbnEubW9uZXkucGF5",
-            "bWVudHMudjEuQXBwbGVQYXlDb25maWciABJvChRHZXRDYXJkUGF5bWVudENv",
-            "bmZpZxIqLmxpbnEubW9uZXkucGF5bWVudHMudjEuT3JkZXJDb25maWdSZXF1",
-            "ZXN0GikubGlucS5tb25leS5wYXltZW50cy52MS5DYXJkUGF5bWVudENvbmZp",
-            "ZyIAEmAKC01ha2VQYXltZW50EiYubGlucS5tb25leS5wYXltZW50cy52MS5Q",
-            "YXltZW50UmVxdWVzdBonLmxpbnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVu",
-            "dFJlc3BvbnNlIgBCpAEKGmNvbS5saW5xLm1vbmV5LnBheW1lbnRzLnYxQgtO",
-            "YXRpdmVQcm90b1ABogIDTE1QqgIWTGlucS5Nb25leS5QYXltZW50cy5WMcoC",
-            "FkxpbnFcTW9uZXlcUGF5bWVudHNcVjHiAiJMaW5xXE1vbmV5XFBheW1lbnRz",
-            "XFYxXEdQQk1ldGFkYXRh6gIZTGlucTo6TW9uZXk6OlBheW1lbnRzOjpWMWIG",
-            "cHJvdG8z"));
+            "ZW1fbGFiZWwYBiABKAlSDWxpbmVJdGVtTGFiZWwSIQoMb3JkZXJfYW1vdW50",
+            "GAcgASgFUgtvcmRlckFtb3VudBIlCg5vcmRlcl9jdXJyZW5jeRgIIAEoCVIN",
+            "b3JkZXJDdXJyZW5jeSKwAQoNVG9rZW5leENvbmZpZxIQCgN1cmwYASABKAlS",
+            "A3VybBIdCgp0b2tlbmV4X2lkGAIgASgJUgl0b2tlbmV4SWQSHAoJdGltZXN0",
+            "YW1wGAMgASgJUgl0aW1lc3RhbXASLQoSYXV0aGVudGljYXRpb25fa2V5GAQg",
+            "ASgJUhFhdXRoZW50aWNhdGlvbktleRIhCgx0b2tlbl9zY2hlbWUYBSABKAlS",
+            "C3Rva2VuU2NoZW1lIlYKC0tvdW50Q29uZmlnEhcKB2lzX3Byb2QYASABKAhS",
+            "BmlzUHJvZBIgCgljbGllbnRfaWQYAiABKAlIAFIIY2xpZW50SWSIAQFCDAoK",
+            "X2NsaWVudF9pZCKpAQoRQ2FyZFBheW1lbnRDb25maWcSTAoOdG9rZW5leF9j",
+            "b25maWcYASABKAsyJS5saW5xLm1vbmV5LnBheW1lbnRzLnYxLlRva2VuZXhD",
+            "b25maWdSDXRva2VuZXhDb25maWcSRgoMa291bnRfY29uZmlnGAIgASgLMiMu",
+            "bGlucS5tb25leS5wYXltZW50cy52MS5Lb3VudENvbmZpZ1ILa291bnRDb25m",
+            "aWciNAoPQXBwbGVQYXlQYXltZW50EiEKDHBheW1lbnRfZGF0YRgBIAEoCVIL",
+            "cGF5bWVudERhdGEiZAoJS291bnREYXRhEh0KCnNlc3Npb25faWQYASABKAlS",
+            "CXNlc3Npb25JZBIbCglmaXJzdF9zaXgYAiABKAlSCGZpcnN0U2l4EhsKCWxh",
+            "c3RfZm91chgDIAEoCVIIbGFzdEZvdXIigQIKEkNhcmRUb2tlbmV4UGF5bWVu",
+            "dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SHQoKdG9rZW5faG1hYxgCIAEoCVIJ",
+            "dG9rZW5IbWFjEhkKCGV4cF95ZWFyGAMgASgJUgdleHBZZWFyEhsKCWV4cF9t",
+            "b250aBgEIAEoCVIIZXhwTW9udGgSKAoQY2FyZF9ob2xkZXJfbmFtZRgFIAEo",
+            "CVIOY2FyZEhvbGRlck5hbWUSRQoKa291bnRfZGF0YRgGIAEoCzIhLmxpbnEu",
+            "bW9uZXkucGF5bWVudHMudjEuS291bnREYXRhSABSCWtvdW50RGF0YYgBAUIN",
+            "Cgtfa291bnRfZGF0YSIvChJPcmRlckNvbmZpZ1JlcXVlc3QSGQoIb3JkZXJf",
+            "aWQYASABKAlSB29yZGVySWQizgIKDlBheW1lbnRSZXF1ZXN0EhkKCG9yZGVy",
+            "X2lkGAEgASgJUgdvcmRlcklkEjUKB2FkZHJlc3MYAiABKAsyGy5saW5xLnNo",
+            "YXJlZC5CaWxsaW5nQWRkcmVzc1IHYWRkcmVzcxJYChFhcHBsZV9wYXlfcGF5",
+            "bWVudBgDIAEoCzInLmxpbnEubW9uZXkucGF5bWVudHMudjEuQXBwbGVQYXlQ",
+            "YXltZW50SABSD2FwcGxlUGF5UGF5bWVudIgBARJhChRjYXJkX3Rva2VuZXhf",
+            "cGF5bWVudBgEIAEoCzIqLmxpbnEubW9uZXkucGF5bWVudHMudjEuQ2FyZFRv",
+            "a2VuZXhQYXltZW50SAFSEmNhcmRUb2tlbmV4UGF5bWVudIgBAUIUChJfYXBw",
+            "bGVfcGF5X3BheW1lbnRCFwoVX2NhcmRfdG9rZW5leF9wYXltZW50Im0KDU9y",
+            "ZGVyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhYKBnN0YXR1cxgCIAEoCVIG",
+            "c3RhdHVzEhYKBmFtb3VudBgDIAEoDVIGYW1vdW50EhwKCXJlZmVyZW5jZRgE",
+            "IAEoCVIJcmVmZXJlbmNlIqYBCg9QYXltZW50UmVzcG9uc2USGAoHc3VjY2Vz",
+            "cxgBIAEoCFIHc3VjY2VzcxI7CgVvcmRlchgCIAEoCzIlLmxpbnEubW9uZXku",
+            "cGF5bWVudHMudjEuT3JkZXJSZXNwb25zZVIFb3JkZXISKQoOcmV0cnlfb3Jk",
+            "ZXJfaWQYAyABKAlIAFIMcmV0cnlPcmRlcklkiAEBQhEKD19yZXRyeV9vcmRl",
+            "cl9pZDLVAgoVTmF0aXZlUGF5bWVudHNTZXJ2aWNlEmkKEUdldEFwcGxlUGF5",
+            "Q29uZmlnEioubGlucS5tb25leS5wYXltZW50cy52MS5PcmRlckNvbmZpZ1Jl",
+            "cXVlc3QaJi5saW5xLm1vbmV5LnBheW1lbnRzLnYxLkFwcGxlUGF5Q29uZmln",
+            "IgASbwoUR2V0Q2FyZFBheW1lbnRDb25maWcSKi5saW5xLm1vbmV5LnBheW1l",
+            "bnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBopLmxpbnEubW9uZXkucGF5bWVu",
+            "dHMudjEuQ2FyZFBheW1lbnRDb25maWciABJgCgtNYWtlUGF5bWVudBImLmxp",
+            "bnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVudFJlcXVlc3QaJy5saW5xLm1v",
+            "bmV5LnBheW1lbnRzLnYxLlBheW1lbnRSZXNwb25zZSIAYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Linq.Shared.BillingAddressReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.ApplePayConfig), global::Linq.Money.Payments.V1.ApplePayConfig.Parser, new[]{ "MerchantId", "CountryCode", "SupportedNetworks", "MerchantCapabilities", "RequiredBillingContactFields", "LineItemLabel" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.ApplePayConfig), global::Linq.Money.Payments.V1.ApplePayConfig.Parser, new[]{ "MerchantId", "CountryCode", "SupportedNetworks", "MerchantCapabilities", "RequiredBillingContactFields", "LineItemLabel", "OrderAmount", "OrderCurrency" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.TokenexConfig), global::Linq.Money.Payments.V1.TokenexConfig.Parser, new[]{ "Url", "TokenexId", "Timestamp", "AuthenticationKey", "TokenScheme" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.KountConfig), global::Linq.Money.Payments.V1.KountConfig.Parser, new[]{ "IsProd", "ClientId" }, new[]{ "ClientId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.CardPaymentConfig), global::Linq.Money.Payments.V1.CardPaymentConfig.Parser, new[]{ "TokenexConfig", "KountConfig" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.ApplePayPayment), global::Linq.Money.Payments.V1.ApplePayPayment.Parser, new[]{ "PaymentData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.KountData), global::Linq.Money.Payments.V1.KountData.Parser, new[]{ "SessionId", "FirstSix", "LastFour" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.CardTokenexPayment), global::Linq.Money.Payments.V1.CardTokenexPayment.Parser, new[]{ "Token", "TokenHmac", "ExpYear", "ExpMonth", "CardHolderName", "KountData" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.CardTokenexPayment), global::Linq.Money.Payments.V1.CardTokenexPayment.Parser, new[]{ "Token", "TokenHmac", "ExpYear", "ExpMonth", "CardHolderName", "KountData" }, new[]{ "KountData" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.OrderConfigRequest), global::Linq.Money.Payments.V1.OrderConfigRequest.Parser, new[]{ "OrderId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentRequest), global::Linq.Money.Payments.V1.PaymentRequest.Parser, new[]{ "OrderId", "Address", "ApplePayPayment", "CardTokenexPayment" }, new[]{ "ApplePayPayment", "CardTokenexPayment" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.OrderResponse), global::Linq.Money.Payments.V1.OrderResponse.Parser, new[]{ "Id", "Status", "Amount", "Reference" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentResponse), global::Linq.Money.Payments.V1.PaymentResponse.Parser, new[]{ "Success", "Order" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentResponse), global::Linq.Money.Payments.V1.PaymentResponse.Parser, new[]{ "Success", "Order", "RetryOrderId" }, new[]{ "RetryOrderId" }, null, null, null)
           }));
     }
     #endregion
@@ -141,6 +140,8 @@ namespace Linq.Money.Payments.V1 {
       merchantCapabilities_ = other.merchantCapabilities_.Clone();
       requiredBillingContactFields_ = other.requiredBillingContactFields_.Clone();
       lineItemLabel_ = other.lineItemLabel_;
+      orderAmount_ = other.orderAmount_;
+      orderCurrency_ = other.orderCurrency_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -237,6 +238,36 @@ namespace Linq.Money.Payments.V1 {
       }
     }
 
+    /// <summary>Field number for the "order_amount" field.</summary>
+    public const int OrderAmountFieldNumber = 7;
+    private int orderAmount_;
+    /// <summary>
+    /// Amount of the payment
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int OrderAmount {
+      get { return orderAmount_; }
+      set {
+        orderAmount_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "order_currency" field.</summary>
+    public const int OrderCurrencyFieldNumber = 8;
+    private string orderCurrency_ = "";
+    /// <summary>
+    /// Code of the currency used in payment transaction
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string OrderCurrency {
+      get { return orderCurrency_; }
+      set {
+        orderCurrency_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -258,6 +289,8 @@ namespace Linq.Money.Payments.V1 {
       if(!merchantCapabilities_.Equals(other.merchantCapabilities_)) return false;
       if(!requiredBillingContactFields_.Equals(other.requiredBillingContactFields_)) return false;
       if (LineItemLabel != other.LineItemLabel) return false;
+      if (OrderAmount != other.OrderAmount) return false;
+      if (OrderCurrency != other.OrderCurrency) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -271,6 +304,8 @@ namespace Linq.Money.Payments.V1 {
       hash ^= merchantCapabilities_.GetHashCode();
       hash ^= requiredBillingContactFields_.GetHashCode();
       if (LineItemLabel.Length != 0) hash ^= LineItemLabel.GetHashCode();
+      if (OrderAmount != 0) hash ^= OrderAmount.GetHashCode();
+      if (OrderCurrency.Length != 0) hash ^= OrderCurrency.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -304,6 +339,14 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(50);
         output.WriteString(LineItemLabel);
       }
+      if (OrderAmount != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(OrderAmount);
+      }
+      if (OrderCurrency.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(OrderCurrency);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -329,6 +372,14 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(50);
         output.WriteString(LineItemLabel);
       }
+      if (OrderAmount != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(OrderAmount);
+      }
+      if (OrderCurrency.Length != 0) {
+        output.WriteRawTag(66);
+        output.WriteString(OrderCurrency);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -350,6 +401,12 @@ namespace Linq.Money.Payments.V1 {
       size += requiredBillingContactFields_.CalculateSize(_repeated_requiredBillingContactFields_codec);
       if (LineItemLabel.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(LineItemLabel);
+      }
+      if (OrderAmount != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(OrderAmount);
+      }
+      if (OrderCurrency.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OrderCurrency);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -374,6 +431,12 @@ namespace Linq.Money.Payments.V1 {
       requiredBillingContactFields_.Add(other.requiredBillingContactFields_);
       if (other.LineItemLabel.Length != 0) {
         LineItemLabel = other.LineItemLabel;
+      }
+      if (other.OrderAmount != 0) {
+        OrderAmount = other.OrderAmount;
+      }
+      if (other.OrderCurrency.Length != 0) {
+        OrderCurrency = other.OrderCurrency;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -414,6 +477,14 @@ namespace Linq.Money.Payments.V1 {
             LineItemLabel = input.ReadString();
             break;
           }
+          case 56: {
+            OrderAmount = input.ReadInt32();
+            break;
+          }
+          case 66: {
+            OrderCurrency = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -451,6 +522,14 @@ namespace Linq.Money.Payments.V1 {
           }
           case 50: {
             LineItemLabel = input.ReadString();
+            break;
+          }
+          case 56: {
+            OrderAmount = input.ReadInt32();
+            break;
+          }
+          case 66: {
+            OrderCurrency = input.ReadString();
             break;
           }
         }
@@ -886,7 +965,7 @@ namespace Linq.Money.Payments.V1 {
 
     private string clientId_;
     /// <summary>
-    /// Client ID for DDC, kount is disabled if not specified
+    /// Client ID for DDC, Kount is disabled if not specified
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1924,7 +2003,7 @@ namespace Linq.Money.Payments.V1 {
     public const int KountDataFieldNumber = 6;
     private global::Linq.Money.Payments.V1.KountData kountData_;
     /// <summary>
-    /// Kound data from Kount DDC
+    /// Kount data from Kount DDC (can be skipped if Kount disabled)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3102,6 +3181,7 @@ namespace Linq.Money.Payments.V1 {
     public PaymentResponse(PaymentResponse other) : this() {
       success_ = other.success_;
       order_ = other.order_ != null ? other.order_.Clone() : null;
+      retryOrderId_ = other.retryOrderId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3141,6 +3221,35 @@ namespace Linq.Money.Payments.V1 {
       }
     }
 
+    /// <summary>Field number for the "retry_order_id" field.</summary>
+    public const int RetryOrderIdFieldNumber = 3;
+    private readonly static string RetryOrderIdDefaultValue = "";
+
+    private string retryOrderId_;
+    /// <summary>
+    /// Order id for recommended retry (for applepay)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string RetryOrderId {
+      get { return retryOrderId_ ?? RetryOrderIdDefaultValue; }
+      set {
+        retryOrderId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "retry_order_id" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasRetryOrderId {
+      get { return retryOrderId_ != null; }
+    }
+    /// <summary>Clears the value of the "retry_order_id" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearRetryOrderId() {
+      retryOrderId_ = null;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3158,6 +3267,7 @@ namespace Linq.Money.Payments.V1 {
       }
       if (Success != other.Success) return false;
       if (!object.Equals(Order, other.Order)) return false;
+      if (RetryOrderId != other.RetryOrderId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3167,6 +3277,7 @@ namespace Linq.Money.Payments.V1 {
       int hash = 1;
       if (Success != false) hash ^= Success.GetHashCode();
       if (order_ != null) hash ^= Order.GetHashCode();
+      if (HasRetryOrderId) hash ^= RetryOrderId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3193,6 +3304,10 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(18);
         output.WriteMessage(Order);
       }
+      if (HasRetryOrderId) {
+        output.WriteRawTag(26);
+        output.WriteString(RetryOrderId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3211,6 +3326,10 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(18);
         output.WriteMessage(Order);
       }
+      if (HasRetryOrderId) {
+        output.WriteRawTag(26);
+        output.WriteString(RetryOrderId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3226,6 +3345,9 @@ namespace Linq.Money.Payments.V1 {
       }
       if (order_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Order);
+      }
+      if (HasRetryOrderId) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RetryOrderId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3247,6 +3369,9 @@ namespace Linq.Money.Payments.V1 {
           Order = new global::Linq.Money.Payments.V1.OrderResponse();
         }
         Order.MergeFrom(other.Order);
+      }
+      if (other.HasRetryOrderId) {
+        RetryOrderId = other.RetryOrderId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3274,6 +3399,10 @@ namespace Linq.Money.Payments.V1 {
             input.ReadMessage(Order);
             break;
           }
+          case 26: {
+            RetryOrderId = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -3298,6 +3427,10 @@ namespace Linq.Money.Payments.V1 {
               Order = new global::Linq.Money.Payments.V1.OrderResponse();
             }
             input.ReadMessage(Order);
+            break;
+          }
+          case 26: {
+            RetryOrderId = input.ReadString();
             break;
           }
         }
