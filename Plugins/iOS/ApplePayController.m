@@ -1,28 +1,21 @@
 #import <Foundation/Foundation.h>
-#import "NativePayments.h"
+#import "ApplePayController.h"
 
-typedef void (*successCallbackDelegate)(const char* data);
-typedef void (*failureCallbackDelegate)(const char* code, const char* message);
-
-//typedef void (*ddd)(const bool* status, const char* message);
+typedef void (*messageDelegate)(const bool* status, const char* message);
 
 static NSString* stringFromChar(const char *string) {
     return string ? [NSString stringWithUTF8String:string] : nil;
 }
 
-@interface NativePayments : NSObject<PKPaymentAuthorizationControllerDelegate>
+@interface ApplePayController : NSObject<PKPaymentAuthorizationControllerDelegate>
 
 @property (nonatomic, strong) PKPaymentAuthorizationController * _Nullable viewController;
 @property (nonatomic, copy) void (^__strong _Nonnull completion)(PKPaymentAuthorizationResult * _Nonnull __strong);
-@property (nonatomic) successCallbackDelegate _Nullable success;
-@property (nonatomic) failureCallbackDelegate _Nullable failure;
-
-//handler:(void (^)(PKPaymentAuthorizationResult *result))completion
+@property (nonatomic) messageDelegate _Nullable notify;
 
 @end
 
-
-@implementation NativePayments
+@implementation ApplePayController
 
 static const PKMerchantCapability PKMerchantCapabilityUnknown = 9999;
 static const PKPaymentNetwork PKPaymentNetworkUnknown = 0;
@@ -39,19 +32,17 @@ static const PKPaymentNetwork PKPaymentNetworkUnknown = 0;
     return sharedInstance;
 }
 
-- (void) showPaymentsView: (NSString *) params
-                  success: (successCallbackDelegate) success
-                  failure: (failureCallbackDelegate) failure
+- (void) showPaymentsView: (messageDelegate) notifier
+                   params: (NSString *) params
 {
-    self.success = success;
-    self.failure = failure;
+    self.notify = notifier;
 
     NSError *error;
     NSData *json = [params dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *data = [NSJSONSerialization JSONObjectWithData:json options:kNilOptions error:&error];
 
     if (error) {
-        self.failure([@"wrong_payment_data" UTF8String], [@"Invalid JSON payment methodData passed" UTF8String]);
+        self.notify(false, [@"Invalid JSON payment methodData passed" UTF8String]);
         return;
     }
 
@@ -126,9 +117,8 @@ static const PKPaymentNetwork PKPaymentNetworkUnknown = 0;
     }];
 }
 
-- (void) complete: (NSString *) incomingStatus
-          success: (successCallbackDelegate) success
-          failure: (failureCallbackDelegate) failure
+- (void) _putConfirmation: (messageDelegate) notifier
+                   status: (BOOL *) status
 {
     PKPaymentAuthorizationStatus status = PKPaymentAuthorizationStatusFailure;
 
@@ -257,20 +247,14 @@ static const PKPaymentNetwork PKPaymentNetworkUnknown = 0;
 
 @end
 
-extern void _showPaymentsView(const char* config, successCallbackDelegate success, failureCallbackDelegate failure) {
-    [[NativePayments sharedInstance] showPaymentsView:stringFromChar(config) success:success failure:failure];
+extern bool _canMakePayments() {
+    return [PKPaymentAuthorizationViewController canMakePayments];
 }
 
-//extern void _putConfirmation()
-//{
-//    [[NativePayments sharedInstance] complete:YES success:<#(successCallbackDelegate)#> failure:<#(failureCallbackDelegate)#>];
-//}
+extern void _askPaymentSheet(messageDelegate notifier, const char* config) {
+    [[ApplePayController sharedInstance] askPaymentSheet:notifier config:stringFromChar(config)];
+}
 
-//_canMakePayments()
-//_askPaymentSheet()
-//_putConfirmation()
-
-extern bool _canMakePayments()
-{
-    return [PKPaymentAuthorizationViewController canMakePayments];
+extern void _putConfirmation(messageDelegate notifier, const bool* status) {
+    [[ApplePayController sharedInstance] putConfirmation:notifier status:status];
 }

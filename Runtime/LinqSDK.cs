@@ -77,6 +77,9 @@ namespace LinqUnity
       };
     }
 
+    // todo: make two new methods, but keep the old one for BC marked as deprecated
+
+    //checkoutByApplePayCard
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId)
     {
       // 1. Getting config for a payment intention
@@ -103,6 +106,7 @@ namespace LinqUnity
       return null;
     }
 
+    //checkoutByOrdinaryCard
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
     {
       // 1. Getting config for a payment intention

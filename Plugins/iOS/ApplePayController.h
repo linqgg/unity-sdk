@@ -1,5 +1,5 @@
-#ifndef NativePayments_h
-#define NativePayments_h
+#ifndef ApplePayController_h
+#define ApplePayController_h
 
 #import <UIKit/UIKit.h>
 #import <PassKit/PassKit.h>
