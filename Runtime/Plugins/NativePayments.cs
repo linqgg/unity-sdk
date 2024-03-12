@@ -38,13 +38,21 @@ namespace LinqUnity
 
     public static void RequestPaymentView(string config)
     {
+	    //todo: validate object types at least?
      	#if UNITY_IOS
 				_showPaymentsView(config, handleSuccessCallback, handleFailureCallback);
       #else
         // DataSession.OnSessionIdCaptured("");
       #endif
     }
-  }
 
-    // string line_item_label = 6;
+    public static bool CanMakePayments()
+    {
+	    #if UNITY_IOS
+				return _canMakePayments();
+			#else
+				return false;
+			#endif
+    }
+  }
 }
