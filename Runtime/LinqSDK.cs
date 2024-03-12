@@ -84,7 +84,8 @@ namespace LinqUnity
       Debug.Log("Fetched payment config: " + JsonConvert.SerializeObject(config));
 
       // 2. Request Apple Pay Session
-      NativePayments.RequestPaymentView(JsonConvert.SerializeObject(config));
+      ApplePayController.AskPaymentSheet(JsonConvert.SerializeObject(config));
+      // run it as async
 
       // covert apple pay data - address to internal type
 

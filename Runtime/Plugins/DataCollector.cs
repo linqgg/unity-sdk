@@ -4,6 +4,8 @@ using System.Threading.Tasks;
   using System.Runtime.InteropServices;
 #endif
 
+//KountDataCollector
+
 namespace LinqUnity
 {
   public static class DataCollector
