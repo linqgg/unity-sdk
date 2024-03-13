@@ -46,6 +46,13 @@ namespace LinqUnity
     public string Protection;
   }
 
+  [Serializable]
+  public record ApplePayDataResponse
+  {
+    public ApplePayPayment paymentSession;
+    public BillingAddress billingAddress;
+  }
+
   public class LinqSDK : MonoBehaviour
   {
     private static GrpcChannel _channel;
@@ -77,37 +84,37 @@ namespace LinqUnity
       };
     }
 
-    // todo: make two new methods, but keep the old one for BC marked as deprecated
-
-    //checkoutByApplePayCard
+    [Obsolete("StartPaymentProcessing without parameter is deprecated, please use CheckoutByApplePayCard instead")]
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId)
+    {
+      return await CheckoutByApplePayCard(orderId);
+    }
+
+    [Obsolete("StartPaymentProcessing without parameter is deprecated, please use CheckoutByOrdinaryCard instead")]
+    public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
+    {
+      return await CheckoutByOrdinaryCard(orderId, details, address);
+    }
+
+    public static async Task<OrderResponse> CheckoutByApplePayCard(string orderId)
     {
       // 1. Getting config for a payment intention
       ApplePayConfig config = await GetApplePayConfig(orderId);
       Debug.Log("Fetched payment config: " + JsonConvert.SerializeObject(config));
 
       // 2. Request Apple Pay Session
-      ApplePayController.AskPaymentSheet(JsonConvert.SerializeObject(config));
-      // run it as async
-
-      // covert apple pay data - address to internal type
+      var (session, address) = await GetPaymentAuthorization(config);
 
       // 3. Send full payload for processing payment
-      // PaymentResponse payment = await
+      PaymentResponse payment = await SetPaymentHandle(orderId, address, session);
+      Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
-      // 4. Build PKPaymentRequest using data from apple_pay_config. Proceed with Apple Pay and get PKPayment in response.
-      // split card and apple pay
-      // if apple pay data provided - send using it, else - use card details
-      // need to split to two methods?
+      ApplePayController.PutConfirmation(payment.Success);
 
-      // PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
-      // Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
-
-      return null;
+      return payment.Order;
     }
 
-    //checkoutByOrdinaryCard
-    public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
+    public static async Task<OrderResponse> CheckoutByOrdinaryCard(string orderId, PaymentDetails details, BillingAddress address)
     {
       // 1. Getting config for a payment intention
       CardPaymentConfig config = await GetPaymentConfig(orderId);
@@ -139,6 +146,18 @@ namespace LinqUnity
       OrderConfigRequest request = new() { OrderId = orderId };
 
       return await client.GetApplePayConfigAsync(request, _headers);
+    }
+
+    private static async Task<(ApplePayPayment, BillingAddress)> GetPaymentAuthorization(ApplePayConfig config)
+    {
+      Task<string> action = PaymentSession.AutorizePayment(JsonConvert.SerializeObject(config));
+      string response = await action;
+
+      ApplePayDataResponse data = JsonConvert.DeserializeObject<ApplePayDataResponse>(response);
+
+      Debug.Log(data);
+
+      return (data.paymentSession, data.billingAddress);
     }
 
     private static async Task<CardPaymentConfig> GetPaymentConfig(string orderId)
@@ -215,7 +234,6 @@ namespace LinqUnity
       Debug.Log("Payment handle: " + JsonConvert.SerializeObject(request));
 
       return await client.MakePaymentAsync(request, _headers);
-
     }
 
     private static async Task<PaymentResponse> SetPaymentHandle(

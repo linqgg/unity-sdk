@@ -79,6 +79,8 @@ static const PKContactField PKContactFieldUnknown = 0;
         ? PKPaymentAuthorizationStatusSuccess
         : PKPaymentAuthorizationStatusFailure;
 
+    NSLog(@"Completion status is: %@", status);
+
     NSArray<NSError *> *errors;
     self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:status errors:errors]);
 
@@ -93,44 +95,32 @@ static const PKContactField PKContactFieldUnknown = 0;
 {
     self.completion = completion;
 
-    NSMutableDictionary *paymentDict = [NSMutableDictionary dictionary];
-    NSMutableDictionary *tokenDict = [NSMutableDictionary dictionary];
-    tokenDict[@"transactionIdentifier"] = payment.token.transactionIdentifier;
+    NSMutableDictionary *response = [NSMutableDictionary dictionary];
+    NSMutableDictionary *paymentSession = [NSMutableDictionary dictionary];
 
     NSString *paymentData64 = [payment.token.paymentData base64EncodedStringWithOptions:0];
     NSData *decodedPaymentData = [[NSData alloc] initWithBase64EncodedString:paymentData64 options:0];
-    tokenDict[@"paymentData"] = [[NSString alloc] initWithData:decodedPaymentData encoding:NSUTF8StringEncoding];
+    paymentSession[@"PaymentData"] = [[NSString alloc] initWithData:decodedPaymentData encoding:NSUTF8StringEncoding];
 
-    NSMutableDictionary *paymentMethodDict = [NSMutableDictionary dictionary];
-    paymentMethodDict[@"displayName"] = payment.token.paymentMethod.displayName;
-    paymentMethodDict[@"network"] = payment.token.paymentMethod.network;
-    paymentMethodDict[@"type"] = [self stringFromPaymentMethodType:payment.token.paymentMethod.type];
+    response[@"paymentSession"] = paymentSession;
 
-    tokenDict[@"paymentMethod"] = paymentMethodDict;
-    paymentDict[@"token"] = tokenDict;
+    CNPostalAddress *address = payment.billingContact.postalAddress;
 
-    PKContact *billingContact = payment.billingContact;
-    if (billingContact) {
-        NSMutableDictionary *billingContactDict = [NSMutableDictionary dictionary];
+    if (address) {
 
-        CNPostalAddress *postalAddress = billingContact.postalAddress;
-        NSMutableDictionary *postalAddressDict = [NSMutableDictionary dictionary];
-        if (postalAddress) {
-            postalAddressDict[@"street"] = postalAddress.street;
-            postalAddressDict[@"city"] = postalAddress.city;
-            postalAddressDict[@"state"] = postalAddress.state;
-            postalAddressDict[@"postalCode"] = postalAddress.postalCode;
-            postalAddressDict[@"country"] = postalAddress.country;
-            postalAddressDict[@"isoCountryCode"] = postalAddress.ISOCountryCode;
-        }
+        NSMutableDictionary *billingAddress = [NSMutableDictionary dictionary];
 
-        billingContactDict[@"postalAddress"] = postalAddressDict;
+        billingAddress[@"Country"] = address.ISOCountryCode;
+        billingAddress[@"Region"] = address.state;
+        billingAddress[@"City"] = address.city;
+        billingAddress[@"Street"] = address.street;
+        billingAddress[@"Zip"] = address.postalCode;
 
-        paymentDict[@"billingContact"] = billingContactDict;
+        response[@"billingAddress"] = billingAddress;
     }
 
     NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:paymentDict options:NSJSONWritingPrettyPrinted error:&error];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:&error];
 
     if (!data) {
         self.notify(false, [@"Failed to serialize PKPayment to JSON." UTF8String]);
@@ -143,23 +133,25 @@ static const PKContactField PKContactFieldUnknown = 0;
 - (void) paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller
 {
     [controller dismissWithCompletion:^{
-        NSLog(@"Payment process canceled by user."); // need to notify back?
-        self.notify(NO, [@"Payment process canceled by user." UTF8String]);
+        NSLog(@"Payment sheet is closed.");
     }];
 }
 
 // ------------------------HELPERS------------------------
 
-- (NSString *) parseMerchantIdentifier: (NSDictionary *) data {
+- (NSString *) parseMerchantIdentifier: (NSDictionary *) data
+{
     return data[@"MerchantId"];
 }
 
-- (NSString *) parseCountryCode: (NSDictionary *) data {
+- (NSString *) parseCountryCode: (NSDictionary *) data
+{
     //todo: add validation
     return data[@"CountryCode"];
 }
 
-- (NSString *) parseCurrencyCode: (NSDictionary *) data {
+- (NSString *) parseCurrencyCode: (NSDictionary *) data
+{
     return data[@"OrderCurrency"];
 }
 
@@ -271,23 +263,6 @@ static const PKContactField PKContactFieldUnknown = 0;
     }
 
     return PKMerchantCapabilityUnknown;
-}
-
-- (NSString *) stringFromPaymentMethodType:(PKPaymentMethodType)type {
-    switch (type) {
-        case PKPaymentMethodTypeUnknown:
-            return @"PKPaymentMethodTypeUnknown";
-        case PKPaymentMethodTypeDebit:
-            return @"PKPaymentMethodTypeDebit";
-        case PKPaymentMethodTypeCredit:
-            return @"PKPaymentMethodTypeCredit";
-        case PKPaymentMethodTypePrepaid:
-            return @"PKPaymentMethodTypePrepaid";
-        case PKPaymentMethodTypeStore:
-            return @"PKPaymentMethodTypeStore";
-        default:
-            return @"PKPaymentMethodTypeUnknown";
-    }
 }
 
 @end
