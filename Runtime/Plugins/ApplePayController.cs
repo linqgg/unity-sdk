@@ -14,6 +14,13 @@ namespace LinqUnity
 		public static void handleMessage(bool status, string message)
 		{
 			Debug.Log("Status: " + status + ", Message: " + message);
+
+			if (!status) {
+				Debug.LogError(message); // will be cacthed by sentry if set up
+				return;
+			}
+
+			PaymentSession.onPaymentAuthorized(message);
 		}
 
 #if UNITY_IOS
@@ -54,6 +61,25 @@ namespace LinqUnity
 			#else
 				// do nothing
 			#endif
+    }
+  }
+
+	public static class PaymentSession
+  {
+    private static TaskCompletionSource<string> _completion;
+
+    public static Task<string> AutorizePayment(string config)
+    {
+      _completion = new TaskCompletionSource<string>();
+
+      ApplePayController.AskPaymentSheet(config);
+
+      return _completion.Task;
+    }
+
+    public static void onPaymentAuthorized(string payment)
+    {
+      _completion.SetResult(payment);
     }
   }
 }
