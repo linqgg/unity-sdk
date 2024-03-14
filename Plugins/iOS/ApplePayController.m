@@ -12,6 +12,7 @@ static NSString* stringFromChar(const char *string) {
 @property (nonatomic) NSDictionary * _Nonnull context;
 @property (nonatomic) messageDelegate _Nullable notify;
 @property (nonatomic, strong) PKPaymentAuthorizationController * _Nullable paymentSheet;
+@property (nonatomic, copy) void (^__strong _Nonnull completion)(PKPaymentAuthorizationResult * _Nonnull __strong);
 
 @end
 
@@ -41,7 +42,7 @@ static const PKContactField PKContactFieldUnknown = 0;
 
     NSError *error;
 
-    NSData *contextString = [config dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *contextString = [context dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *contextData = [NSJSONSerialization JSONObjectWithData:contextString options:kNilOptions error:&error];
 
     if (error) {
@@ -84,51 +85,33 @@ static const PKContactField PKContactFieldUnknown = 0;
     }];
 }
 
-- (void) putConfirmation: (messageDelegate) notifier
-                  result: (bool) result
-{
-    PKPaymentAuthorizationStatus status = result == true
-        ? PKPaymentAuthorizationStatusSuccess
-        : PKPaymentAuthorizationStatusFailure;
-
-    NSArray<NSError *> *errors;
-    self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:status errors:errors]);
-
-    if (errors.count > 0) {
-        self.notify(false, [@"Payment could not be confirmed due to errors" UTF8String]);
-    }
-}
-
 - (void) paymentAuthorizationController:(PKPaymentAuthorizationViewController *)controller
                     didAuthorizePayment:(PKPayment *)payment
                                 handler:(void (^)(PKPaymentAuthorizationResult *result))completion
 {
+    self.completion = completion;
+
     NSMutableDictionary *payload = [NSMutableDictionary dictionary];
 
     NSMutableDictionary *session = [NSMutableDictionary dictionary];
     NSString *paymentData64 = [payment.token.paymentData base64EncodedStringWithOptions:0];
     NSData *decodedPaymentData = [[NSData alloc] initWithBase64EncodedString:paymentData64 options:0];
-    session[@"PaymentData"] = [[NSString alloc] initWithData:decodedPaymentData encoding:NSUTF8StringEncoding];
+    session[@"paymentData"] = [[NSString alloc] initWithData:decodedPaymentData encoding:NSUTF8StringEncoding];
 
     CNPostalAddress *postalAddress = payment.billingContact.postalAddress;
     NSMutableDictionary *address = [NSMutableDictionary dictionary];
-    address[@"Country"] = postalAddress.ISOCountryCode;
-    address[@"Region"] = postalAddress.state;
-    address[@"City"] = postalAddress.city;
-    address[@"Street"] = postalAddress.street;
-    address[@"Zip"] = postalAddress.postalCode;
+    address[@"country"] = postalAddress.ISOCountryCode;
+    address[@"region"] = postalAddress.state;
+    address[@"city"] = postalAddress.city;
+    address[@"street"] = postalAddress.street;
+    address[@"zip"] = postalAddress.postalCode;
 
-    payload[@"OrderId"] = self.context[@"reference"];
-    payload[@"Address"] = address;
-    payload[@"ApplePayPayment"] = session;
-    payload[@"CardTokenexPayment"] = nil;
+    payload[@"orderId"] = self.context[@"reference"];
+    payload[@"address"] = address;
+    payload[@"applePayPayment"] = session;
+    payload[@"cardTokenexPayment"] = nil;
 
-    NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:payload options:NSJSONWritingPrettyPrinted error:&error];
-
-    //--
-    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    //--
+    NSData *data = [NSJSONSerialization dataWithJSONObject:payload options:NSJSONWritingPrettyPrinted error:nil];
 
     NSURLSession *handler = [NSURLSession sharedSession];
 
@@ -138,11 +121,23 @@ static const PKContactField PKContactFieldUnknown = 0;
 
         NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
-        if (httpResponse.statusCode == 200) {
-            self.notify(true, [json UTF8String]);
-        } else {
-            self.notify(false, [[NSString stringWithFormat:@"Payment validation failed with unswer: %@", json] UTF8String]);
+        if (httpResponse.statusCode != 200) {
+            self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusFailure errors:nil]);
+            self.notify(false, [[NSString stringWithFormat:@"Payment validation failed with error: %@", json] UTF8String]);
+            return;
         }
+
+        NSError *parseError;
+        NSDictionary *answer = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
+
+        if (!answer[@"success"]) {
+            self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusFailure errors:nil]);
+            self.notify(false, [[NSString stringWithFormat:@"Payment validation failed with answer: %@", json] UTF8String]);
+            return;
+        }
+
+        self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusSuccess errors:nil]);
+        self.notify(true, [json UTF8String]);
     }];
 
     [dataTask resume];
@@ -164,10 +159,6 @@ static const PKContactField PKContactFieldUnknown = 0;
 
     NSString *service = @"linq.money.payments.v1.NativePaymentsService/MakePayment";
     NSString *url = [NSString stringWithFormat:@"%@/%@", remoteUrl, service];
-
-    //--
-    NSLog(@"%@", url);
-    //--
 
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     headers[@"Authorization"] = [NSString stringWithFormat:@"Bearer %@", secretKey];
@@ -319,8 +310,4 @@ extern bool _canMakePayments() {
 
 extern void _askPaymentSheet(messageDelegate notifier, const char* context, const char* config) {
     [[ApplePayController sharedInstance] askPaymentSheet:notifier context:stringFromChar(context) config:stringFromChar(config)];
-}
-
-extern void _putConfirmation(messageDelegate notifier, const bool result) {
-    [[ApplePayController sharedInstance] putConfirmation:notifier result:result];
 }
