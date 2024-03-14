@@ -46,11 +46,19 @@ namespace LinqUnity
     public string Protection;
   }
 
-  // PlayPal
+  [Serializable]
+  public record Context
+  {
+    public string remoteUrl;
+    public string secretKey;
+    public string reference;
+  }
+
   public class LinqSDK : MonoBehaviour
   {
     private static GrpcChannel _channel;
     private static Metadata _headers;
+    private static Context _context;
 
     /// <summary>
     /// Initialize the LinQ SDK with your remoteUrl and secretKey.
@@ -68,6 +76,12 @@ namespace LinqUnity
         Debug.Log("LinQ Initializing: " + remoteUrl + ", with key: " + secretKey);
       #endif
 
+      _context = new Context
+      {
+        remoteUrl = remoteUrl,
+        secretKey = secretKey,
+      };
+
       _channel = GrpcChannel.ForAddress(remoteUrl, new GrpcChannelOptions() {
           HttpHandler = new GrpcWebHandler(new HttpClientHandler())
         }
@@ -76,10 +90,34 @@ namespace LinqUnity
       _headers = new Metadata {
         { "Authorization", $"Bearer {secretKey}" }
       };
-
     }
 
+    [Obsolete("StartPaymentProcessing without parameter is deprecated, please use CheckoutByApplePayCard instead")]
+    public static async Task<OrderResponse> StartPaymentProcessing(string orderId)
+    {
+      return await CheckoutByApplePayCard(orderId);
+    }
+
+    [Obsolete("StartPaymentProcessing without parameter is deprecated, please use CheckoutByOrdinaryCard instead")]
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
+    {
+      return await CheckoutByOrdinaryCard(orderId, details, address);
+    }
+
+    public static async Task<OrderResponse> CheckoutByApplePayCard(string orderId)
+    {
+      // 1. Getting config for a payment intention
+      ApplePayConfig config = await GetApplePayConfig(orderId);
+      Debug.Log("Fetched payment config: " + JsonConvert.SerializeObject(config));
+
+      // 2. Request Apple Pay Session and Confirmation
+      PaymentResponse payment = await GetPaymentAuthorization(orderId, config);
+      Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
+
+      return payment.Order;
+    }
+
+    public static async Task<OrderResponse> CheckoutByOrdinaryCard(string orderId, PaymentDetails details, BillingAddress address)
     {
       // 1. Getting config for a payment intention
       CardPaymentConfig config = await GetPaymentConfig(orderId);
@@ -95,16 +133,41 @@ namespace LinqUnity
       Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
 
       // 4. Send full payload for processing payment
-      PaymentResponse payment = await SetPaymentHandle(orderId, tokenizedCard, address);
+      PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
       return payment.Order;
     }
 
+    private static async Task<ApplePayConfig> GetApplePayConfig(string orderId)
+    {
+      #if UNITY_EDITOR
+        Debug.Log("Getting Apple Pay config for order id: " + orderId);
+      #endif
+
+      NativePaymentsServiceClient client = new(_channel);
+      OrderConfigRequest request = new() { OrderId = orderId };
+
+      return await client.GetApplePayConfigAsync(request, _headers);
+    }
+
+    private static async Task<PaymentResponse> GetPaymentAuthorization(string order, ApplePayConfig config)
+    {
+      _context.reference = order;
+
+      Task<string> action = PaymentSession.AutorizePayment(
+        JsonConvert.SerializeObject(_context),
+        JsonConvert.SerializeObject(config)
+      );
+      string response = await action;
+
+      return JsonConvert.DeserializeObject<PaymentResponse>(response);
+    }
+
     private static async Task<CardPaymentConfig> GetPaymentConfig(string orderId)
     {
       #if UNITY_EDITOR
-        Debug.Log("Getting config for order id: " + orderId);
+        Debug.Log("Getting Card Payment config for order id: " + orderId);
       #endif
 
       NativePaymentsServiceClient client = new(_channel);
@@ -156,8 +219,8 @@ namespace LinqUnity
 
     private static async Task<PaymentResponse> SetPaymentHandle(
       string orderId,
-      CardTokenexPayment tokenex,
-      BillingAddress address
+      BillingAddress address,
+      ApplePayPayment payment
       )
     {
       #if UNITY_EDITOR
@@ -169,7 +232,30 @@ namespace LinqUnity
       {
         OrderId = orderId,
         Address = address,
-        CardTokenexPayment = tokenex,
+        ApplePayPayment = payment,
+      };
+
+      Debug.Log("Payment handle: " + JsonConvert.SerializeObject(request));
+
+      return await client.MakePaymentAsync(request, _headers);
+    }
+
+    private static async Task<PaymentResponse> SetPaymentHandle(
+      string orderId,
+      BillingAddress address,
+      CardTokenexPayment payment
+      )
+    {
+      #if UNITY_EDITOR
+        Debug.Log("Setting payment handle for intent id: " + orderId);
+      #endif
+
+      NativePaymentsServiceClient client = new(_channel);
+      PaymentRequest request = new()
+      {
+        OrderId = orderId,
+        Address = address,
+        CardTokenexPayment = payment,
       };
 
       Debug.Log("Payment handle: " + JsonConvert.SerializeObject(request));
