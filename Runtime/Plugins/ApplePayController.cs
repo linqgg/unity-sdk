@@ -13,10 +13,8 @@ namespace LinqUnity
 		[AOT.MonoPInvokeCallbackAttribute(typeof(messageDelegate))]
 		public static void handleMessage(bool status, string message)
 		{
-			Debug.Log("Status: " + status + ", Message: " + message);
-
 			if (!status) {
-				Debug.LogError(message); // will be cacthed by sentry if set up
+				Debug.LogError(message); // will be catched by sentry if set up
 				return;
 			}
 
@@ -29,10 +27,7 @@ namespace LinqUnity
 		private static extern bool _canMakePayments();
 
 		[DllImport("__Internal")]
-		private static extern void _askPaymentSheet(messageDelegate message, string config);
-
-		[DllImport("__Internal")]
-		private static extern void _putConfirmation(messageDelegate message, bool status);
+		private static extern void _askPaymentSheet(messageDelegate message, string context, string config);
 
 #endif
 
@@ -45,22 +40,13 @@ namespace LinqUnity
 			#endif
 		}
 
-    public static void AskPaymentSheet(string config)
+    public static void AskPaymentSheet(string context, string config)
     {
      	#if UNITY_IOS
-				_askPaymentSheet(handleMessage, config);
+				_askPaymentSheet(handleMessage, context, config);
       #else
         // do nothing
       #endif
-    }
-
-    public static void PutConfirmation(bool status)
-    {
-			#if UNITY_IOS
-				_putConfirmation(handleMessage, status);
-			#else
-				// do nothing
-			#endif
     }
   }
 
@@ -68,11 +54,11 @@ namespace LinqUnity
   {
     private static TaskCompletionSource<string> _completion;
 
-    public static Task<string> AutorizePayment(string config)
+    public static Task<string> AutorizePayment(string context, string config)
     {
       _completion = new TaskCompletionSource<string>();
 
-      ApplePayController.AskPaymentSheet(config);
+      ApplePayController.AskPaymentSheet(context, config);
 
       return _completion.Task;
     }

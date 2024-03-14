@@ -47,16 +47,18 @@ namespace LinqUnity
   }
 
   [Serializable]
-  public record ApplePayDataResponse
+  public record Context
   {
-    public ApplePayPayment paymentSession;
-    public BillingAddress billingAddress;
+    public string remoteUrl;
+    public string secretKey;
+    public string reference;
   }
 
   public class LinqSDK : MonoBehaviour
   {
     private static GrpcChannel _channel;
     private static Metadata _headers;
+    private static Context _context;
 
     /// <summary>
     /// Initialize the LinQ SDK with your remoteUrl and secretKey.
@@ -73,6 +75,12 @@ namespace LinqUnity
       #if UNITY_EDITOR
         Debug.Log("LinQ Initializing: " + remoteUrl + ", with key: " + secretKey);
       #endif
+
+      _context = new Context
+      {
+        remoteUrl = remoteUrl,
+        secretKey = secretKey,
+      };
 
       _channel = GrpcChannel.ForAddress(remoteUrl, new GrpcChannelOptions() {
           HttpHandler = new GrpcWebHandler(new HttpClientHandler())
@@ -102,14 +110,9 @@ namespace LinqUnity
       ApplePayConfig config = await GetApplePayConfig(orderId);
       Debug.Log("Fetched payment config: " + JsonConvert.SerializeObject(config));
 
-      // 2. Request Apple Pay Session
-      var (session, address) = await GetPaymentAuthorization(config);
-
-      // 3. Send full payload for processing payment
-      PaymentResponse payment = await SetPaymentHandle(orderId, address, session);
+      // 2. Request Apple Pay Session and Confirmation
+      PaymentResponse payment = await GetPaymentAuthorization(orderId, config);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
-
-      ApplePayController.PutConfirmation(payment.Success);
 
       return payment.Order;
     }
@@ -148,16 +151,17 @@ namespace LinqUnity
       return await client.GetApplePayConfigAsync(request, _headers);
     }
 
-    private static async Task<(ApplePayPayment, BillingAddress)> GetPaymentAuthorization(ApplePayConfig config)
+    private static async Task<PaymentResponse> GetPaymentAuthorization(string order, ApplePayConfig config)
     {
-      Task<string> action = PaymentSession.AutorizePayment(JsonConvert.SerializeObject(config));
+      _context.reference = order;
+
+      Task<string> action = PaymentSession.AutorizePayment(
+        JsonConvert.SerializeObject(_context),
+        JsonConvert.SerializeObject(config)
+      );
       string response = await action;
 
-      ApplePayDataResponse data = JsonConvert.DeserializeObject<ApplePayDataResponse>(response);
-
-      Debug.Log(data);
-
-      return (data.paymentSession, data.billingAddress);
+      return JsonConvert.DeserializeObject<PaymentResponse>(response);
     }
 
     private static async Task<CardPaymentConfig> GetPaymentConfig(string orderId)

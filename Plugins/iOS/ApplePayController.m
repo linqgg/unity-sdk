@@ -9,9 +9,9 @@ static NSString* stringFromChar(const char *string) {
 
 @interface ApplePayController : NSObject<PKPaymentAuthorizationControllerDelegate>
 
+@property (nonatomic) NSDictionary * _Nonnull context;
 @property (nonatomic) messageDelegate _Nullable notify;
 @property (nonatomic, strong) PKPaymentAuthorizationController * _Nullable paymentSheet;
-@property (nonatomic, copy) void (^__strong _Nonnull completion)(PKPaymentAuthorizationResult * _Nonnull __strong);
 
 @end
 
@@ -34,13 +34,25 @@ static const PKContactField PKContactFieldUnknown = 0;
 }
 
 - (void) askPaymentSheet: (messageDelegate) notifier
+                 context: (NSString *) context
                   config: (NSString *) config
 {
     self.notify = notifier;
 
     NSError *error;
-    NSData *json = [config dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *data = [NSJSONSerialization JSONObjectWithData:json options:kNilOptions error:&error];
+
+    NSData *contextString = [config dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *contextData = [NSJSONSerialization JSONObjectWithData:contextString options:kNilOptions error:&error];
+
+    if (error) {
+        self.notify(false, [@"Invalid JSON with ApplePay context with creds is passed" UTF8String]);
+        return;
+    }
+
+    self.context = contextData;
+
+    NSData *configString = [config dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *configData = [NSJSONSerialization JSONObjectWithData:configString options:kNilOptions error:&error];
 
     if (error) {
         self.notify(false, [@"Invalid JSON with ApplePay server configuration is passed" UTF8String]);
@@ -49,13 +61,13 @@ static const PKContactField PKContactFieldUnknown = 0;
 
     PKPaymentRequest *paymentRequest = [[PKPaymentRequest alloc] init];
 
-    paymentRequest.countryCode = [self parseCountryCode:data];
-    paymentRequest.currencyCode = [self parseCurrencyCode:data];
-    paymentRequest.supportedNetworks = [self parseSupportedNetworks:data];
-    paymentRequest.merchantIdentifier = [self parseMerchantIdentifier:data];
-    paymentRequest.paymentSummaryItems = [self parsePaymentSummaryItems:data];
-    paymentRequest.merchantCapabilities = [self parseMerchantCapabilities:data];
-    paymentRequest.requiredBillingContactFields = [self parseRequiredBillingContactFields:data];
+    paymentRequest.countryCode = [self parseCountryCode:configData];
+    paymentRequest.currencyCode = [self parseCurrencyCode:configData];
+    paymentRequest.supportedNetworks = [self parseSupportedNetworks:configData];
+    paymentRequest.merchantIdentifier = [self parseMerchantIdentifier:configData];
+    paymentRequest.paymentSummaryItems = [self parsePaymentSummaryItems:configData];
+    paymentRequest.merchantCapabilities = [self parseMerchantCapabilities:configData];
+    paymentRequest.requiredBillingContactFields = [self parseRequiredBillingContactFields:configData];
 
     self.paymentSheet = [[PKPaymentAuthorizationController alloc] initWithPaymentRequest:paymentRequest];
     self.paymentSheet.delegate = self;
@@ -79,8 +91,6 @@ static const PKContactField PKContactFieldUnknown = 0;
         ? PKPaymentAuthorizationStatusSuccess
         : PKPaymentAuthorizationStatusFailure;
 
-    NSLog(@"Completion status is: %@", status);
-
     NSArray<NSError *> *errors;
     self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:status errors:errors]);
 
@@ -93,41 +103,49 @@ static const PKContactField PKContactFieldUnknown = 0;
                     didAuthorizePayment:(PKPayment *)payment
                                 handler:(void (^)(PKPaymentAuthorizationResult *result))completion
 {
-    self.completion = completion;
+    NSMutableDictionary *payload = [NSMutableDictionary dictionary];
 
-    NSMutableDictionary *response = [NSMutableDictionary dictionary];
-    NSMutableDictionary *paymentSession = [NSMutableDictionary dictionary];
-
+    NSMutableDictionary *session = [NSMutableDictionary dictionary];
     NSString *paymentData64 = [payment.token.paymentData base64EncodedStringWithOptions:0];
     NSData *decodedPaymentData = [[NSData alloc] initWithBase64EncodedString:paymentData64 options:0];
-    paymentSession[@"PaymentData"] = [[NSString alloc] initWithData:decodedPaymentData encoding:NSUTF8StringEncoding];
+    session[@"PaymentData"] = [[NSString alloc] initWithData:decodedPaymentData encoding:NSUTF8StringEncoding];
 
-    response[@"paymentSession"] = paymentSession;
+    CNPostalAddress *postalAddress = payment.billingContact.postalAddress;
+    NSMutableDictionary *address = [NSMutableDictionary dictionary];
+    address[@"Country"] = postalAddress.ISOCountryCode;
+    address[@"Region"] = postalAddress.state;
+    address[@"City"] = postalAddress.city;
+    address[@"Street"] = postalAddress.street;
+    address[@"Zip"] = postalAddress.postalCode;
 
-    CNPostalAddress *address = payment.billingContact.postalAddress;
-
-    if (address) {
-
-        NSMutableDictionary *billingAddress = [NSMutableDictionary dictionary];
-
-        billingAddress[@"Country"] = address.ISOCountryCode;
-        billingAddress[@"Region"] = address.state;
-        billingAddress[@"City"] = address.city;
-        billingAddress[@"Street"] = address.street;
-        billingAddress[@"Zip"] = address.postalCode;
-
-        response[@"billingAddress"] = billingAddress;
-    }
+    payload[@"OrderId"] = self.context[@"reference"];
+    payload[@"Address"] = address;
+    payload[@"ApplePayPayment"] = session;
+    payload[@"CardTokenexPayment"] = nil;
 
     NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:response options:NSJSONWritingPrettyPrinted error:&error];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:payload options:NSJSONWritingPrettyPrinted error:&error];
 
-    if (!data) {
-        self.notify(false, [@"Failed to serialize PKPayment to JSON." UTF8String]);
-    } else {
+    //--
+    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    //--
+
+    NSURLSession *handler = [NSURLSession sharedSession];
+
+    NSURLSessionDataTask *dataTask = [handler dataTaskWithRequest:[self preparePaymentValidationRequest:data] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+
         NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        self.notify(true, [json UTF8String]);
-    }
+
+        if (httpResponse.statusCode == 200) {
+            self.notify(true, [json UTF8String]);
+        } else {
+            self.notify(false, [[NSString stringWithFormat:@"Payment validation failed with unswer: %@", json] UTF8String]);
+        }
+    }];
+
+    [dataTask resume];
 }
 
 - (void) paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller
@@ -138,6 +156,34 @@ static const PKContactField PKContactFieldUnknown = 0;
 }
 
 // ------------------------HELPERS------------------------
+
+- (NSMutableURLRequest *) preparePaymentValidationRequest: (NSData *) payload
+{
+    NSString *remoteUrl = self.context[@"remoteUrl"];
+    NSString *secretKey = self.context[@"secretKey"];
+
+    NSString *service = @"linq.money.payments.v1.NativePaymentsService/MakePayment";
+    NSString *url = [NSString stringWithFormat:@"%@/%@", remoteUrl, service];
+
+    //--
+    NSLog(@"%@", url);
+    //--
+
+    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    headers[@"Authorization"] = [NSString stringWithFormat:@"Bearer %@", secretKey];
+    headers[@"Content-Type"] = @"application/json";
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+
+    [request setURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:payload];
+    for (NSString *header in headers) {
+        [request setValue:[headers valueForKey:header] forHTTPHeaderField:header];
+    }
+
+    return request;
+}
 
 - (NSString *) parseMerchantIdentifier: (NSDictionary *) data
 {
@@ -271,8 +317,8 @@ extern bool _canMakePayments() {
     return [PKPaymentAuthorizationViewController canMakePayments];
 }
 
-extern void _askPaymentSheet(messageDelegate notifier, const char* config) {
-    [[ApplePayController sharedInstance] askPaymentSheet:notifier config:stringFromChar(config)];
+extern void _askPaymentSheet(messageDelegate notifier, const char* context, const char* config) {
+    [[ApplePayController sharedInstance] askPaymentSheet:notifier context:stringFromChar(context) config:stringFromChar(config)];
 }
 
 extern void _putConfirmation(messageDelegate notifier, const bool result) {
