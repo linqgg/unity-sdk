@@ -11,7 +11,6 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.Text;
-using JetBrains.Annotations;
 using Linq.Shared;
 
 namespace LinqUnity
@@ -113,6 +112,8 @@ namespace LinqUnity
       // 2. Request Apple Pay Session and Confirmation
       PaymentResponse payment = await GetPaymentAuthorization(orderId, config);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
+
+      if (payment == null) throw new InvalidOperationException("ApplePay is no not supported on this device");
 
       return payment.Order;
     }
