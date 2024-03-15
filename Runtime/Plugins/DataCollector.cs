@@ -27,7 +27,7 @@ namespace LinqUnity
 
     public static void RequestSessionId(string kountClientId, bool isProd)
     {
-      #if UNITY_IOS
+      #if UNITY_IOS && !UNITY_EDITOR
         _Init(handleNativeCallBack, kountClientId, isProd);
         _Collect();
       #else

@@ -14,6 +14,7 @@ namespace LinqUnity
 		public static void handleMessage(bool status, string message)
 		{
 			if (!status) {
+				PaymentSession.onPaymentAuthorized("");
 				Debug.LogError(message); // will be catched by sentry if set up
 				return;
 			}
@@ -33,7 +34,7 @@ namespace LinqUnity
 
 		public static bool CanMakePayments()
 		{
-			#if UNITY_IOS
+			#if UNITY_IOS && !UNITY_EDITOR
 				return _canMakePayments();
 			#else
 				return false;
@@ -42,10 +43,10 @@ namespace LinqUnity
 
     public static void AskPaymentSheet(string context, string config)
     {
-     	#if UNITY_IOS
+			#if UNITY_IOS && !UNITY_EDITOR
 				_askPaymentSheet(handleMessage, context, config);
       #else
-        // do nothing
+				PaymentSession.onPaymentAuthorized("");
       #endif
     }
   }
@@ -56,11 +57,11 @@ namespace LinqUnity
 
     public static Task<string> AutorizePayment(string context, string config)
     {
-      _completion = new TaskCompletionSource<string>();
+	    _completion = new TaskCompletionSource<string>();
 
-      ApplePayController.AskPaymentSheet(context, config);
+	    ApplePayController.AskPaymentSheet(context, config);
 
-      return _completion.Task;
+	    return _completion.Task;
     }
 
     public static void onPaymentAuthorized(string payment)
