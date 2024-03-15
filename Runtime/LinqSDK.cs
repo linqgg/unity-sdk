@@ -30,7 +30,7 @@ namespace LinqUnity
   public record TokenexDataResponse
   {
     public bool Success;
-    [CanBeNull] public string Error;
+    public string Error;
     public string ReferenceNumber;
     public string Token;
     public string TokenHMAC;
@@ -130,8 +130,11 @@ namespace LinqUnity
 
       // 3. Request Kount Session ID
       KountData kountSessionData = await GetSpecialChecks(config.KountConfig, details);
-      tokenizedCard.KountData = kountSessionData;
-      Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
+      if (!string.IsNullOrEmpty(kountSessionData.SessionId)) {
+        tokenizedCard.KountData = kountSessionData;
+        Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
+      }
+
 
       // 4. Send full payload for processing payment
       PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
@@ -190,6 +193,8 @@ namespace LinqUnity
       };
 
       TokenexDataResponse response = await ProcessWebRequest<TokenexDataResponse>(config.Url, JsonConvert.SerializeObject(tokenexRequest));
+
+      if (!response.Success) throw new InvalidOperationException(response.Error);
 
       string[] expiration = details.Expiration.Split("/");
 
