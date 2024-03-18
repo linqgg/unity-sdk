@@ -146,7 +146,8 @@ static const PKContactField PKContactFieldUnknown = 0;
 - (void) paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller
 {
     [controller dismissWithCompletion:^{
-        NSLog(@"Payment sheet is closed.");
+        NSLog(@"Payment sheet is closed as payment cancelled by user.");
+        self.notify(true, [@"" UTF8String]);
     }];
 }
 
@@ -183,7 +184,6 @@ static const PKContactField PKContactFieldUnknown = 0;
 
 - (NSString *) parseCountryCode: (NSDictionary *) data
 {
-    //todo: add validation
     return data[@"CountryCode"];
 }
 
