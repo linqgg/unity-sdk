@@ -135,7 +135,6 @@ namespace LinqUnity
         Debug.Log("Kount session: " + JsonConvert.SerializeObject(kountSessionData));
       }
 
-
       // 4. Send full payload for processing payment
       PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));

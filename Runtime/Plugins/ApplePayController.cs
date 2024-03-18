@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Threading.Tasks;
 #if UNITY_IOS
@@ -14,8 +15,7 @@ namespace LinqUnity
 		public static void handleMessage(bool status, string message)
 		{
 			if (!status) {
-				PaymentSession.onPaymentAuthorized("");
-				Debug.LogError(message); // will be catched by sentry if set up
+				PaymentSession.onPaymentFailed(message);
 				return;
 			}
 
@@ -46,7 +46,7 @@ namespace LinqUnity
 			#if UNITY_IOS && !UNITY_EDITOR
 				_askPaymentSheet(handleMessage, context, config);
       #else
-				PaymentSession.onPaymentAuthorized("");
+				PaymentSession.onPaymentCancelled("Native payments are not supported on this device");
       #endif
     }
   }
@@ -66,7 +66,20 @@ namespace LinqUnity
 
     public static void onPaymentAuthorized(string payment)
     {
+	    if (string.IsNullOrEmpty(payment)) onPaymentCancelled("Payment cancelled by user");
+
       _completion.SetResult(payment);
+    }
+
+    public static void onPaymentCancelled(string message)
+    {
+	    throw new OperationCanceledException(message);
+    }
+
+    public static void onPaymentFailed(string message)
+    {
+	    Debug.LogError(message); // will be catched by sentry if set up
+	    throw new OperationCanceledException(message);
     }
   }
 }
