@@ -113,7 +113,7 @@ namespace LinqUnity
       PaymentResponse payment = await GetPaymentAuthorization(orderId, config);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
-      if (payment == null) throw new InvalidOperationException("ApplePay is no not supported on this device");
+      if (payment == null) throw new InvalidOperationException("Payment processing is failed on provider side");
 
       return payment.Order;
     }
@@ -162,7 +162,12 @@ namespace LinqUnity
         JsonConvert.SerializeObject(_context),
         JsonConvert.SerializeObject(config)
       );
+
       string response = await action;
+
+      if (response == "unknown") throw new InvalidOperationException("Payment unknown or not supported");
+      if (response == "discard") throw new InvalidOperationException("Payment discard handled by the user");
+      if (response == "failure") throw new InvalidOperationException("Payment failure during authorization");
 
       return JsonConvert.DeserializeObject<PaymentResponse>(response);
     }
