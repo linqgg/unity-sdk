@@ -9,6 +9,7 @@ static NSString* stringFromChar(const char *string) {
 
 @interface ApplePayController : NSObject<PKPaymentAuthorizationControllerDelegate>
 
+@property (nonatomic) BOOL success;
 @property (nonatomic) NSDictionary * _Nonnull context;
 @property (nonatomic) messageDelegate _Nullable notify;
 @property (nonatomic, strong) PKPaymentAuthorizationController * _Nullable paymentSheet;
@@ -39,6 +40,7 @@ static const PKContactField PKContactFieldUnknown = 0;
                   config: (NSString *) config
 {
     self.notify = notifier;
+    self.success = NO;
 
     NSError *error;
 
@@ -85,7 +87,7 @@ static const PKContactField PKContactFieldUnknown = 0;
     }];
 }
 
-- (void) paymentAuthorizationController:(PKPaymentAuthorizationViewController *)controller
+- (void) paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
                     didAuthorizePayment:(PKPayment *)payment
                                 handler:(void (^)(PKPaymentAuthorizationResult *result))completion
 {
@@ -138,6 +140,7 @@ static const PKContactField PKContactFieldUnknown = 0;
 
         self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusSuccess errors:nil]);
         self.notify(true, [json UTF8String]);
+        self.success = YES;
     }];
 
     [dataTask resume];
@@ -146,7 +149,10 @@ static const PKContactField PKContactFieldUnknown = 0;
 - (void) paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller
 {
     [controller dismissWithCompletion:^{
-        NSLog(@"Payment sheet is closed.");
+        if (!self.success) {
+            NSLog(@"Payment sheet is closed as payment cancelled by user.");
+            self.notify(true, [@"" UTF8String]);
+        }
     }];
 }
 
@@ -183,7 +189,6 @@ static const PKContactField PKContactFieldUnknown = 0;
 
 - (NSString *) parseCountryCode: (NSDictionary *) data
 {
-    //todo: add validation
     return data[@"CountryCode"];
 }
 

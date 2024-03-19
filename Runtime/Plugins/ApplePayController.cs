@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using UnityEngine;
 using System.Threading.Tasks;
 #if UNITY_IOS
@@ -14,12 +16,17 @@ namespace LinqUnity
 		public static void handleMessage(bool status, string message)
 		{
 			if (!status) {
-				PaymentSession.onPaymentAuthorized("");
-				Debug.LogError(message); // will be catched by sentry if set up
+				PaymentSession.onPaymentFailure(message);
 				return;
 			}
 
-			PaymentSession.onPaymentAuthorized(message);
+			if (string.IsNullOrEmpty(message))
+			{
+				PaymentSession.onPaymentDiscard("Payment cancelled by user by closing payment sheet");
+				return;
+			}
+
+			PaymentSession.onPaymentSuccess(message);
 		}
 
 #if UNITY_IOS
@@ -46,7 +53,7 @@ namespace LinqUnity
 			#if UNITY_IOS && !UNITY_EDITOR
 				_askPaymentSheet(handleMessage, context, config);
       #else
-				PaymentSession.onPaymentAuthorized("");
+				PaymentSession.onPaymentUnknown("ApplePay is not supported on this device");
       #endif
     }
   }
@@ -64,9 +71,28 @@ namespace LinqUnity
 	    return _completion.Task;
     }
 
-    public static void onPaymentAuthorized(string payment)
+    public static void onPaymentSuccess(string message)
     {
-      _completion.SetResult(payment);
+	    _completion.SetResult(message);
+	    Debug.Log("[ApplePayController] " + message);
+    }
+
+    public static void onPaymentDiscard(string message)
+    {
+	    _completion.SetResult("discard");
+	    Debug.Log("[ApplePayController] " + message);
+    }
+
+    public static void onPaymentUnknown(string message)
+    {
+	    _completion.SetResult("unknown");
+	    Debug.LogWarning("[ApplePayController] " + message);
+    }
+
+    public static void onPaymentFailure(string message)
+    {
+	    _completion.SetResult("failure");
+	    Debug.LogError("[ApplePayController] " + message);
     }
   }
 }
