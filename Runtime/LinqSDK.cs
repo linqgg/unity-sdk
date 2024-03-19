@@ -53,6 +53,21 @@ namespace LinqUnity
     public string reference;
   }
 
+  public class PaymentFailureException : InvalidOperationException
+  {
+    public PaymentFailureException(string message) : base(message) {}
+  }
+
+  public class PaymentDiscardException : InvalidOperationException
+  {
+    public PaymentDiscardException(string message) : base(message) {}
+  }
+
+  public class PaymentUnknownException : InvalidOperationException
+  {
+    public PaymentUnknownException(string message) : base(message) {}
+  }
+
   public class LinqSDK : MonoBehaviour
   {
     private static GrpcChannel _channel;
@@ -165,9 +180,9 @@ namespace LinqUnity
 
       string response = await action;
 
-      if (response == "unknown") throw new InvalidOperationException("Payment unknown or not supported");
-      if (response == "discard") throw new InvalidOperationException("Payment discard handled by the user");
-      if (response == "failure") throw new InvalidOperationException("Payment failure during authorization");
+      if (response == "unknown") throw new PaymentUnknownException("Payment unknown or not supported");
+      if (response == "discard") throw new PaymentDiscardException("Payment discard handled by the user");
+      if (response == "failure") throw new PaymentFailureException("Payment failure during authorization");
 
       return JsonConvert.DeserializeObject<PaymentResponse>(response);
     }
