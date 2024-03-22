@@ -154,6 +154,8 @@ namespace LinqUnity
       PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
+      if (payment == null || !payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
+
       return payment.Order;
     }
 
