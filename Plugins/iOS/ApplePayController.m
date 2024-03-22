@@ -9,7 +9,7 @@ static NSString* stringFromChar(const char *string) {
 
 @interface ApplePayController : NSObject<PKPaymentAuthorizationControllerDelegate>
 
-@property (nonatomic) BOOL success;
+@property (nonatomic) BOOL completed;
 @property (nonatomic) NSDictionary * _Nonnull context;
 @property (nonatomic) messageDelegate _Nullable notify;
 @property (nonatomic, strong) PKPaymentAuthorizationController * _Nullable paymentSheet;
@@ -40,7 +40,7 @@ static const PKContactField PKContactFieldUnknown = 0;
                   config: (NSString *) config
 {
     self.notify = notifier;
-    self.success = NO;
+    self.completed = NO;
 
     NSError *error;
 
@@ -49,6 +49,7 @@ static const PKContactField PKContactFieldUnknown = 0;
 
     if (error) {
         self.notify(false, [@"Invalid JSON with ApplePay context with creds is passed" UTF8String]);
+        self.completed = YES;
         return;
     }
 
@@ -59,6 +60,7 @@ static const PKContactField PKContactFieldUnknown = 0;
 
     if (error) {
         self.notify(false, [@"Invalid JSON with ApplePay server configuration is passed" UTF8String]);
+        self.completed = YES;
         return;
     }
 
@@ -77,6 +79,7 @@ static const PKContactField PKContactFieldUnknown = 0;
 
     if (!self.paymentSheet) {
         self.notify(false, [@"Failed initializing payment sheet, check your ApplePay configuration" UTF8String]);
+        self.completed = YES;
         return;
     }
 
@@ -126,6 +129,7 @@ static const PKContactField PKContactFieldUnknown = 0;
         if (httpResponse.statusCode != 200) {
             self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusFailure errors:nil]);
             self.notify(false, [[NSString stringWithFormat:@"Payment validation failed with error: %@", json] UTF8String]);
+            self.completed = YES;
             return;
         }
 
@@ -135,12 +139,13 @@ static const PKContactField PKContactFieldUnknown = 0;
         if (!answer[@"success"]) {
             self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusFailure errors:nil]);
             self.notify(false, [[NSString stringWithFormat:@"Payment validation failed with answer: %@", json] UTF8String]);
+            self.completed = YES;
             return;
         }
 
         self.completion([[PKPaymentAuthorizationResult alloc] initWithStatus:PKPaymentAuthorizationStatusSuccess errors:nil]);
         self.notify(true, [json UTF8String]);
-        self.success = YES;
+        self.completed = YES;
     }];
 
     [dataTask resume];
@@ -149,9 +154,10 @@ static const PKContactField PKContactFieldUnknown = 0;
 - (void) paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller
 {
     [controller dismissWithCompletion:^{
-        if (!self.success) {
+        if (!self.completed) {
             NSLog(@"Payment sheet is closed as payment cancelled by user.");
             self.notify(true, [@"" UTF8String]);
+            self.completed = YES;
         }
     }];
 }
