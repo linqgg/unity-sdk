@@ -62,7 +62,7 @@ LinqSDK.InitSDK("https://services.stage.galactica.games", "secret-key");
 
 ### Usage
 
-To use SDK need to prepare card data and billing address, that the user provided via your own UX elements. We do not require any additional steps here, except the rule that card data should not be transferred to any game backend service as it will break PCI DCI policy.
+To use SDK you need to prepare card data and billing address, that the user provided via your own UX elements. We do not require any additional steps here, except the rule that card data should not be transferred to any game backend service as it will break PCI DCI policy.
 
 Also, before processing payment you have to initiate payment intent, which can be done via backend API with the method `putReplenishOrder`. The method will return `order.id`, that is intent identifier itself.
 
@@ -91,29 +91,83 @@ var address = new BillingAddress()
 
 > Note, that country has to be converted into a 2-letter code according to [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
 
-The latest step is to pass collected data into SDK, which will return the replenishment order with the appropriate status in case payment was successful.
+According to the billing address, we require only **country**, **state**2520 (for USA), and **postal code**. Please consider it during the implementation of UI validation in the game.
+
+The latest step is to pass collected data into SDK, which will return the replenishment order with the appropriate status when payment is successful.
+
+### Processing Payments
+
+API allows running the checkout process via ordinary card and using Apple Pay when it is supported (on iOS devices).
 
 ```csharp
-var order = await LinqSDK.StartPaymentProcessing(data.id, details, address);
+// Ordinary Card
+var order = await LinqSDK.CheckoutByOrdinaryCard(order, details, address);
 Debug.Log("Order status: " + order.Status);
+```
+
+```csharp
+// Apple Pay Card
+var order = await LinqSDK.CheckoutByApplePayCard(order);
+Debug.Log("Order status: " + order.Status);
+```
+
+### Error Handling
+
+In case the SDK request fails it generates an appropriate exception with an error message. To avoid hanging, you must handle such exceptions using `try/catch` constructions.
+
+```csharp
+try {
+  var response = await LinqSDK.CheckoutByOrdinaryCard(order, details, address);
+  Debug.Log("Success: " + response.Status);
+} catch (InvalidOperationException e) {
+  Debug.Log("Failure: " + e.Message);
+}
+```
+
+ApplePay part works the same way but provides more custom exceptions. 
+
+- `PaymentFailureException` – when payment was authorized by the user but failed on the provider side. 
+- `PaymentDiscardException` – when a user closes the Apple Pay payment sheet.
+- `PaymentUnknownException` – when ApplePay is not supported on the device (applicable for Unity Editor as well).
+
+```
+try {
+  var response = await LinqSDK.CheckoutByApplePayCard(order);
+  // Success
+} catch (PaymentUnknownException e) {
+  Debug.Log("Unknown: " + e.Message);
+  // do nothing
+} catch (PaymentFailureException e) {
+  Debug.Log("Failure: " + e.Message);
+  // show a message to the user that payment has failed
+} catch (PaymentDiscardException e) {
+  Debug.Log("Discard: " + e.Message);
+  // handle logic about cancellation
+}
 ```
 
 ### Testing & Validation
 
-For testing purposes, you can use the following card credentials:
+For testing purposes, you can use the following card credentials for ordinary card payment:
 
-- Number: `4242424242424242`
-- Expriration: `12/27`
+- Number: `4242 4242 4242 4242`
+- Expriration: `12/2027`
 - Holder Name: `CARD HOLDER`
 - CVV Code: `123`
 
-In some cases, native modules, that are used under the hood, may not work. It is applied for situations when the game is running on Android or from Unity Editor. To not block the flow it is possible to skip anti-fraud checks by providing the word `NOFRAUD` in the field of the cardholder name.
+In some cases, native modules, that are used under the hood, may not work. It may happen when the game runs on Android or from Unity Editor. To not block the flow it is possible to skip anti-fraud checks by providing the word `NOFRAUD` in the field of the cardholder name.
+
+For Apple Pay testing, you need to create [special testing account](https://developer.apple.com/apple-pay/sandbox-testing/) and add there the next card details. Authorization may work with any cards and accounts, but transactions will fail on the provider side.
+
+- Number: `5204 2452 5000 1488`
+- Expriration: `11/2022`
+- CVV Code: `111`
 
 ## Samples
 
 Examples and ready-to-use components.
 
-Not yet ready, but we will implement it soon!
+It is not ready yet. But we will implement it soon!
 
 Check our [Roadmap](./VISION.md) for more details.
   
