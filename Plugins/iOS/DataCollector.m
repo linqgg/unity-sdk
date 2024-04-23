@@ -21,7 +21,7 @@ void _Init(sessionCallBackDelegate delegate, const char* kountClientId, const bo
     }
 
     // Set your Merchant ID
-    [[KDataCollector sharedCollector] setMerchantID:[stringFromChar(kountClientId) integerValue]];
+    [[KDataCollector sharedCollector] setMerchantID:stringFromChar(kountClientId)];
 
     // Set the location collection configuration
     [[KDataCollector sharedCollector]setLocationCollectorConfig:KLocationCollectorConfigRequestPermission];
@@ -42,7 +42,7 @@ void _Collect() {
                 if (error != nil) {
                     NSLog([@(error.code) stringValue], error.description, error);
                 } else {
-                    NSLog(@"0", @"Unknown kount error", nil);
+                    NSLog(@0, @"Unknown kount error", nil);
                 }
             }
         }];
