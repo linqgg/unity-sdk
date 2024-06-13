@@ -64,18 +64,20 @@ namespace Linq.Money.Payments.V1 {
             "bGVfcGF5X3BheW1lbnRCFwoVX2NhcmRfdG9rZW5leF9wYXltZW50Im0KDU9y",
             "ZGVyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhYKBnN0YXR1cxgCIAEoCVIG",
             "c3RhdHVzEhYKBmFtb3VudBgDIAEoDVIGYW1vdW50EhwKCXJlZmVyZW5jZRgE",
-            "IAEoCVIJcmVmZXJlbmNlIqYBCg9QYXltZW50UmVzcG9uc2USGAoHc3VjY2Vz",
+            "IAEoCVIJcmVmZXJlbmNlItkBCg9QYXltZW50UmVzcG9uc2USGAoHc3VjY2Vz",
             "cxgBIAEoCFIHc3VjY2VzcxI7CgVvcmRlchgCIAEoCzIlLmxpbnEubW9uZXku",
             "cGF5bWVudHMudjEuT3JkZXJSZXNwb25zZVIFb3JkZXISKQoOcmV0cnlfb3Jk",
-            "ZXJfaWQYAyABKAlIAFIMcmV0cnlPcmRlcklkiAEBQhEKD19yZXRyeV9vcmRl",
-            "cl9pZDLVAgoVTmF0aXZlUGF5bWVudHNTZXJ2aWNlEmkKEUdldEFwcGxlUGF5",
-            "Q29uZmlnEioubGlucS5tb25leS5wYXltZW50cy52MS5PcmRlckNvbmZpZ1Jl",
-            "cXVlc3QaJi5saW5xLm1vbmV5LnBheW1lbnRzLnYxLkFwcGxlUGF5Q29uZmln",
-            "IgASbwoUR2V0Q2FyZFBheW1lbnRDb25maWcSKi5saW5xLm1vbmV5LnBheW1l",
-            "bnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBopLmxpbnEubW9uZXkucGF5bWVu",
-            "dHMudjEuQ2FyZFBheW1lbnRDb25maWciABJgCgtNYWtlUGF5bWVudBImLmxp",
-            "bnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVudFJlcXVlc3QaJy5saW5xLm1v",
-            "bmV5LnBheW1lbnRzLnYxLlBheW1lbnRSZXNwb25zZSIAYgZwcm90bzM="));
+            "ZXJfaWQYAyABKAlIAFIMcmV0cnlPcmRlcklkiAEBEiIKCnNjcmlwdF8zZHMY",
+            "BCABKAlIAVIJc2NyaXB0M2RziAEBQhEKD19yZXRyeV9vcmRlcl9pZEINCgtf",
+            "c2NyaXB0XzNkczLVAgoVTmF0aXZlUGF5bWVudHNTZXJ2aWNlEmkKEUdldEFw",
+            "cGxlUGF5Q29uZmlnEioubGlucS5tb25leS5wYXltZW50cy52MS5PcmRlckNv",
+            "bmZpZ1JlcXVlc3QaJi5saW5xLm1vbmV5LnBheW1lbnRzLnYxLkFwcGxlUGF5",
+            "Q29uZmlnIgASbwoUR2V0Q2FyZFBheW1lbnRDb25maWcSKi5saW5xLm1vbmV5",
+            "LnBheW1lbnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBopLmxpbnEubW9uZXku",
+            "cGF5bWVudHMudjEuQ2FyZFBheW1lbnRDb25maWciABJgCgtNYWtlUGF5bWVu",
+            "dBImLmxpbnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVudFJlcXVlc3QaJy5s",
+            "aW5xLm1vbmV5LnBheW1lbnRzLnYxLlBheW1lbnRSZXNwb25zZSIAYgZwcm90",
+            "bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Linq.Shared.BillingAddressReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -89,7 +91,7 @@ namespace Linq.Money.Payments.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.OrderConfigRequest), global::Linq.Money.Payments.V1.OrderConfigRequest.Parser, new[]{ "OrderId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentRequest), global::Linq.Money.Payments.V1.PaymentRequest.Parser, new[]{ "OrderId", "Address", "ApplePayPayment", "CardTokenexPayment" }, new[]{ "ApplePayPayment", "CardTokenexPayment" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.OrderResponse), global::Linq.Money.Payments.V1.OrderResponse.Parser, new[]{ "Id", "Status", "Amount", "Reference" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentResponse), global::Linq.Money.Payments.V1.PaymentResponse.Parser, new[]{ "Success", "Order", "RetryOrderId" }, new[]{ "RetryOrderId" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentResponse), global::Linq.Money.Payments.V1.PaymentResponse.Parser, new[]{ "Success", "Order", "RetryOrderId", "Script3Ds" }, new[]{ "RetryOrderId", "Script3Ds" }, null, null, null)
           }));
     }
     #endregion
@@ -449,7 +451,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -496,7 +502,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -829,7 +839,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -864,7 +878,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1103,7 +1121,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1126,7 +1148,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1345,7 +1371,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1374,7 +1404,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1561,7 +1595,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1580,7 +1618,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -1821,7 +1863,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -1848,7 +1894,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2196,7 +2246,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2238,7 +2292,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2438,7 +2496,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2457,7 +2519,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2739,7 +2805,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -2779,7 +2849,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -2924,8 +2998,7 @@ namespace Linq.Money.Payments.V1 {
     public const int ReferenceFieldNumber = 4;
     private string reference_ = "";
     /// <summary>
-    /// Ref string that was placed to order during creations
-    /// May be taken for validation
+    /// Reference data that was placed into the order during the creation
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3083,7 +3156,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3114,7 +3191,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3182,6 +3263,7 @@ namespace Linq.Money.Payments.V1 {
       success_ = other.success_;
       order_ = other.order_ != null ? other.order_.Clone() : null;
       retryOrderId_ = other.retryOrderId_;
+      script3Ds_ = other.script3Ds_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3250,6 +3332,35 @@ namespace Linq.Money.Payments.V1 {
       retryOrderId_ = null;
     }
 
+    /// <summary>Field number for the "script_3ds" field.</summary>
+    public const int Script3DsFieldNumber = 4;
+    private readonly static string Script3DsDefaultValue = "";
+
+    private string script3Ds_;
+    /// <summary>
+    /// Script for 3ds check that should be opened in webview
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Script3Ds {
+      get { return script3Ds_ ?? Script3DsDefaultValue; }
+      set {
+        script3Ds_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "script_3ds" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasScript3Ds {
+      get { return script3Ds_ != null; }
+    }
+    /// <summary>Clears the value of the "script_3ds" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearScript3Ds() {
+      script3Ds_ = null;
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -3268,6 +3379,7 @@ namespace Linq.Money.Payments.V1 {
       if (Success != other.Success) return false;
       if (!object.Equals(Order, other.Order)) return false;
       if (RetryOrderId != other.RetryOrderId) return false;
+      if (Script3Ds != other.Script3Ds) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3278,6 +3390,7 @@ namespace Linq.Money.Payments.V1 {
       if (Success != false) hash ^= Success.GetHashCode();
       if (order_ != null) hash ^= Order.GetHashCode();
       if (HasRetryOrderId) hash ^= RetryOrderId.GetHashCode();
+      if (HasScript3Ds) hash ^= Script3Ds.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3308,6 +3421,10 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(26);
         output.WriteString(RetryOrderId);
       }
+      if (HasScript3Ds) {
+        output.WriteRawTag(34);
+        output.WriteString(Script3Ds);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3330,6 +3447,10 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(26);
         output.WriteString(RetryOrderId);
       }
+      if (HasScript3Ds) {
+        output.WriteRawTag(34);
+        output.WriteString(Script3Ds);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3348,6 +3469,9 @@ namespace Linq.Money.Payments.V1 {
       }
       if (HasRetryOrderId) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(RetryOrderId);
+      }
+      if (HasScript3Ds) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Script3Ds);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3373,6 +3497,9 @@ namespace Linq.Money.Payments.V1 {
       if (other.HasRetryOrderId) {
         RetryOrderId = other.RetryOrderId;
       }
+      if (other.HasScript3Ds) {
+        Script3Ds = other.Script3Ds;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -3384,7 +3511,11 @@ namespace Linq.Money.Payments.V1 {
     #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
@@ -3403,6 +3534,10 @@ namespace Linq.Money.Payments.V1 {
             RetryOrderId = input.ReadString();
             break;
           }
+          case 34: {
+            Script3Ds = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -3414,7 +3549,11 @@ namespace Linq.Money.Payments.V1 {
     void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
@@ -3431,6 +3570,10 @@ namespace Linq.Money.Payments.V1 {
           }
           case 26: {
             RetryOrderId = input.ReadString();
+            break;
+          }
+          case 34: {
+            Script3Ds = input.ReadString();
             break;
           }
         }
