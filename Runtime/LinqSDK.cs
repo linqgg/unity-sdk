@@ -70,9 +70,10 @@ namespace LinqUnity
 
   public class LinqSDK : MonoBehaviour
   {
-    private static GrpcChannel _channel;
-    private static Metadata _headers;
     private static Context _context;
+    private static Metadata _headers;
+    private static UniWebView _browser;
+    private static GrpcChannel _channel;
 
     /// <summary>
     /// Initialize the LinQ SDK with your remoteUrl and secretKey.
@@ -154,7 +155,61 @@ namespace LinqUnity
       PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
-      if (payment == null || !payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
+      if (payment == null) throw new InvalidOperationException("Payment processing is failed on provider side");
+
+      if (payment.HasScript3Ds)
+      {
+        _browser = new GameObject("UniWebView").AddComponent<UniWebView>();
+
+        _browser.Frame = new Rect(0, 0, Screen.width, Screen.height);
+        _browser.BackgroundColor = Color.clear;
+
+        _browser.SetAcceptThirdPartyCookies(true);
+        _browser.SetVerticalScrollBarEnabled(false);
+        _browser.SetHorizontalScrollBarEnabled(false);
+        _browser.SetTransparencyClickingThroughEnabled(true);
+        _browser.SetBouncesEnabled(false);
+        _browser.SetShowSpinnerWhileLoading(true);
+        _browser.SetZoomEnabled(false);
+
+        _browser.LoadHTMLString(payment.Script3Ds, "");
+        _browser.Show();
+
+        _browser.OnPageFinished += (view, statusCode, url) => {
+          _browser.AddUrlScheme("http");
+          _browser.AddUrlScheme("https");
+          _browser.EvaluateJavaScript("window.uniwebview = true;", (payload) => {
+            if (payload.resultCode.Equals("0")) {
+              Debug.Log("UniWebView registered!");
+            } else {
+              Debug.Log("Something goes wrong: " + payload.data);
+            }
+          });
+        };
+
+        _browser.OnMessageReceived += (_, message) => {
+          if (message.Path.Equals("completion")) {
+            var success = bool.TryParse(message.Args["success"], out var parsedValue) && parsedValue;
+            if (success) {
+              Debug.Log("Payment successed");
+              // Close();
+              Destroy(_browser);
+              return;
+            }
+            Debug.Log("Payment failured");
+            // Close();
+            Destroy(_browser);
+            return;
+          };
+        };
+
+        //challengeSkipped - юзер закрыл окно с челенджем соостветственно оплата прервалась
+        //challengeFinished - то челендж пройден и идет запрос на оплату, то есть можно заново отобразить загрузку
+        
+        // _browser.Alpha - change opacity
+      }
+
+      // if (payment == null || !payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
 
       return payment.Order;
     }
