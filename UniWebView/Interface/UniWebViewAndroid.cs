@@ -199,6 +199,15 @@ public class UniWebViewInterface {
         CheckPlatform();
         plugin.CallStatic("setAllowUniversalAccessFromFileURLs", flag);
     }
+    public static void BringContentToFront(string name) {
+        CheckPlatform();
+        plugin.CallStatic("bringContentToFront", name);
+    }
+
+    public static void SetForwardWebConsoleToNativeOutput(bool flag) {
+        CheckPlatform();
+        plugin.CallStatic("setForwardWebConsoleToNativeOutput", flag);
+    }
 
     public static void SetEnableKeyboardAvoidance(bool flag) {
         CheckPlatform();
@@ -213,6 +222,11 @@ public class UniWebViewInterface {
     public static void CleanCache(string name) {
         CheckPlatform();
         plugin.CallStatic("cleanCache", name);
+    }
+
+    public static void SetCacheMode(string name, int mode) {
+        CheckPlatform();
+        plugin.CallStatic("setCacheMode", name, mode);
     }
 
     public static void ClearCookies() {
@@ -389,6 +403,11 @@ public class UniWebViewInterface {
         plugin.CallStatic("setSupportMultipleWindows", name, enabled, allowJavaScriptOpening);
     }
 
+    public static void SetDragInteractionEnabled(string name, bool flag) {
+        CheckPlatform();
+        plugin.CallStatic("setDragInteractionEnabled", name, flag);
+    }
+
     public static void SetDefaultFontSize(string name, int size) {
         CheckPlatform();
         plugin.CallStatic("setDefaultFontSize", name, size);
@@ -412,6 +431,11 @@ public class UniWebViewInterface {
     public static void SetDownloadEventForContextMenuEnabled(string name, bool enabled) {
         CheckPlatform();
         plugin.CallStatic("setDownloadEventForContextMenuEnabled", name, enabled);
+    }
+
+    public static void SetAllowUserEditFileNameBeforeDownloading(string name, bool allowed) {
+        CheckPlatform();
+        plugin.CallStatic("setAllowUserEditFileNameBeforeDownloading", name, allowed);
     }
 
     // Safe Browsing

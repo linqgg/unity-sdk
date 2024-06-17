@@ -23,6 +23,9 @@ using AOT;
 using System.Reflection;
 
 public class UniWebViewInterface {
+    
+    private const string StaticListenerName = "UniWebView-static";
+    
     static UniWebViewInterface() {
         ConnectMessageSender();
         RegisterChannel();
@@ -68,6 +71,13 @@ public class UniWebViewInterface {
             "Received message sent from native. Name: " + name + " Method: " + method + " Params: " + parameters
         );
 
+        if (name == StaticListenerName) {
+            MethodInfo methodInfo = typeof(UniWebViewStaticListener)
+                .GetMethod(method, BindingFlags.Static | BindingFlags.Public);
+            methodInfo.Invoke(null, new object[] { parameters });
+            return;
+        }
+        
         var listener = UniWebViewNativeListener.GetListener(name);
         if (listener) {
             MethodInfo methodInfo = typeof(UniWebViewNativeListener).GetMethod(method);
@@ -310,6 +320,13 @@ public class UniWebViewInterface {
         CheckPlatform();
         uv_setAllowUniversalAccessFromFileURLs(flag);
     }
+    
+    [DllImport(DllLib)]
+    private static extern void uv_setForwardWebConsoleToNativeOutput(bool flag);
+    public static void SetForwardWebConsoleToNativeOutput(bool flag) {
+        CheckPlatform();
+        uv_setForwardWebConsoleToNativeOutput(flag);
+    }
 
     [DllImport(DllLib)]
     private static extern void uv_setAllowJavaScriptOpenWindow(bool flag);
@@ -337,6 +354,13 @@ public class UniWebViewInterface {
     public static void CleanCache(string name) {
         CheckPlatform();
         uv_cleanCache(name);
+    }
+
+    [DllImport(DllLib)]
+    private static extern void uv_setCacheMode(string name, int mode);
+    public static void SetCacheMode(string name, int mode) {
+        CheckPlatform();
+        uv_setCacheMode(name, mode);
     }
 
     [DllImport(DllLib)]
@@ -631,7 +655,14 @@ public class UniWebViewInterface {
         CheckPlatform();
         uv_removeDownloadMIMETypes(name, MIMEType, type);
     }
-
+    
+    [DllImport(DllLib)]
+    private static extern void uv_setAllowUserEditFileNameBeforeDownloading(string name, bool allowed);
+    public static void SetAllowUserEditFileNameBeforeDownloading(string name, bool allowed) {
+        CheckPlatform();
+        uv_setAllowUserEditFileNameBeforeDownloading(name, allowed);
+    }
+    
     [DllImport(DllLib)]
     private static extern void uv_setAllowUserChooseActionAfterDownloading(string name, bool allowed);
     public static void SetAllowUserChooseActionAfterDownloading(string name, bool allowed) {

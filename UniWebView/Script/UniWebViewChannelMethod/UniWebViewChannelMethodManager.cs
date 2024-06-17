@@ -21,7 +21,8 @@ using System.Linq;
 using UnityEngine;
 
 enum UniWebViewChannelMethod {
-    ShouldUniWebViewHandleRequest
+    ShouldUniWebViewHandleRequest,
+    RequestMediaCapturePermission
 }
 
 class UniWebViewChannelMethodManager {
@@ -97,20 +98,47 @@ class UniWebViewChannelMethodManager {
         
         UniWebViewLogger.Instance.Verbose("Channel method invoking received for web view: " + webViewName + ", method: " +
                                           methodName + ", parameters: " + parameters);
+        string result;
         switch (method) {
-            case UniWebViewChannelMethod.ShouldUniWebViewHandleRequest:
+            case UniWebViewChannelMethod.ShouldUniWebViewHandleRequest: {
                 // (UniWebViewChannelMethodHandleRequest) -> bool
                 var input = JsonUtility.FromJson<UniWebViewChannelMethodHandleRequest>(parameters);
                 bool Func(UniWebViewChannelMethodHandleRequest i) => (bool)func(i);
-                var result = ResultJsonWith(Func(input));
-                UniWebViewLogger.Instance.Debug("Channel method handler responded. Result: " + result);
-                return result;
+                result = ResultJsonWith(Func(input));
+                break;
+            }
+            case UniWebViewChannelMethod.RequestMediaCapturePermission: {
+                // (UniWebViewChannelMethodMediaCapturePermission) -> UniWebViewMediaCapturePermissionDecision
+                var input = JsonUtility.FromJson<UniWebViewChannelMethodMediaCapturePermission>(parameters);
+                UniWebViewMediaCapturePermissionDecision Func(UniWebViewChannelMethodMediaCapturePermission i) => (UniWebViewMediaCapturePermissionDecision)func(i);
+                result = ResultJsonWith(Func(input));
+                break;
+            }
             default:
-                return null;
+                result = null;
+                break;
         }
+        UniWebViewLogger.Instance.Debug("Channel method handler responded. Result: " + result);
+        return result;
     }
 
     string ResultJsonWith(bool value) {
         return value ? "{\"result\":true}" : "{\"result\":false}";
+    }
+    
+    string ResultJsonWith(UniWebViewMediaCapturePermissionDecision decision) {
+        switch (decision) {
+            case UniWebViewMediaCapturePermissionDecision.Prompt:
+                return "{\"result\":\"prompt\"}";
+            case UniWebViewMediaCapturePermissionDecision.Grant:
+                return "{\"result\":\"grant\"}";
+            case UniWebViewMediaCapturePermissionDecision.Deny:
+                return "{\"result\":\"deny\"}";
+            default:
+                UniWebViewLogger.Instance.Critical("Unknown decision: " + decision);
+                break;
+        }
+        Debug.LogAssertion("Unrecognized UniWebViewMediaCapturePermissionDecision. Fallback to prompt.");
+        return "{\"result\":\"prompt\"}";
     }
 }

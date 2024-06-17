@@ -58,7 +58,7 @@ public class UniWebViewLogger {
     /// Default is `Critical`, which means the logger only prints errors and exceptions.
     /// </summary>
     public Level LogLevel {
-        get { return level; }
+        get => level;
         set {
             Log(Level.Off, "Setting UniWebView logger level to: " + value);
             level = value;

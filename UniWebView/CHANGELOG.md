@@ -1,10 +1,103 @@
 # Release Note
 
+### 5.10.0 (9 Jun, 2024)
+
+#### Add
+
+* A `RestoreViewHierarchyOnResume` property to make the web view restore its view hierarchy when the app resumes from background on Android. This is an issue in these Unity versions: from Unity 2021.3.31 to 2021.3.34, from Unity 2022.3.10 to 2022.3.15. If you are using UniWebView in these versions, you need to set this value to `true` after upgrading.
+
+#### Fix
+
+* Some internal improvements.
+
+### 5.9.2 (10 Apr, 2024)
+
+#### Fix
+
+* An issue that missing the x86_64 slice for UniWebView on macOS. Now the macOS version can run on Unity editor under x86_64 mode again.
+
+### 5.9.1 (20 Mar, 2024)
+
+#### Fix
+
+* A compiling error of Android build system under Unity 2023.2.13 or later. This was due to Unity removed the related APIs in the new version. Now UniWebView reverts to use the old way (the same before UniWebView 5.8.0) to patch the Android project files.
+
+### 5.9.0 (28 Feb, 2024)
+
+#### Add
+
+* Now the WebRTC support on Android does not require adding trust domain by code. A prompt window will be shown to the user if the web page tries to access the camera or microphone.
+* Now it is possible to customize the permission request handler for WebRTC, such as grant the access request without prompt to the user. Check `RegisterOnRequestMediaCapturePermission` for more information.
+
+#### Deprecate
+
+* As `RegisterOnRequestMediaCapturePermission` is introduced, the current `AddPermissionTrustDomain` method is deprecated. Use the new method if you need to grant the permission by code.
+
+### 5.8.0 (28 Jan, 2024)
+
+#### Add
+
+* Supporting of specifying the cache mode used when loading a request. You can now use `SetCacheMode` and pick a `UniWebViewCacheMode` policy to determine whether and how to use the cache data when loading a request.
+* Adopt to use `AndroidProjectFilesModifier` to modify the exported Android project from Unity 2023.2. This prevents some potential edge issues when exporting the project if another custom Gradle template is used.
+* Supporting of the data URI on the page. Now the links starting with `data:` is treated as a valid URL and it trigger a standard downloading process.
+* Add a method `SetAllowUserEditFileNameBeforeDownloading` to provide a more customizable way of downloading. By setting it with `false`, UniWebView will skip the file name editing step and use the default file name instead, and start the downloading immediately.
+
+### 5.7.3 (25 Dec, 2023)
+
+#### Fix
+
+* The context menu image downloading now should work correctly on Android 14.
+* An issue that the downloading URL was converted to lower case when triggering a context menu download on Android.
+* Refine the gradle properties file patcher to not add a trailing new line when patching the file.
+* A potential vulnerability scanner warning that the file provider can read files from a wider scope than needed.
+
+#### Deprecate
+
+* Completely mark the legacy toolbar related methods as deprecated. Use the new embedded toolbar instead whenever possible.
+
+### 5.7.2 (4 Dec, 2023)
+
+#### Fix
+
+* A potential issue on some Android browser implementations, the OAuth support crashes due to a "null activity handler found!" error. Now UniWebView will use a workaround to prevent the crash.
+
+### 5.7.1 (24 Nov, 2023)
+
+#### Fix
+
+* The `SetDragInteractionEnabled` method also works on Android now. It allows you to disable the drag interaction on Android devices that support drag-and-drop gesture.
+* Mark several methods in `UniWebViewAuthenticationFlowCustomize` as `virtual` to allow overriding them in subclasses.
+* Now the OAuth 2.0 flow will ignore the letter case when receiving the response code URL from the server. It allows you to register the redirect URL with different letter cases in the OAuth provider and UniWebView.
+
+### 5.7.0 (25 Oct, 2023)
+
+#### Add
+
+* A new `SetForwardWebConsoleToNativeOutput` method which enables forwarding the web console log (such as `console.log` or `console.error`) to the native log output. On iOS, it prints the log to Xcode console, on Android to the Android logcat, and on macOS Editor to the Unity console. This is useful for debugging issues from the web page.
+* Now the `OnWebContentProcessTerminated` event will also be invoked when the render process is gone on Android (when the `OnRenderProcessGone` event is raise). This is a new behavior on Android 11 and above and the default handling will only prevent the whole app crash. You need to implement this event and 
+try to release resources and/or perform a reload to recover.
+
+#### Fix
+
+* An issue that the keyboard avoidance behavior on Android is not working properly and contains an undesired offset when the web view is not placed at the top of the screen.
+
+### 5.6.3 (4 Oct, 2023)
+
+#### Fix
+
+* An issue that the web view disappears when switching back to foreground in some newer Unity versions (2021.3.31f1, 2022.3.10f1, 2023.3.0a1). This is a regression of the particular Unity versions when it tries to fix [UUM-30881](https://issuetracker.unity3d.com/issues/android-a-black-screen-appears-for-a-few-seconds-when-returning-to-the-game-from-the-lock-screen-after-idle-time).
+
+### 5.6.2 (29 Sep, 2023)
+
+#### Fix
+
+* Support for Android 14. Solve a crash when setting Android 14 (API Level 34) as the target SDK for the game, and opening a web view on Android 14 devices.
+
 ### 5.6.1 (9 Sep, 2023)
 
 #### Fix
 
-* A compile error when using UniWebView on Windows Editor introduced in 5.6.0. Now you should be able to compile the project on Windows Editor. Mac Editor is not affected.
+* A compile error when using UniWebView on Windows Editor was introduced in 5.6.0. Now you should be able to compile the project on Windows Editor. Mac Editor is not affected.
 
 ### 5.6.0 (8 Sep, 2023)
 

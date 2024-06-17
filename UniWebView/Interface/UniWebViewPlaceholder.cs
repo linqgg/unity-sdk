@@ -32,12 +32,14 @@ public class UniWebViewInterface {
     public static void SetAllowAutoPlay(bool flag) { CheckPlatform(); }
     public static void SetAllowInlinePlay(bool flag) { CheckPlatform(); }
     public static void SetAllowJavaScriptOpenWindow(bool flag) { CheckPlatform(); }
+    public static void SetForwardWebConsoleToNativeOutput(bool flag) { CheckPlatform(); }
     public static void SetAllowFileAccess(string name, bool flag) { CheckPlatform(); }
     public static void SetAllowFileAccessFromFileURLs(string name, bool flag) { CheckPlatform(); }
     public static void SetAllowUniversalAccessFromFileURLs(bool flag) { CheckPlatform(); }
     public static void SetJavaScriptEnabled(bool flag) { CheckPlatform(); }
     public static void SetLimitsNavigationsToAppBoundDomains(bool enabled) { CheckPlatform(); }
     public static void CleanCache(string name) { CheckPlatform(); }
+    public static void SetCacheMode(string name, int mode) { CheckPlatform(); }
     public static void ClearCookies() { CheckPlatform(); }
     public static void SetCookie(string url, string cookie, bool skipEncoding) { CheckPlatform(); }
     public static void RemoveCookies(string url, bool skipEncoding) { CheckPlatform(); }
@@ -71,6 +73,7 @@ public class UniWebViewInterface {
     public static void SetTransparencyClickingThroughEnabled(string name, bool enabled) { CheckPlatform(); }
     public static void SetWebContentsDebuggingEnabled(bool enabled) { CheckPlatform(); }
     public static void SetAllowHTTPAuthPopUpWindow(string name, bool flag) { CheckPlatform(); }
+    public static void SetAllowUserEditFileNameBeforeDownloading(string name, bool allowed) { CheckPlatform(); }
     public static void Print(string name) { CheckPlatform(); }
     public static void CaptureSnapshot(string name, string filename) { CheckPlatform(); }
     public static void SetCalloutEnabled(string name, bool flag) { CheckPlatform(); }

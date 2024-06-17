@@ -66,11 +66,7 @@ public class UniWebViewNativeListener: MonoBehaviour {
     /// Name of current listener. This is a UUID string by which native side could use to find 
     /// the message destination.
     /// </summary>
-    public string Name {
-        get {
-            return gameObject.name;
-        }
-    }
+    public string Name => gameObject.name;
 
     public void PageStarted(string url) {
         UniWebViewLogger.Instance.Info("Page Started Event. Url: " + url);

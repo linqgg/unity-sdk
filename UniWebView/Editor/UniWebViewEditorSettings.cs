@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 
-class UniWebViewEditorSettings: ScriptableObject
+public class UniWebViewEditorSettings: ScriptableObject
 {
-    const string assetPath = "Assets/Editor/UniWebView/settings.asset";
+    private const string AssetPath = "Assets/Editor/UniWebView/settings.asset";
 
     [SerializeField]
     internal bool usesCleartextTraffic = false;
@@ -49,13 +49,13 @@ class UniWebViewEditorSettings: ScriptableObject
     internal static string defaultAndroidXCoreVersion = "1.5.0";
 
     internal static UniWebViewEditorSettings GetOrCreateSettings() {
-        var settings = AssetDatabase.LoadAssetAtPath<UniWebViewEditorSettings>(assetPath);
+        var settings = AssetDatabase.LoadAssetAtPath<UniWebViewEditorSettings>(AssetPath);
 
         if (settings == null) {
             settings = ScriptableObject.CreateInstance<UniWebViewEditorSettings>();
 
             Directory.CreateDirectory("Assets/Editor/UniWebView/");
-            AssetDatabase.CreateAsset(settings, assetPath);
+            AssetDatabase.CreateAsset(settings, AssetPath);
             AssetDatabase.SaveAssets();
         }
 
@@ -65,6 +65,24 @@ class UniWebViewEditorSettings: ScriptableObject
     internal static SerializedObject GetSerializedSettings() {
         return new SerializedObject(GetOrCreateSettings());
     }
+}
+
+// UniWebViewEditorSettings is not working well with AndroidProjectFilesModifier.
+// (reading it requires main thread, but the OnModifyAndroidProjectFiles is not in main thread)
+[Serializable]
+public class UniWebViewEditorSettingsReading {
+    public bool usesCleartextTraffic = false;
+    public bool writeExternalStorage = false;
+    public bool accessFineLocation = false;
+    public bool addsKotlin = true;
+    public string kotlinVersion = null;
+    public bool addsAndroidBrowser = true;
+    public string androidBrowserVersion = null;
+    public bool addsAndroidXCore = false;
+    public string androidXCoreVersion = null;
+    public bool enableJetifier = true;
+    public string[] authCallbackUrls = { };
+    public bool supportLINELogin = false;
 }
 
 static class UniWebViewSettingsProvider {

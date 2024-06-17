@@ -323,17 +323,9 @@ namespace UniWebViewExternal {
                 }
             }
 
-            char PeekChar {
-                get {
-                    return Convert.ToChar(json.Peek());
-                }
-            }
+            char PeekChar => Convert.ToChar(json.Peek());
 
-            char NextChar {
-                get {
-                    return Convert.ToChar(json.Read());
-                }
-            }
+            char NextChar => Convert.ToChar(json.Read());
 
             string NextWord {
                 get {
