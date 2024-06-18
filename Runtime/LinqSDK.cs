@@ -72,7 +72,6 @@ namespace LinqUnity
   {
     private static Context _context;
     private static Metadata _headers;
-    private static UniWebView _browser;
     private static GrpcChannel _channel;
 
     /// <summary>
@@ -105,8 +104,6 @@ namespace LinqUnity
       _headers = new Metadata {
         { "Authorization", $"Bearer {secretKey}" }
       };
-
-      UniWebViewLogger.Instance.LogLevel = UniWebViewLogger.Level.Debug;
     }
 
     [Obsolete("StartPaymentProcessing without parameter is deprecated, please use CheckoutByApplePayCard instead")]
@@ -160,76 +157,9 @@ namespace LinqUnity
       if (payment == null) throw new InvalidOperationException("Payment processing is failed");
 
       // 5. Checking 3DS code if required
-
-      if (!payment.HasScript3Ds) {
-        if (!payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
+      if (payment.HasScript3Ds && await SecurityCheck.Validate3DSCode(payment.Script3Ds))
+      {
         return payment.Order;
-      } else {
-        _browser = new GameObject("WebView").AddComponent<UniWebView>();
-
-        _browser.Frame = new Rect(0, 0, Screen.width, Screen.height);
-        _browser.BackgroundColor = Color.clear;
-
-        _browser.SetAcceptThirdPartyCookies(true);
-        _browser.SetVerticalScrollBarEnabled(false);
-        _browser.SetHorizontalScrollBarEnabled(false);
-        _browser.SetTransparencyClickingThroughEnabled(true);
-        _browser.SetBouncesEnabled(false);
-        _browser.SetShowSpinnerWhileLoading(true);
-        _browser.SetZoomEnabled(false);
-        _browser.LoadHTMLString(payment.Script3Ds, "");
-        _browser.Alpha = 0.0f; // set as transparent on start
-
-        _browser.OnPageStarted += (view, _) => view.ShowSpinner();
-
-        _browser.OnPageFinished += (view, statusCode, url) => {
-          view.EvaluateJavaScript("window.uniwebview = true;", (payload) =>
-          {
-            if (!payload.resultCode.Equals("0"))
-            {
-              Debug.Log("Something goes wrong: " + payload.data);
-              return;
-            }
-            Debug.Log("UniWebView registered!");
-          });
-        };
-
-        _browser.OnMessageReceived += (view, message) =>
-        {
-          if (!message.Path.Equals("completion")) return;
-
-          string answer = message.Args["message"];
-
-          if (string.IsNullOrEmpty(answer)) return;
-
-              // dsfdsf
-              Debug.Log(answer);
-
-          switch (answer)
-          {
-            case "challengeRendered":
-              view.Alpha = 1.0f;
-              view.Show(true, UniWebViewTransitionEdge.Bottom);
-              view.HideSpinner();
-              break;
-            case "challengeFinished":
-              view.ShowSpinner();
-              break;
-            case "pyamentSuccess":
-              view.Hide(true);
-              view.Alpha = 0.0f;
-              view.HideSpinner();
-              payment.Success = true;
-              break;
-            case "challengeSkipped":
-            case "paymentFailed":
-            case "error":
-              payment.Success = false;
-              Destroy(_browser);
-              _browser = null;
-              break;
-          }
-        };
       }
 
       if (!payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
