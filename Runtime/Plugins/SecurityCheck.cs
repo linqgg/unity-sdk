@@ -8,8 +8,6 @@ namespace LinqUnity
 {
   public static class SecurityCheck
   {
-    private static UniWebView _browser;
-
     private static TaskCompletionSource<bool> _completion;
 
     public static Task<bool> Validate3DSCode(string script)
@@ -25,27 +23,25 @@ namespace LinqUnity
     {
       UniWebViewLogger.Instance.LogLevel = UniWebViewLogger.Level.Debug;
 
-      _browser = new GameObject("WebView").AddComponent<UniWebView>();
+      UniWebView browser = new GameObject("WebView").AddComponent<UniWebView>();
 
-      _browser.Frame = new Rect(0, 0, Screen.width, Screen.height);
-      _browser.BackgroundColor = Color.clear;
+      browser.Frame = new Rect(0, 0, Screen.width, Screen.height);
+      browser.BackgroundColor = Color.clear;
 
-      _browser.SetAcceptThirdPartyCookies(true);
-      _browser.SetVerticalScrollBarEnabled(false);
-      _browser.SetHorizontalScrollBarEnabled(false);
-      _browser.SetTransparencyClickingThroughEnabled(true);
-      _browser.SetBouncesEnabled(false);
-      _browser.SetShowSpinnerWhileLoading(true);
-      _browser.SetZoomEnabled(false);
-      _browser.LoadHTMLString(script, "");
-      // _browser.Alpha = 0.0f;
-      _browser.Show();
+      browser.SetAcceptThirdPartyCookies(true);
+      browser.SetVerticalScrollBarEnabled(false);
+      browser.SetHorizontalScrollBarEnabled(false);
+      browser.SetTransparencyClickingThroughEnabled(true);
+      browser.SetBouncesEnabled(false);
+      browser.SetShowSpinnerWhileLoading(true);
+      browser.SetZoomEnabled(false);
+      browser.LoadHTMLString(script, "");
+      browser.Alpha = 0.0f;
+      browser.Show();
 
-      // _browser.OnPageStarted -= (view, url) => { };
+      browser.OnPageStarted += (view, _) => view.ShowSpinner();
 
-      _browser.OnPageStarted += (view, _) => view.ShowSpinner();
-
-      _browser.OnPageFinished += (view, statusCode, url) => {
+      browser.OnPageFinished += (view, statusCode, url) => {
         view.EvaluateJavaScript("window.uniwebview = true;", (payload) =>
         {
           if (!payload.resultCode.Equals("0"))
@@ -57,7 +53,7 @@ namespace LinqUnity
         });
       };
 
-      _browser.OnMessageReceived += (view, message) =>
+      browser.OnMessageReceived += (view, message) =>
       {
         if (!message.Path.Equals("completion")) return;
 
@@ -68,40 +64,30 @@ namespace LinqUnity
         switch (answer)
         {
           case "challengeRendered":
-            // view.Alpha = 1.0f;
-            // view.Show(true, UniWebViewTransitionEdge.Bottom);
+            view.Alpha = 1.0f;
             view.HideSpinner();
             break;
           case "challengeFinished":
             view.ShowSpinner();
             break;
           case "paymentSuccess":
-            // view.HideSpinner();
-            // view.Hide(true);
-            // // view.Alpha = 0.0f;
-            // _browser = null;
-            OnSecurityCodeChecked(true);
+            OnSecurityCodeChecked(true, view);
             break;
           case "paymentFailed":
           case "challengeSkipped":
           case "error":
-          // default:
-            // view.HideSpinner();
-            // view.Hide(true);
-            // _browser = null;
-            OnSecurityCodeChecked(false);
+            OnSecurityCodeChecked(false, view);
             break;
         }
       };
     }
 
-    public static void OnSecurityCodeChecked(bool status)
+    public static void OnSecurityCodeChecked(bool status, UniWebView view)
     {
-      _browser.HideSpinner();
-      _browser.Hide(true);
+      view.HideSpinner();
+      view.Hide(true);
 
-      UnityEngine.Object.Destroy(_browser);
-      _browser = null;
+      UnityEngine.Object.Destroy(view);
 
       _completion.SetResult(status);
     }
