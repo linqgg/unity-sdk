@@ -105,6 +105,8 @@ namespace LinqUnity
       _headers = new Metadata {
         { "Authorization", $"Bearer {secretKey}" }
       };
+
+      UniWebViewLogger.Instance.LogLevel = UniWebViewLogger.Level.Debug;
     }
 
     [Obsolete("StartPaymentProcessing without parameter is deprecated, please use CheckoutByApplePayCard instead")]
@@ -155,11 +157,15 @@ namespace LinqUnity
       PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
-      if (payment == null) throw new InvalidOperationException("Payment processing is failed on provider side");
+      if (payment == null) throw new InvalidOperationException("Payment processing is failed");
 
-      if (payment.HasScript3Ds)
-      {
-        _browser = new GameObject("UniWebView").AddComponent<UniWebView>();
+      // 5. Checking 3DS code if required
+
+      if (!payment.HasScript3Ds) {
+        if (!payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
+        return payment.Order;
+      } else {
+        _browser = new GameObject("WebView").AddComponent<UniWebView>();
 
         _browser.Frame = new Rect(0, 0, Screen.width, Screen.height);
         _browser.BackgroundColor = Color.clear;
@@ -171,45 +177,62 @@ namespace LinqUnity
         _browser.SetBouncesEnabled(false);
         _browser.SetShowSpinnerWhileLoading(true);
         _browser.SetZoomEnabled(false);
-
         _browser.LoadHTMLString(payment.Script3Ds, "");
-        _browser.Show();
+        _browser.Alpha = 0.0f; // set as transparent on start
+
+        _browser.OnPageStarted += (view, _) => view.ShowSpinner();
 
         _browser.OnPageFinished += (view, statusCode, url) => {
-          _browser.AddUrlScheme("http");
-          _browser.AddUrlScheme("https");
-          _browser.EvaluateJavaScript("window.uniwebview = true;", (payload) => {
-            if (payload.resultCode.Equals("0")) {
-              Debug.Log("UniWebView registered!");
-            } else {
+          view.EvaluateJavaScript("window.uniwebview = true;", (payload) =>
+          {
+            if (!payload.resultCode.Equals("0"))
+            {
               Debug.Log("Something goes wrong: " + payload.data);
+              return;
             }
+            Debug.Log("UniWebView registered!");
           });
         };
 
-        _browser.OnMessageReceived += (_, message) => {
-          if (message.Path.Equals("completion")) {
-            var success = bool.TryParse(message.Args["success"], out var parsedValue) && parsedValue;
-            if (success) {
-              Debug.Log("Payment successed");
-              // Close();
-              Destroy(_browser);
-              return;
-            }
-            Debug.Log("Payment failured");
-            // Close();
-            Destroy(_browser);
-            return;
-          };
-        };
+        _browser.OnMessageReceived += (view, message) =>
+        {
+          if (!message.Path.Equals("completion")) return;
 
-        //challengeSkipped - юзер закрыл окно с челенджем соостветственно оплата прервалась
-        //challengeFinished - то челендж пройден и идет запрос на оплату, то есть можно заново отобразить загрузку
-        
-        // _browser.Alpha - change opacity
+          string answer = message.Args["message"];
+
+          if (string.IsNullOrEmpty(answer)) return;
+
+              // dsfdsf
+              Debug.Log(answer);
+
+          switch (answer)
+          {
+            case "challengeRendered":
+              view.Alpha = 1.0f;
+              view.Show(true, UniWebViewTransitionEdge.Bottom);
+              view.HideSpinner();
+              break;
+            case "challengeFinished":
+              view.ShowSpinner();
+              break;
+            case "pyamentSuccess":
+              view.Hide(true);
+              view.Alpha = 0.0f;
+              view.HideSpinner();
+              payment.Success = true;
+              break;
+            case "challengeSkipped":
+            case "paymentFailed":
+            case "error":
+              payment.Success = false;
+              Destroy(_browser);
+              _browser = null;
+              break;
+          }
+        };
       }
 
-      // if (payment == null || !payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
+      if (!payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
 
       return payment.Order;
     }
