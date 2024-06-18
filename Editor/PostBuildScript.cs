@@ -28,8 +28,10 @@ public class PostBuildIosScript
     {
       "merchant.games.galactica.linq-test",
       "merchant.games.galactica.linq-2-test",
+      "merchant.games.galactica.linq-3-test",
       "merchant.games.galactica.linq",
       "merchant.games.galactica.linq-2",
+      "merchant.games.galactica.linq-3",
     });
 
     manager.WriteToFile();

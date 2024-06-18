@@ -1,0 +1,17 @@
+{
+    "name": "Galactica.Linq",
+    "rootNamespace": "LinqUnity",
+    "references": [
+        "UniTask",
+        "UniWebView"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

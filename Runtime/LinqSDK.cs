@@ -70,9 +70,9 @@ namespace LinqUnity
 
   public class LinqSDK : MonoBehaviour
   {
-    private static GrpcChannel _channel;
-    private static Metadata _headers;
     private static Context _context;
+    private static Metadata _headers;
+    private static GrpcChannel _channel;
 
     /// <summary>
     /// Initialize the LinQ SDK with your remoteUrl and secretKey.
@@ -154,7 +154,15 @@ namespace LinqUnity
       PaymentResponse payment = await SetPaymentHandle(orderId, address, tokenizedCard);
       Debug.Log("Payment result: " + JsonConvert.SerializeObject(payment));
 
-      if (payment == null || !payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
+      if (payment == null) throw new InvalidOperationException("Payment processing is failed");
+
+      // 5. Checking 3DS code if required
+      if (payment.HasScript3Ds && await SecurityCheck.Validate3DSCode(payment.Script3Ds))
+      {
+        return payment.Order;
+      }
+
+      if (!payment.Success) throw new InvalidOperationException("Payment processing is failed on provider side");
 
       return payment.Order;
     }

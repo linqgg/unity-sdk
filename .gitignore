@@ -1,5 +1,9 @@
-/Runtime/Services/*
-!/Runtime/Services/Native*
-!/Runtime/Services/BillingAddress*
+/Runtime/Services/Auth*
+/Runtime/Services/Geo*
+/Runtime/Services/Play*
+/Runtime/Services/Sandbox*
+/Runtime/Services/Money/Operations*
+/Runtime/Services/Money/Accounts*
+/Runtime/Services/Money/Payments/V1/Payments*
 
 .idea
