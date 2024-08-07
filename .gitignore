@@ -1,5 +1,6 @@
 /Runtime/Services/Auth*
-/Runtime/Services/Geo*
+/Runtime/Services/Geo/Operations*
+/Runtime/Services/Geo/Restrictions/V1*
 /Runtime/Services/Play*
 /Runtime/Services/Sandbox*
 /Runtime/Services/Money/Operations*
