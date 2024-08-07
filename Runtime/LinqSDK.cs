@@ -4,6 +4,7 @@ using Grpc.Net.Client;
 using System.Net.Http;
 using Grpc.Net.Client.Web;
 using static Linq.Money.Payments.V1.NativePaymentsService;
+using static Linq.Geo.Restrictions.V2.RestrictionsService;
 using Linq.Money.Payments.V1;
 using Grpc.Core;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.Text;
+using Google.Protobuf.WellKnownTypes;
+using Linq.Geo.Restrictions.V2;
 using Linq.Shared;
 
 namespace LinqUnity
@@ -116,6 +119,20 @@ namespace LinqUnity
     public static async Task<OrderResponse> StartPaymentProcessing(string orderId, PaymentDetails details, BillingAddress address)
     {
       return await CheckoutByOrdinaryCard(orderId, details, address);
+    }
+
+    public static async Task<bool> IsAccessToAppAllowed()
+    {
+      #if UNITY_EDITOR
+        Debug.Log("Getting info about access to the application");
+      #endif
+
+      RestrictionsServiceClient client = new(_channel);
+      AccessStatus access = await client.IsAccessAllowedAsync(new Empty(), _headers);
+
+      Debug.Log($"Access status: {access.Allowed}, detected location: {access.Location.ToString()}");
+
+      return access.Allowed;
     }
 
     public static async Task<OrderResponse> CheckoutByApplePayCard(string orderId)
