@@ -135,6 +135,21 @@ namespace LinqUnity
       return access.Allowed;
     }
 
+    public static async Task<PixPaymentResponse> CheckoutByPixPayMethod(string orderId, string tax = null, BillingAddress address = null)
+    {
+      #if UNITY_EDITOR
+        Debug.Log("Getting Pix payment code for order id: " + orderId);
+      #endif
+
+      NativePaymentsServiceClient client = new(_channel);
+      PixPaymentRequest request = new() { OrderId = orderId };
+
+      if (!string.IsNullOrEmpty(tax)) request.TaxId = tax;
+      if (address != null) request.Address = address;
+
+      return await client.GetPixPaymentDataAsync(request, _headers);
+    }
+
     public static async Task<OrderResponse> CheckoutByApplePayCard(string orderId)
     {
       // 1. Getting config for a payment intention
