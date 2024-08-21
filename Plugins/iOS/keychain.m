@@ -1,7 +1,3 @@
-#import <Foundation/Foundation.h>
-#import <Security/Security.h>
-#import <UIKit/UIKit.h>
-
 void setKeychainValue(const char* key, const char* value, const char* accessGroup) {
     // Convert C strings to NSString
     NSString *keyString = [NSString stringWithUTF8String:key];
@@ -16,11 +12,11 @@ void setKeychainValue(const char* key, const char* value, const char* accessGrou
 
     // Create the query dictionary
     NSDictionary *query = @{
-        (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-        (__bridge id)kSecAttrService: keyString,
-        (__bridge id)kSecAttrAccount: idfv,
-        (__bridge id)kSecAttrAccessGroup: accessGroupString,
-        (__bridge id)kSecValueData: valueData
+        (__bridge NSString *)kSecClass: (__bridge id)kSecClassGenericPassword,
+        (__bridge NSString *)kSecAttrService: keyString,
+        (__bridge NSString *)kSecAttrAccount: idfv,
+        (__bridge NSString *)kSecAttrAccessGroup: accessGroupString,
+        (__bridge NSString *)kSecValueData: valueData
     };
 
     // Delete any existing item with the same key and account
@@ -30,10 +26,7 @@ void setKeychainValue(const char* key, const char* value, const char* accessGrou
     OSStatus status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
     if (status != errSecSuccess) {
         NSLog(@"Error setting Keychain value: %d", (int)status);
+    } else {
+        NSLog(@"Keychain value sucessfully set");
     }
 }
-
-// c#
-// setAuthUserTokenToKeychain(string token, string accessGroup) {
-//     setKeychainValue('GAME_LOGIN_TO_GALACTICA_WALLET_TOKEN', token, accessGroup);
-// }
