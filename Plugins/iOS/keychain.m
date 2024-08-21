@@ -1,3 +1,8 @@
+
+#import <Foundation/Foundation.h>
+#import <Security/Security.h>
+#import <UIKit/UIKit.h>
+
 void setKeychainValue(const char* key, const char* value, const char* accessGroup) {
     // Convert C strings to NSString
     NSString *keyString = [NSString stringWithUTF8String:key];

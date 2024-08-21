@@ -6,11 +6,11 @@
 
 namespace LinqUnity
 {
-    public static class SetKeychain
+    public static class Keychain
     {
 #if UNITY_IOS && !UNITY_EDITOR
         [DllImport("__Internal")]
-        public static extern void Keychain(string key, string value, string accessGroup);
+        public static extern void SetKeychainValue(string key, string value, string accessGroup);
 
         public static void setAuthUserToken(string token, string accessGroup)
         {
