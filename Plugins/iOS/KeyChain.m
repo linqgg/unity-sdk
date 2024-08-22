@@ -32,6 +32,6 @@ void setKeychainValue(const char* key, const char* value, const char* accessGrou
     if (status != errSecSuccess) {
         NSLog(@"Error setting Keychain value: %d", (int)status);
     } else {
-        NSLog(@"Keychain value sucessfully set");
+        NSLog(@"Keychain value successfully set");
     }
 }
