@@ -19,8 +19,7 @@ namespace LinqUnity
 #else
         public static void setAuthUserToken(string token, string accessGroup)
         {
-            // Заглушка для использования в редакторе Unity или на других платформах.
-            Debug.LogError("Not IOS");
+            Debug.LogError("Support only on IOS device");
         }
 #endif
     }
