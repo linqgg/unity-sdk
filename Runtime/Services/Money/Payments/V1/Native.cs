@@ -45,56 +45,74 @@ namespace Linq.Money.Payments.V1 {
             "b25maWdSDXRva2VuZXhDb25maWcSRgoMa291bnRfY29uZmlnGAIgASgLMiMu",
             "bGlucS5tb25leS5wYXltZW50cy52MS5Lb3VudENvbmZpZ1ILa291bnRDb25m",
             "aWciNAoPQXBwbGVQYXlQYXltZW50EiEKDHBheW1lbnRfZGF0YRgBIAEoCVIL",
-            "cGF5bWVudERhdGEiZAoJS291bnREYXRhEh0KCnNlc3Npb25faWQYASABKAlS",
-            "CXNlc3Npb25JZBIbCglmaXJzdF9zaXgYAiABKAlSCGZpcnN0U2l4EhsKCWxh",
-            "c3RfZm91chgDIAEoCVIIbGFzdEZvdXIigQIKEkNhcmRUb2tlbmV4UGF5bWVu",
+            "cGF5bWVudERhdGEivQEKCUtvdW50RGF0YRIdCgpzZXNzaW9uX2lkGAEgASgJ",
+            "UglzZXNzaW9uSWQSIAoJZmlyc3Rfc2l4GAIgASgJSABSCGZpcnN0U2l4iAEB",
+            "EiAKCWxhc3RfZm91chgDIAEoCUgBUghsYXN0Rm91cogBARIiCgp1c2VyX2Fn",
+            "ZW50GAQgASgJSAJSCXVzZXJBZ2VudIgBAUIMCgpfZmlyc3Rfc2l4QgwKCl9s",
+            "YXN0X2ZvdXJCDQoLX3VzZXJfYWdlbnQigQIKEkNhcmRUb2tlbmV4UGF5bWVu",
             "dBIUCgV0b2tlbhgBIAEoCVIFdG9rZW4SHQoKdG9rZW5faG1hYxgCIAEoCVIJ",
             "dG9rZW5IbWFjEhkKCGV4cF95ZWFyGAMgASgJUgdleHBZZWFyEhsKCWV4cF9t",
             "b250aBgEIAEoCVIIZXhwTW9udGgSKAoQY2FyZF9ob2xkZXJfbmFtZRgFIAEo",
             "CVIOY2FyZEhvbGRlck5hbWUSRQoKa291bnRfZGF0YRgGIAEoCzIhLmxpbnEu",
             "bW9uZXkucGF5bWVudHMudjEuS291bnREYXRhSABSCWtvdW50RGF0YYgBAUIN",
-            "Cgtfa291bnRfZGF0YSIvChJPcmRlckNvbmZpZ1JlcXVlc3QSGQoIb3JkZXJf",
-            "aWQYASABKAlSB29yZGVySWQizgIKDlBheW1lbnRSZXF1ZXN0EhkKCG9yZGVy",
-            "X2lkGAEgASgJUgdvcmRlcklkEjUKB2FkZHJlc3MYAiABKAsyGy5saW5xLnNo",
-            "YXJlZC5CaWxsaW5nQWRkcmVzc1IHYWRkcmVzcxJYChFhcHBsZV9wYXlfcGF5",
-            "bWVudBgDIAEoCzInLmxpbnEubW9uZXkucGF5bWVudHMudjEuQXBwbGVQYXlQ",
-            "YXltZW50SABSD2FwcGxlUGF5UGF5bWVudIgBARJhChRjYXJkX3Rva2VuZXhf",
-            "cGF5bWVudBgEIAEoCzIqLmxpbnEubW9uZXkucGF5bWVudHMudjEuQ2FyZFRv",
-            "a2VuZXhQYXltZW50SAFSEmNhcmRUb2tlbmV4UGF5bWVudIgBAUIUChJfYXBw",
-            "bGVfcGF5X3BheW1lbnRCFwoVX2NhcmRfdG9rZW5leF9wYXltZW50Im0KDU9y",
-            "ZGVyUmVzcG9uc2USDgoCaWQYASABKAlSAmlkEhYKBnN0YXR1cxgCIAEoCVIG",
-            "c3RhdHVzEhYKBmFtb3VudBgDIAEoDVIGYW1vdW50EhwKCXJlZmVyZW5jZRgE",
-            "IAEoCVIJcmVmZXJlbmNlItkBCg9QYXltZW50UmVzcG9uc2USGAoHc3VjY2Vz",
-            "cxgBIAEoCFIHc3VjY2VzcxI7CgVvcmRlchgCIAEoCzIlLmxpbnEubW9uZXku",
-            "cGF5bWVudHMudjEuT3JkZXJSZXNwb25zZVIFb3JkZXISKQoOcmV0cnlfb3Jk",
-            "ZXJfaWQYAyABKAlIAFIMcmV0cnlPcmRlcklkiAEBEiIKCnNjcmlwdF8zZHMY",
-            "BCABKAlIAVIJc2NyaXB0M2RziAEBQhEKD19yZXRyeV9vcmRlcl9pZEINCgtf",
-            "c2NyaXB0XzNkcyKdAQoRUGl4UGF5bWVudFJlcXVlc3QSGQoIb3JkZXJfaWQY",
-            "ASABKAlSB29yZGVySWQSGgoGdGF4X2lkGAIgASgJSABSBXRheElkiAEBEjoK",
-            "B2FkZHJlc3MYAyABKAsyGy5saW5xLnNoYXJlZC5CaWxsaW5nQWRkcmVzc0gB",
-            "UgdhZGRyZXNziAEBQgkKB190YXhfaWRCCgoIX2FkZHJlc3MiKAoSUGl4UGF5",
-            "bWVudFJlc3BvbnNlEhIKBGNvZGUYASABKAlSBGNvZGUivAEKDVBheW1lbnRT",
-            "b3VyY2USDgoCaWQYASABKAlSAmlkEj0KBHR5cGUYAiABKA4yKS5saW5xLm1v",
-            "bmV5LnBheW1lbnRzLnYxLlBheW1lbnRTb3VyY2VUeXBlUgR0eXBlEhQKBXZh",
-            "bHVlGAMgASgJUgV2YWx1ZRI6CgdhZGRyZXNzGAQgASgLMhsubGlucS5zaGFy",
-            "ZWQuQmlsbGluZ0FkZHJlc3NIAFIHYWRkcmVzc4gBAUIKCghfYWRkcmVzcyJo",
-            "ChZQYXltZW50U291cmNlc1Jlc3BvbnNlEk4KD3BheW1lbnRfc291cmNlcxgB",
-            "IAMoCzIlLmxpbnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVudFNvdXJjZVIO",
-            "cGF5bWVudFNvdXJjZXMqMAoRUGF5bWVudFNvdXJjZVR5cGUSCAoEQ0FSRBAA",
-            "EhEKDUJSQVpJTF9UQVhfSUQQATK2BAoVTmF0aXZlUGF5bWVudHNTZXJ2aWNl",
-            "EmkKEUdldEFwcGxlUGF5Q29uZmlnEioubGlucS5tb25leS5wYXltZW50cy52",
-            "MS5PcmRlckNvbmZpZ1JlcXVlc3QaJi5saW5xLm1vbmV5LnBheW1lbnRzLnYx",
-            "LkFwcGxlUGF5Q29uZmlnIgASbwoUR2V0Q2FyZFBheW1lbnRDb25maWcSKi5s",
-            "aW5xLm1vbmV5LnBheW1lbnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBopLmxp",
-            "bnEubW9uZXkucGF5bWVudHMudjEuQ2FyZFBheW1lbnRDb25maWciABJsChFH",
-            "ZXRQaXhQYXltZW50RGF0YRIpLmxpbnEubW9uZXkucGF5bWVudHMudjEuUGl4",
-            "UGF5bWVudFJlcXVlc3QaKi5saW5xLm1vbmV5LnBheW1lbnRzLnYxLlBpeFBh",
-            "eW1lbnRSZXNwb25zZSIAEmAKC01ha2VQYXltZW50EiYubGlucS5tb25leS5w",
-            "YXltZW50cy52MS5QYXltZW50UmVxdWVzdBonLmxpbnEubW9uZXkucGF5bWVu",
-            "dHMudjEuUGF5bWVudFJlc3BvbnNlIgAScQoRR2V0UGF5bWVudFNvdXJjZXMS",
-            "Ki5saW5xLm1vbmV5LnBheW1lbnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBou",
-            "LmxpbnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVudFNvdXJjZXNSZXNwb25z",
-            "ZSIAYgZwcm90bzM="));
+            "Cgtfa291bnRfZGF0YSKrAQoQU2F2ZWRDYXJkUGF5bWVudBIiCg1zYXZlZF9j",
+            "YXJkX2lkGAEgASgJUgtzYXZlZENhcmRJZBIdCgp0b2tlbl9obWFjGAIgASgJ",
+            "Ugl0b2tlbkhtYWMSRQoKa291bnRfZGF0YRgDIAEoCzIhLmxpbnEubW9uZXku",
+            "cGF5bWVudHMudjEuS291bnREYXRhSABSCWtvdW50RGF0YYgBAUINCgtfa291",
+            "bnRfZGF0YSJeCh1TYXZlZENhcmRQYXltZW50Q29uZmlnUmVxdWVzdBIZCghv",
+            "cmRlcl9pZBgBIAEoCVIHb3JkZXJJZBIiCg1zYXZlZF9jYXJkX2lkGAIgASgJ",
+            "UgtzYXZlZENhcmRJZCLEAQoWU2F2ZWRDYXJkUGF5bWVudENvbmZpZxIUCgV0",
+            "b2tlbhgBIAEoCVIFdG9rZW4STAoOdG9rZW5leF9jb25maWcYAiABKAsyJS5s",
+            "aW5xLm1vbmV5LnBheW1lbnRzLnYxLlRva2VuZXhDb25maWdSDXRva2VuZXhD",
+            "b25maWcSRgoMa291bnRfY29uZmlnGAMgASgLMiMubGlucS5tb25leS5wYXlt",
+            "ZW50cy52MS5Lb3VudENvbmZpZ1ILa291bnRDb25maWciLwoST3JkZXJDb25m",
+            "aWdSZXF1ZXN0EhkKCG9yZGVyX2lkGAEgASgJUgdvcmRlcklkItMDCg5QYXlt",
+            "ZW50UmVxdWVzdBIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBI6CgdhZGRy",
+            "ZXNzGAIgASgLMhsubGlucS5zaGFyZWQuQmlsbGluZ0FkZHJlc3NIAFIHYWRk",
+            "cmVzc4gBARJYChFhcHBsZV9wYXlfcGF5bWVudBgDIAEoCzInLmxpbnEubW9u",
+            "ZXkucGF5bWVudHMudjEuQXBwbGVQYXlQYXltZW50SAFSD2FwcGxlUGF5UGF5",
+            "bWVudIgBARJhChRjYXJkX3Rva2VuZXhfcGF5bWVudBgEIAEoCzIqLmxpbnEu",
+            "bW9uZXkucGF5bWVudHMudjEuQ2FyZFRva2VuZXhQYXltZW50SAJSEmNhcmRU",
+            "b2tlbmV4UGF5bWVudIgBARJbChJzYXZlZF9jYXJkX3BheW1lbnQYBSABKAsy",
+            "KC5saW5xLm1vbmV5LnBheW1lbnRzLnYxLlNhdmVkQ2FyZFBheW1lbnRIA1IQ",
+            "c2F2ZWRDYXJkUGF5bWVudIgBAUIKCghfYWRkcmVzc0IUChJfYXBwbGVfcGF5",
+            "X3BheW1lbnRCFwoVX2NhcmRfdG9rZW5leF9wYXltZW50QhUKE19zYXZlZF9j",
+            "YXJkX3BheW1lbnQibQoNT3JkZXJSZXNwb25zZRIOCgJpZBgBIAEoCVICaWQS",
+            "FgoGc3RhdHVzGAIgASgJUgZzdGF0dXMSFgoGYW1vdW50GAMgASgNUgZhbW91",
+            "bnQSHAoJcmVmZXJlbmNlGAQgASgJUglyZWZlcmVuY2Ui2QEKD1BheW1lbnRS",
+            "ZXNwb25zZRIYCgdzdWNjZXNzGAEgASgIUgdzdWNjZXNzEjsKBW9yZGVyGAIg",
+            "ASgLMiUubGlucS5tb25leS5wYXltZW50cy52MS5PcmRlclJlc3BvbnNlUgVv",
+            "cmRlchIpCg5yZXRyeV9vcmRlcl9pZBgDIAEoCUgAUgxyZXRyeU9yZGVySWSI",
+            "AQESIgoKc2NyaXB0XzNkcxgEIAEoCUgBUglzY3JpcHQzZHOIAQFCEQoPX3Jl",
+            "dHJ5X29yZGVyX2lkQg0KC19zY3JpcHRfM2RzIp0BChFQaXhQYXltZW50UmVx",
+            "dWVzdBIZCghvcmRlcl9pZBgBIAEoCVIHb3JkZXJJZBIaCgZ0YXhfaWQYAiAB",
+            "KAlIAFIFdGF4SWSIAQESOgoHYWRkcmVzcxgDIAEoCzIbLmxpbnEuc2hhcmVk",
+            "LkJpbGxpbmdBZGRyZXNzSAFSB2FkZHJlc3OIAQFCCQoHX3RheF9pZEIKCghf",
+            "YWRkcmVzcyIoChJQaXhQYXltZW50UmVzcG9uc2USEgoEY29kZRgBIAEoCVIE",
+            "Y29kZSK8AQoNUGF5bWVudFNvdXJjZRIOCgJpZBgBIAEoCVICaWQSPQoEdHlw",
+            "ZRgCIAEoDjIpLmxpbnEubW9uZXkucGF5bWVudHMudjEuUGF5bWVudFNvdXJj",
+            "ZVR5cGVSBHR5cGUSFAoFdmFsdWUYAyABKAlSBXZhbHVlEjoKB2FkZHJlc3MY",
+            "BCABKAsyGy5saW5xLnNoYXJlZC5CaWxsaW5nQWRkcmVzc0gAUgdhZGRyZXNz",
+            "iAEBQgoKCF9hZGRyZXNzImgKFlBheW1lbnRTb3VyY2VzUmVzcG9uc2USTgoP",
+            "cGF5bWVudF9zb3VyY2VzGAEgAygLMiUubGlucS5tb25leS5wYXltZW50cy52",
+            "MS5QYXltZW50U291cmNlUg5wYXltZW50U291cmNlcyowChFQYXltZW50U291",
+            "cmNlVHlwZRIICgRDQVJEEAASEQoNQlJBWklMX1RBWF9JRBABMr0FChVOYXRp",
+            "dmVQYXltZW50c1NlcnZpY2USaQoRR2V0QXBwbGVQYXlDb25maWcSKi5saW5x",
+            "Lm1vbmV5LnBheW1lbnRzLnYxLk9yZGVyQ29uZmlnUmVxdWVzdBomLmxpbnEu",
+            "bW9uZXkucGF5bWVudHMudjEuQXBwbGVQYXlDb25maWciABJvChRHZXRDYXJk",
+            "UGF5bWVudENvbmZpZxIqLmxpbnEubW9uZXkucGF5bWVudHMudjEuT3JkZXJD",
+            "b25maWdSZXF1ZXN0GikubGlucS5tb25leS5wYXltZW50cy52MS5DYXJkUGF5",
+            "bWVudENvbmZpZyIAEoQBChlHZXRTYXZlZENhcmRQYXltZW50Q29uZmlnEjUu",
+            "bGlucS5tb25leS5wYXltZW50cy52MS5TYXZlZENhcmRQYXltZW50Q29uZmln",
+            "UmVxdWVzdBouLmxpbnEubW9uZXkucGF5bWVudHMudjEuU2F2ZWRDYXJkUGF5",
+            "bWVudENvbmZpZyIAEmwKEUdldFBpeFBheW1lbnREYXRhEikubGlucS5tb25l",
+            "eS5wYXltZW50cy52MS5QaXhQYXltZW50UmVxdWVzdBoqLmxpbnEubW9uZXku",
+            "cGF5bWVudHMudjEuUGl4UGF5bWVudFJlc3BvbnNlIgASYAoLTWFrZVBheW1l",
+            "bnQSJi5saW5xLm1vbmV5LnBheW1lbnRzLnYxLlBheW1lbnRSZXF1ZXN0Gicu",
+            "bGlucS5tb25leS5wYXltZW50cy52MS5QYXltZW50UmVzcG9uc2UiABJxChFH",
+            "ZXRQYXltZW50U291cmNlcxIqLmxpbnEubW9uZXkucGF5bWVudHMudjEuT3Jk",
+            "ZXJDb25maWdSZXF1ZXN0Gi4ubGlucS5tb25leS5wYXltZW50cy52MS5QYXlt",
+            "ZW50U291cmNlc1Jlc3BvbnNlIgBiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Linq.Shared.BillingAddressReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Linq.Money.Payments.V1.PaymentSourceType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -103,10 +121,13 @@ namespace Linq.Money.Payments.V1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.KountConfig), global::Linq.Money.Payments.V1.KountConfig.Parser, new[]{ "IsProd", "ClientId" }, new[]{ "ClientId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.CardPaymentConfig), global::Linq.Money.Payments.V1.CardPaymentConfig.Parser, new[]{ "TokenexConfig", "KountConfig" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.ApplePayPayment), global::Linq.Money.Payments.V1.ApplePayPayment.Parser, new[]{ "PaymentData" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.KountData), global::Linq.Money.Payments.V1.KountData.Parser, new[]{ "SessionId", "FirstSix", "LastFour" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.KountData), global::Linq.Money.Payments.V1.KountData.Parser, new[]{ "SessionId", "FirstSix", "LastFour", "UserAgent" }, new[]{ "FirstSix", "LastFour", "UserAgent" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.CardTokenexPayment), global::Linq.Money.Payments.V1.CardTokenexPayment.Parser, new[]{ "Token", "TokenHmac", "ExpYear", "ExpMonth", "CardHolderName", "KountData" }, new[]{ "KountData" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.SavedCardPayment), global::Linq.Money.Payments.V1.SavedCardPayment.Parser, new[]{ "SavedCardId", "TokenHmac", "KountData" }, new[]{ "KountData" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest), global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest.Parser, new[]{ "OrderId", "SavedCardId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.SavedCardPaymentConfig), global::Linq.Money.Payments.V1.SavedCardPaymentConfig.Parser, new[]{ "Token", "TokenexConfig", "KountConfig" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.OrderConfigRequest), global::Linq.Money.Payments.V1.OrderConfigRequest.Parser, new[]{ "OrderId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentRequest), global::Linq.Money.Payments.V1.PaymentRequest.Parser, new[]{ "OrderId", "Address", "ApplePayPayment", "CardTokenexPayment" }, new[]{ "ApplePayPayment", "CardTokenexPayment" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentRequest), global::Linq.Money.Payments.V1.PaymentRequest.Parser, new[]{ "OrderId", "Address", "ApplePayPayment", "CardTokenexPayment", "SavedCardPayment" }, new[]{ "Address", "ApplePayPayment", "CardTokenexPayment", "SavedCardPayment" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.OrderResponse), global::Linq.Money.Payments.V1.OrderResponse.Parser, new[]{ "Id", "Status", "Amount", "Reference" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PaymentResponse), global::Linq.Money.Payments.V1.PaymentResponse.Parser, new[]{ "Success", "Order", "RetryOrderId", "Script3Ds" }, new[]{ "RetryOrderId", "Script3Ds" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Linq.Money.Payments.V1.PixPaymentRequest), global::Linq.Money.Payments.V1.PixPaymentRequest.Parser, new[]{ "OrderId", "TaxId", "Address" }, new[]{ "TaxId", "Address" }, null, null, null),
@@ -1713,6 +1734,7 @@ namespace Linq.Money.Payments.V1 {
       sessionId_ = other.sessionId_;
       firstSix_ = other.firstSix_;
       lastFour_ = other.lastFour_;
+      userAgent_ = other.userAgent_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1739,32 +1761,89 @@ namespace Linq.Money.Payments.V1 {
 
     /// <summary>Field number for the "first_six" field.</summary>
     public const int FirstSixFieldNumber = 2;
-    private string firstSix_ = "";
+    private readonly static string FirstSixDefaultValue = "";
+
+    private string firstSix_;
     /// <summary>
     /// First six card number digits
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string FirstSix {
-      get { return firstSix_; }
+      get { return firstSix_ ?? FirstSixDefaultValue; }
       set {
         firstSix_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
+    /// <summary>Gets whether the "first_six" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasFirstSix {
+      get { return firstSix_ != null; }
+    }
+    /// <summary>Clears the value of the "first_six" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearFirstSix() {
+      firstSix_ = null;
+    }
 
     /// <summary>Field number for the "last_four" field.</summary>
     public const int LastFourFieldNumber = 3;
-    private string lastFour_ = "";
+    private readonly static string LastFourDefaultValue = "";
+
+    private string lastFour_;
     /// <summary>
     /// Last four card number digits
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string LastFour {
-      get { return lastFour_; }
+      get { return lastFour_ ?? LastFourDefaultValue; }
       set {
         lastFour_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
+    }
+    /// <summary>Gets whether the "last_four" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasLastFour {
+      get { return lastFour_ != null; }
+    }
+    /// <summary>Clears the value of the "last_four" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearLastFour() {
+      lastFour_ = null;
+    }
+
+    /// <summary>Field number for the "user_agent" field.</summary>
+    public const int UserAgentFieldNumber = 4;
+    private readonly static string UserAgentDefaultValue = "";
+
+    private string userAgent_;
+    /// <summary>
+    /// Device user-agent
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string UserAgent {
+      get { return userAgent_ ?? UserAgentDefaultValue; }
+      set {
+        userAgent_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+    /// <summary>Gets whether the "user_agent" field is set</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool HasUserAgent {
+      get { return userAgent_ != null; }
+    }
+    /// <summary>Clears the value of the "user_agent" field</summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void ClearUserAgent() {
+      userAgent_ = null;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1785,6 +1864,7 @@ namespace Linq.Money.Payments.V1 {
       if (SessionId != other.SessionId) return false;
       if (FirstSix != other.FirstSix) return false;
       if (LastFour != other.LastFour) return false;
+      if (UserAgent != other.UserAgent) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1793,8 +1873,9 @@ namespace Linq.Money.Payments.V1 {
     public override int GetHashCode() {
       int hash = 1;
       if (SessionId.Length != 0) hash ^= SessionId.GetHashCode();
-      if (FirstSix.Length != 0) hash ^= FirstSix.GetHashCode();
-      if (LastFour.Length != 0) hash ^= LastFour.GetHashCode();
+      if (HasFirstSix) hash ^= FirstSix.GetHashCode();
+      if (HasLastFour) hash ^= LastFour.GetHashCode();
+      if (HasUserAgent) hash ^= UserAgent.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1817,13 +1898,17 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(10);
         output.WriteString(SessionId);
       }
-      if (FirstSix.Length != 0) {
+      if (HasFirstSix) {
         output.WriteRawTag(18);
         output.WriteString(FirstSix);
       }
-      if (LastFour.Length != 0) {
+      if (HasLastFour) {
         output.WriteRawTag(26);
         output.WriteString(LastFour);
+      }
+      if (HasUserAgent) {
+        output.WriteRawTag(34);
+        output.WriteString(UserAgent);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -1839,13 +1924,17 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(10);
         output.WriteString(SessionId);
       }
-      if (FirstSix.Length != 0) {
+      if (HasFirstSix) {
         output.WriteRawTag(18);
         output.WriteString(FirstSix);
       }
-      if (LastFour.Length != 0) {
+      if (HasLastFour) {
         output.WriteRawTag(26);
         output.WriteString(LastFour);
+      }
+      if (HasUserAgent) {
+        output.WriteRawTag(34);
+        output.WriteString(UserAgent);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -1860,11 +1949,14 @@ namespace Linq.Money.Payments.V1 {
       if (SessionId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(SessionId);
       }
-      if (FirstSix.Length != 0) {
+      if (HasFirstSix) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(FirstSix);
       }
-      if (LastFour.Length != 0) {
+      if (HasLastFour) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(LastFour);
+      }
+      if (HasUserAgent) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserAgent);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1881,11 +1973,14 @@ namespace Linq.Money.Payments.V1 {
       if (other.SessionId.Length != 0) {
         SessionId = other.SessionId;
       }
-      if (other.FirstSix.Length != 0) {
+      if (other.HasFirstSix) {
         FirstSix = other.FirstSix;
       }
-      if (other.LastFour.Length != 0) {
+      if (other.HasLastFour) {
         LastFour = other.LastFour;
+      }
+      if (other.HasUserAgent) {
+        UserAgent = other.UserAgent;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1918,6 +2013,10 @@ namespace Linq.Money.Payments.V1 {
             LastFour = input.ReadString();
             break;
           }
+          case 34: {
+            UserAgent = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1947,6 +2046,10 @@ namespace Linq.Money.Payments.V1 {
           }
           case 26: {
             LastFour = input.ReadString();
+            break;
+          }
+          case 34: {
+            UserAgent = input.ReadString();
             break;
           }
         }
@@ -2088,7 +2191,7 @@ namespace Linq.Money.Payments.V1 {
     public const int KountDataFieldNumber = 6;
     private global::Linq.Money.Payments.V1.KountData kountData_;
     /// <summary>
-    /// Kount data from Kount DDC (can be skipped if Kount disabled)
+    /// Kount data from Kount DDC (can be skipped only if Kount disabled)
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2370,6 +2473,845 @@ namespace Linq.Money.Payments.V1 {
   }
 
   /// <summary>
+  /// Payment with previously saved card
+  /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SavedCardPayment : pb::IMessage<SavedCardPayment>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SavedCardPayment> _parser = new pb::MessageParser<SavedCardPayment>(() => new SavedCardPayment());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SavedCardPayment> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPayment() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPayment(SavedCardPayment other) : this() {
+      savedCardId_ = other.savedCardId_;
+      tokenHmac_ = other.tokenHmac_;
+      kountData_ = other.kountData_ != null ? other.kountData_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPayment Clone() {
+      return new SavedCardPayment(this);
+    }
+
+    /// <summary>Field number for the "saved_card_id" field.</summary>
+    public const int SavedCardIdFieldNumber = 1;
+    private string savedCardId_ = "";
+    /// <summary>
+    /// Saved card identifier
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SavedCardId {
+      get { return savedCardId_; }
+      set {
+        savedCardId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "token_hmac" field.</summary>
+    public const int TokenHmacFieldNumber = 2;
+    private string tokenHmac_ = "";
+    /// <summary>
+    /// TokenEx token HMAC from TokenEx tokenization response
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string TokenHmac {
+      get { return tokenHmac_; }
+      set {
+        tokenHmac_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "kount_data" field.</summary>
+    public const int KountDataFieldNumber = 3;
+    private global::Linq.Money.Payments.V1.KountData kountData_;
+    /// <summary>
+    /// Kount data from Kount DDC (can be skipped only if Kount disabled)
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Linq.Money.Payments.V1.KountData KountData {
+      get { return kountData_; }
+      set {
+        kountData_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SavedCardPayment);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SavedCardPayment other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (SavedCardId != other.SavedCardId) return false;
+      if (TokenHmac != other.TokenHmac) return false;
+      if (!object.Equals(KountData, other.KountData)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (SavedCardId.Length != 0) hash ^= SavedCardId.GetHashCode();
+      if (TokenHmac.Length != 0) hash ^= TokenHmac.GetHashCode();
+      if (kountData_ != null) hash ^= KountData.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (SavedCardId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SavedCardId);
+      }
+      if (TokenHmac.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TokenHmac);
+      }
+      if (kountData_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(KountData);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (SavedCardId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(SavedCardId);
+      }
+      if (TokenHmac.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(TokenHmac);
+      }
+      if (kountData_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(KountData);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (SavedCardId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SavedCardId);
+      }
+      if (TokenHmac.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(TokenHmac);
+      }
+      if (kountData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KountData);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SavedCardPayment other) {
+      if (other == null) {
+        return;
+      }
+      if (other.SavedCardId.Length != 0) {
+        SavedCardId = other.SavedCardId;
+      }
+      if (other.TokenHmac.Length != 0) {
+        TokenHmac = other.TokenHmac;
+      }
+      if (other.kountData_ != null) {
+        if (kountData_ == null) {
+          KountData = new global::Linq.Money.Payments.V1.KountData();
+        }
+        KountData.MergeFrom(other.KountData);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            SavedCardId = input.ReadString();
+            break;
+          }
+          case 18: {
+            TokenHmac = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (kountData_ == null) {
+              KountData = new global::Linq.Money.Payments.V1.KountData();
+            }
+            input.ReadMessage(KountData);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            SavedCardId = input.ReadString();
+            break;
+          }
+          case 18: {
+            TokenHmac = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (kountData_ == null) {
+              KountData = new global::Linq.Money.Payments.V1.KountData();
+            }
+            input.ReadMessage(KountData);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// Saved card config request
+  /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SavedCardPaymentConfigRequest : pb::IMessage<SavedCardPaymentConfigRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SavedCardPaymentConfigRequest> _parser = new pb::MessageParser<SavedCardPaymentConfigRequest>(() => new SavedCardPaymentConfigRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SavedCardPaymentConfigRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPaymentConfigRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPaymentConfigRequest(SavedCardPaymentConfigRequest other) : this() {
+      orderId_ = other.orderId_;
+      savedCardId_ = other.savedCardId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPaymentConfigRequest Clone() {
+      return new SavedCardPaymentConfigRequest(this);
+    }
+
+    /// <summary>Field number for the "order_id" field.</summary>
+    public const int OrderIdFieldNumber = 1;
+    private string orderId_ = "";
+    /// <summary>
+    /// Order id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string OrderId {
+      get { return orderId_; }
+      set {
+        orderId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "saved_card_id" field.</summary>
+    public const int SavedCardIdFieldNumber = 2;
+    private string savedCardId_ = "";
+    /// <summary>
+    /// Saved card id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SavedCardId {
+      get { return savedCardId_; }
+      set {
+        savedCardId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SavedCardPaymentConfigRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SavedCardPaymentConfigRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (OrderId != other.OrderId) return false;
+      if (SavedCardId != other.SavedCardId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (OrderId.Length != 0) hash ^= OrderId.GetHashCode();
+      if (SavedCardId.Length != 0) hash ^= SavedCardId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (OrderId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(OrderId);
+      }
+      if (SavedCardId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SavedCardId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (OrderId.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(OrderId);
+      }
+      if (SavedCardId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SavedCardId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (OrderId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(OrderId);
+      }
+      if (SavedCardId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SavedCardId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SavedCardPaymentConfigRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.OrderId.Length != 0) {
+        OrderId = other.OrderId;
+      }
+      if (other.SavedCardId.Length != 0) {
+        SavedCardId = other.SavedCardId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            OrderId = input.ReadString();
+            break;
+          }
+          case 18: {
+            SavedCardId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            OrderId = input.ReadString();
+            break;
+          }
+          case 18: {
+            SavedCardId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// Data for saved card payment
+  /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class SavedCardPaymentConfig : pb::IMessage<SavedCardPaymentConfig>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SavedCardPaymentConfig> _parser = new pb::MessageParser<SavedCardPaymentConfig>(() => new SavedCardPaymentConfig());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<SavedCardPaymentConfig> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPaymentConfig() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPaymentConfig(SavedCardPaymentConfig other) : this() {
+      token_ = other.token_;
+      tokenexConfig_ = other.tokenexConfig_ != null ? other.tokenexConfig_.Clone() : null;
+      kountConfig_ = other.kountConfig_ != null ? other.kountConfig_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public SavedCardPaymentConfig Clone() {
+      return new SavedCardPaymentConfig(this);
+    }
+
+    /// <summary>Field number for the "token" field.</summary>
+    public const int TokenFieldNumber = 1;
+    private string token_ = "";
+    /// <summary>
+    /// Card token used for tokenex request
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Token {
+      get { return token_; }
+      set {
+        token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "tokenex_config" field.</summary>
+    public const int TokenexConfigFieldNumber = 2;
+    private global::Linq.Money.Payments.V1.TokenexConfig tokenexConfig_;
+    /// <summary>
+    /// Tokenex config
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Linq.Money.Payments.V1.TokenexConfig TokenexConfig {
+      get { return tokenexConfig_; }
+      set {
+        tokenexConfig_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "kount_config" field.</summary>
+    public const int KountConfigFieldNumber = 3;
+    private global::Linq.Money.Payments.V1.KountConfig kountConfig_;
+    /// <summary>
+    /// Kount config
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Linq.Money.Payments.V1.KountConfig KountConfig {
+      get { return kountConfig_; }
+      set {
+        kountConfig_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as SavedCardPaymentConfig);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(SavedCardPaymentConfig other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Token != other.Token) return false;
+      if (!object.Equals(TokenexConfig, other.TokenexConfig)) return false;
+      if (!object.Equals(KountConfig, other.KountConfig)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Token.Length != 0) hash ^= Token.GetHashCode();
+      if (tokenexConfig_ != null) hash ^= TokenexConfig.GetHashCode();
+      if (kountConfig_ != null) hash ^= KountConfig.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Token.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Token);
+      }
+      if (tokenexConfig_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TokenexConfig);
+      }
+      if (kountConfig_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(KountConfig);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Token.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Token);
+      }
+      if (tokenexConfig_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(TokenexConfig);
+      }
+      if (kountConfig_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(KountConfig);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Token.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
+      }
+      if (tokenexConfig_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(TokenexConfig);
+      }
+      if (kountConfig_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KountConfig);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(SavedCardPaymentConfig other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Token.Length != 0) {
+        Token = other.Token;
+      }
+      if (other.tokenexConfig_ != null) {
+        if (tokenexConfig_ == null) {
+          TokenexConfig = new global::Linq.Money.Payments.V1.TokenexConfig();
+        }
+        TokenexConfig.MergeFrom(other.TokenexConfig);
+      }
+      if (other.kountConfig_ != null) {
+        if (kountConfig_ == null) {
+          KountConfig = new global::Linq.Money.Payments.V1.KountConfig();
+        }
+        KountConfig.MergeFrom(other.KountConfig);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Token = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (tokenexConfig_ == null) {
+              TokenexConfig = new global::Linq.Money.Payments.V1.TokenexConfig();
+            }
+            input.ReadMessage(TokenexConfig);
+            break;
+          }
+          case 26: {
+            if (kountConfig_ == null) {
+              KountConfig = new global::Linq.Money.Payments.V1.KountConfig();
+            }
+            input.ReadMessage(KountConfig);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Token = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (tokenexConfig_ == null) {
+              TokenexConfig = new global::Linq.Money.Payments.V1.TokenexConfig();
+            }
+            input.ReadMessage(TokenexConfig);
+            break;
+          }
+          case 26: {
+            if (kountConfig_ == null) {
+              KountConfig = new global::Linq.Money.Payments.V1.KountConfig();
+            }
+            input.ReadMessage(KountConfig);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
   /// Order config request
   /// </summary>
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
@@ -2387,7 +3329,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2591,7 +3533,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[11]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2615,6 +3557,7 @@ namespace Linq.Money.Payments.V1 {
       address_ = other.address_ != null ? other.address_.Clone() : null;
       applePayPayment_ = other.applePayPayment_ != null ? other.applePayPayment_.Clone() : null;
       cardTokenexPayment_ = other.cardTokenexPayment_ != null ? other.cardTokenexPayment_.Clone() : null;
+      savedCardPayment_ = other.savedCardPayment_ != null ? other.savedCardPayment_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -2684,6 +3627,21 @@ namespace Linq.Money.Payments.V1 {
       }
     }
 
+    /// <summary>Field number for the "saved_card_payment" field.</summary>
+    public const int SavedCardPaymentFieldNumber = 5;
+    private global::Linq.Money.Payments.V1.SavedCardPayment savedCardPayment_;
+    /// <summary>
+    /// Saved card payment
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Linq.Money.Payments.V1.SavedCardPayment SavedCardPayment {
+      get { return savedCardPayment_; }
+      set {
+        savedCardPayment_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -2703,6 +3661,7 @@ namespace Linq.Money.Payments.V1 {
       if (!object.Equals(Address, other.Address)) return false;
       if (!object.Equals(ApplePayPayment, other.ApplePayPayment)) return false;
       if (!object.Equals(CardTokenexPayment, other.CardTokenexPayment)) return false;
+      if (!object.Equals(SavedCardPayment, other.SavedCardPayment)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2714,6 +3673,7 @@ namespace Linq.Money.Payments.V1 {
       if (address_ != null) hash ^= Address.GetHashCode();
       if (applePayPayment_ != null) hash ^= ApplePayPayment.GetHashCode();
       if (cardTokenexPayment_ != null) hash ^= CardTokenexPayment.GetHashCode();
+      if (savedCardPayment_ != null) hash ^= SavedCardPayment.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2748,6 +3708,10 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(34);
         output.WriteMessage(CardTokenexPayment);
       }
+      if (savedCardPayment_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(SavedCardPayment);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -2774,6 +3738,10 @@ namespace Linq.Money.Payments.V1 {
         output.WriteRawTag(34);
         output.WriteMessage(CardTokenexPayment);
       }
+      if (savedCardPayment_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(SavedCardPayment);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -2795,6 +3763,9 @@ namespace Linq.Money.Payments.V1 {
       }
       if (cardTokenexPayment_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(CardTokenexPayment);
+      }
+      if (savedCardPayment_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(SavedCardPayment);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2828,6 +3799,12 @@ namespace Linq.Money.Payments.V1 {
           CardTokenexPayment = new global::Linq.Money.Payments.V1.CardTokenexPayment();
         }
         CardTokenexPayment.MergeFrom(other.CardTokenexPayment);
+      }
+      if (other.savedCardPayment_ != null) {
+        if (savedCardPayment_ == null) {
+          SavedCardPayment = new global::Linq.Money.Payments.V1.SavedCardPayment();
+        }
+        SavedCardPayment.MergeFrom(other.SavedCardPayment);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2871,6 +3848,13 @@ namespace Linq.Money.Payments.V1 {
               CardTokenexPayment = new global::Linq.Money.Payments.V1.CardTokenexPayment();
             }
             input.ReadMessage(CardTokenexPayment);
+            break;
+          }
+          case 42: {
+            if (savedCardPayment_ == null) {
+              SavedCardPayment = new global::Linq.Money.Payments.V1.SavedCardPayment();
+            }
+            input.ReadMessage(SavedCardPayment);
             break;
           }
         }
@@ -2917,6 +3901,13 @@ namespace Linq.Money.Payments.V1 {
             input.ReadMessage(CardTokenexPayment);
             break;
           }
+          case 42: {
+            if (savedCardPayment_ == null) {
+              SavedCardPayment = new global::Linq.Money.Payments.V1.SavedCardPayment();
+            }
+            input.ReadMessage(SavedCardPayment);
+            break;
+          }
         }
       }
     }
@@ -2942,7 +3933,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[12]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3275,7 +4266,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[13]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3636,7 +4627,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[14]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3943,7 +4934,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[15]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4144,7 +5135,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[16]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4477,7 +5468,7 @@ namespace Linq.Money.Payments.V1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Linq.Money.Payments.V1.NativeReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

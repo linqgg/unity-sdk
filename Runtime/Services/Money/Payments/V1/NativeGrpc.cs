@@ -58,6 +58,10 @@ namespace Linq.Money.Payments.V1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Linq.Money.Payments.V1.CardPaymentConfig> __Marshaller_linq_money_payments_v1_CardPaymentConfig = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Linq.Money.Payments.V1.CardPaymentConfig.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest> __Marshaller_linq_money_payments_v1_SavedCardPaymentConfigRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Linq.Money.Payments.V1.SavedCardPaymentConfig> __Marshaller_linq_money_payments_v1_SavedCardPaymentConfig = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Linq.Money.Payments.V1.SavedCardPaymentConfig.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Linq.Money.Payments.V1.PixPaymentRequest> __Marshaller_linq_money_payments_v1_PixPaymentRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Linq.Money.Payments.V1.PixPaymentRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Linq.Money.Payments.V1.PixPaymentResponse> __Marshaller_linq_money_payments_v1_PixPaymentResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Linq.Money.Payments.V1.PixPaymentResponse.Parser));
@@ -83,6 +87,14 @@ namespace Linq.Money.Payments.V1 {
         "GetCardPaymentConfig",
         __Marshaller_linq_money_payments_v1_OrderConfigRequest,
         __Marshaller_linq_money_payments_v1_CardPaymentConfig);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest, global::Linq.Money.Payments.V1.SavedCardPaymentConfig> __Method_GetSavedCardPaymentConfig = new grpc::Method<global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest, global::Linq.Money.Payments.V1.SavedCardPaymentConfig>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetSavedCardPaymentConfig",
+        __Marshaller_linq_money_payments_v1_SavedCardPaymentConfigRequest,
+        __Marshaller_linq_money_payments_v1_SavedCardPaymentConfig);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Linq.Money.Payments.V1.PixPaymentRequest, global::Linq.Money.Payments.V1.PixPaymentResponse> __Method_GetPixPaymentData = new grpc::Method<global::Linq.Money.Payments.V1.PixPaymentRequest, global::Linq.Money.Payments.V1.PixPaymentResponse>(
@@ -138,6 +150,18 @@ namespace Linq.Money.Payments.V1 {
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
       public virtual global::System.Threading.Tasks.Task<global::Linq.Money.Payments.V1.CardPaymentConfig> GetCardPaymentConfig(global::Linq.Money.Payments.V1.OrderConfigRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      /// <summary>
+      /// Saved card payment config
+      /// </summary>
+      /// <param name="request">The request received from the client.</param>
+      /// <param name="context">The context of the server-side call handler being invoked.</param>
+      /// <returns>The response to send back to the client (wrapped by a task).</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task<global::Linq.Money.Payments.V1.SavedCardPaymentConfig> GetSavedCardPaymentConfig(global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -304,6 +328,54 @@ namespace Linq.Money.Payments.V1 {
         return CallInvoker.AsyncUnaryCall(__Method_GetCardPaymentConfig, null, options, request);
       }
       /// <summary>
+      /// Saved card payment config
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Linq.Money.Payments.V1.SavedCardPaymentConfig GetSavedCardPaymentConfig(global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetSavedCardPaymentConfig(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Saved card payment config
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The response received from the server.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::Linq.Money.Payments.V1.SavedCardPaymentConfig GetSavedCardPaymentConfig(global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetSavedCardPaymentConfig, null, options, request);
+      }
+      /// <summary>
+      /// Saved card payment config
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="headers">The initial metadata to send with the call. This parameter is optional.</param>
+      /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
+      /// <param name="cancellationToken">An optional token for canceling the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Linq.Money.Payments.V1.SavedCardPaymentConfig> GetSavedCardPaymentConfigAsync(global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetSavedCardPaymentConfigAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      /// <summary>
+      /// Saved card payment config
+      /// </summary>
+      /// <param name="request">The request to send to the server.</param>
+      /// <param name="options">The options for the call.</param>
+      /// <returns>The call object.</returns>
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncUnaryCall<global::Linq.Money.Payments.V1.SavedCardPaymentConfig> GetSavedCardPaymentConfigAsync(global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetSavedCardPaymentConfig, null, options, request);
+      }
+      /// <summary>
       /// Pix (brazilian payment system) config
       /// </summary>
       /// <param name="request">The request to send to the server.</param>
@@ -463,6 +535,7 @@ namespace Linq.Money.Payments.V1 {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_GetApplePayConfig, serviceImpl.GetApplePayConfig)
           .AddMethod(__Method_GetCardPaymentConfig, serviceImpl.GetCardPaymentConfig)
+          .AddMethod(__Method_GetSavedCardPaymentConfig, serviceImpl.GetSavedCardPaymentConfig)
           .AddMethod(__Method_GetPixPaymentData, serviceImpl.GetPixPaymentData)
           .AddMethod(__Method_MakePayment, serviceImpl.MakePayment)
           .AddMethod(__Method_GetPaymentSources, serviceImpl.GetPaymentSources).Build();
@@ -477,6 +550,7 @@ namespace Linq.Money.Payments.V1 {
     {
       serviceBinder.AddMethod(__Method_GetApplePayConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Linq.Money.Payments.V1.OrderConfigRequest, global::Linq.Money.Payments.V1.ApplePayConfig>(serviceImpl.GetApplePayConfig));
       serviceBinder.AddMethod(__Method_GetCardPaymentConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Linq.Money.Payments.V1.OrderConfigRequest, global::Linq.Money.Payments.V1.CardPaymentConfig>(serviceImpl.GetCardPaymentConfig));
+      serviceBinder.AddMethod(__Method_GetSavedCardPaymentConfig, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Linq.Money.Payments.V1.SavedCardPaymentConfigRequest, global::Linq.Money.Payments.V1.SavedCardPaymentConfig>(serviceImpl.GetSavedCardPaymentConfig));
       serviceBinder.AddMethod(__Method_GetPixPaymentData, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Linq.Money.Payments.V1.PixPaymentRequest, global::Linq.Money.Payments.V1.PixPaymentResponse>(serviceImpl.GetPixPaymentData));
       serviceBinder.AddMethod(__Method_MakePayment, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Linq.Money.Payments.V1.PaymentRequest, global::Linq.Money.Payments.V1.PaymentResponse>(serviceImpl.MakePayment));
       serviceBinder.AddMethod(__Method_GetPaymentSources, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Linq.Money.Payments.V1.OrderConfigRequest, global::Linq.Money.Payments.V1.PaymentSourcesResponse>(serviceImpl.GetPaymentSources));
