@@ -1,6 +1,6 @@
 {
   "name": "gg.linq.unity-sdk",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "license": "MIT",
   "displayName": "LinQ Unity",
   "description": "LinQ SDK for Unity",
@@ -9,7 +9,13 @@
   "documentationUrl": "https://github.com/linqgg/unity-sdk/blob/main/README.md",
   "changelogUrl": "https://github.com/linqgg/unity-sdk/blob/main/CHANGELOG.md",
   "licensesUrl": "https://github.com/linqgg/unity-sdk/blob/main/LICENSE.md",
-  "keywords": ["linq", "wallet", "integration", "game", "free2play"],
+  "keywords": [
+    "linq",
+    "wallet",
+    "integration",
+    "game",
+    "free2play"
+  ],
   "dependencies": {
     "com.google.external-dependency-manager": "1.2.177",
     "com.unity.nuget.newtonsoft-json": "3.2.0"
