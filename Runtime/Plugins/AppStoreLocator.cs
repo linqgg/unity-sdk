@@ -10,7 +10,7 @@ namespace LinqUnity
     [DllImport("__Internal")] public static extern string _GetAppStoreRegion();
     public static string GetAppStoreRegion() => _GetAppStoreRegion();
 #else
-    public static string GetAppStoreRegion() => "USA"; // by ISO 3166-1 alpha-3
+    public static string GetAppStoreRegion() => ""; // by ISO 3166-1 alpha-3
 #endif
   }
 }
