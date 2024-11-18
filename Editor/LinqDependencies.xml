@@ -1,6 +1,6 @@
 <dependencies>
   <iosPods>
-    <iosPod name="Kount" version="4.1.10">
+    <iosPod name="Kount" version="4.2.1">
       <sources>
         <source>https://github.com/Kount/kount-pod-spec</source>
       </sources>
